@@ -1,0 +1,17 @@
+$border-color: rgb(226, 226, 226);
+
+.navbar {
+    width: 100%;
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    padding-inline: 40px;
+    padding-block: 10px;
+    font-size: 21px;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.search {
+    width: 300px;
+}
