@@ -29,11 +29,33 @@ export default function Home() {
               <p>2</p>
           </Page>
         </Section>
-        <Page
-            title={"Test"}
+        <Section name="Components">
+          <Page
+              title={"Title"}
+            >
+              <p>3</p>
+          </Page>
+          <Page
+              title={"Text"}
+            >
+              <p>3</p>
+          </Page>
+          <Page
+              title={"CommandPrompt"}
+            >
+              <p>3</p>
+          </Page>
+          <Page
+            title={"Code"}
           >
-            <p>3</p>
-        </Page>
+              <p>3</p>
+          </Page>
+          <Page
+            title={"Custom Components"}
+          >
+              <p>Custom Components</p>
+          </Page>
+        </Section>
       </Docs>
     </DocsProvider>
   );

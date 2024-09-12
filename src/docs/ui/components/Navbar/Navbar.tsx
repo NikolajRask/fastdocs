@@ -30,6 +30,7 @@ export default function Navbar() {
                     <Dialog>
                         <DialogTrigger>
                             <Input 
+                                readOnly={true}
                                 placeholder='Search'
                                 className={styles.search}
                             />

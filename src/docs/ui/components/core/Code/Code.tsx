@@ -1,5 +1,5 @@
 import React from 'react'
-import { CodeBlock, dracula, a11yDark, irBlack } from 'react-code-blocks'
+import { CodeBlock, irBlack } from 'react-code-blocks'
 
 interface CodeProps{
     code: string
@@ -12,7 +12,9 @@ const Code = ({
     <CodeBlock
         customStyle={{
             borderRadius: "10px",
-            fontFamily: "monospace"
+            fontFamily: "monospace",
+            marginBottom: "10px",
+            fontStyle: "normal"
         }}
         text={code.trim()}
         language='typescript'
