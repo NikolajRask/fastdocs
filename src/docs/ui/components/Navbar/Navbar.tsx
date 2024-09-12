@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { DialogTrigger } from '@radix-ui/react-dialog'
 import { useDocsContext } from '@/docs/context/context'
-import { FileIcon } from '@radix-ui/react-icons'
+import { FileIcon, GitHubLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
 
 export default function Navbar() {
 
@@ -26,50 +26,64 @@ export default function Navbar() {
                 >
                     {useSettings("productName")}
                 </h2>
-                <Dialog>
-                    <DialogTrigger>
-                        <Input 
-                            placeholder='Search'
-                            className={styles.search}
-                        />
-                    </DialogTrigger>
-                    <DialogContent className={styles.searchModal}>
-                        <DialogTitle
-                            style={{
-                                display: "none"
-                            }}
-                        />
-                        <Input
-                            placeholder="Search"
-                            value={searchInput}
-                            className={styles.searchBar}
-                            onChange={(e) => {
-                                setSearchInput(e.target.value)
-                            }}
-                        />
-                        {
-                            search(searchInput).length > 0 ? (
-                                <div className={styles.searchResults}>
-                                    {
-                                        search(searchInput).map((result, index) => {
-                                            return (
-                                                <div key={index}>
-                                                    <DialogClose style={{width: '100%'}}>
-                                                        <SearchItem title={result}/>
-                                                    </DialogClose>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            ) : (
-                                <div>
-                                    <p className={styles.noResult}>No results found</p>
-                                </div>
-                            )
-                        }
-                    </DialogContent>
-                </Dialog>
+                <div className={styles.flex}>
+                    <Dialog>
+                        <DialogTrigger>
+                            <Input 
+                                placeholder='Search'
+                                className={styles.search}
+                            />
+                        </DialogTrigger>
+                        <DialogContent className={styles.searchModal}>
+                            <DialogTitle
+                                style={{
+                                    display: "none"
+                                }}
+                            />
+                            <Input
+                                placeholder="Search"
+                                value={searchInput}
+                                className={styles.searchBar}
+                                onChange={(e) => {
+                                    setSearchInput(e.target.value)
+                                }}
+                            />
+                            {
+                                search(searchInput).length > 0 ? (
+                                    <div className={styles.searchResults}>
+                                        {
+                                            search(searchInput).map((result, index) => {
+                                                return (
+                                                    <div key={index}>
+                                                        <DialogClose style={{width: '100%'}}>
+                                                            <SearchItem title={result}/>
+                                                        </DialogClose>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <p className={styles.noResult}>No results found</p>
+                                    </div>
+                                )
+                            }
+                        </DialogContent>
+                    </Dialog>
+                    <GitHubLogoIcon 
+                        onClick={() => {
+                            window.open(useSettings("githubRepo"))
+                        }}
+                        className={styles.logo}
+                    />
+                    <TwitterLogoIcon
+                        onClick={() => {
+                            window.open(useSettings("twitter"))
+                        }}
+                        className={styles.logo}
+                    />                   
+                </div>
             </nav>
         </>
     )

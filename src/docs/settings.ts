@@ -1,7 +1,9 @@
 const settings: any = {
     color: "red",
     productName: "fastdocs",
-    defaultPage: "Get Started"
+    defaultPage: "Get Started",
+    githubRepo: "https://github.com/NikolajRask/fastdocs",
+    twitter: "https://x.com/nkjrask"
 }
 
 

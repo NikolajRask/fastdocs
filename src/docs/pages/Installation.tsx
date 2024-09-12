@@ -4,6 +4,7 @@ import Navigator from '../ui/components/core/Navigator/Navigator'
 import CommandPrompt from '../ui/components/core/CommandPrompt/CommandPrompt'
 import Text from '../ui/components/core/Text/Text'
 import Link from '../ui/components/core/Link/Link'
+import Code from '../ui/components/core/Code/Code'
 
 const Installation = () => {
   return (
@@ -16,6 +17,14 @@ const Installation = () => {
         </Text>
         <CommandPrompt
           content="npx create-next-app@latest"
+        />
+        <Text>Use this code</Text>
+        <Code
+          code={`
+function x() {
+  console.log("e")
+}
+            `}
         />
         <Navigator/>
     </div>

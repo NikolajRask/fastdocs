@@ -10,6 +10,19 @@ $border-color: rgb(226, 226, 226);
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
+
+    .flex {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .logo {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+    }
 }
 
 .search {
