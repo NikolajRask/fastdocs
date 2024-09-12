@@ -33,6 +33,8 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   }[]>([])
   const [currentPage, setCurrentPage] = useState<string>(useSettings("defaultPage"))
 
+
+
   const addTitle = (title: string) => {
     setTitles((prev) => {
       if (prev.includes(title)) {

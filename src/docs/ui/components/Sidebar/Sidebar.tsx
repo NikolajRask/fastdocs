@@ -19,8 +19,8 @@ const Sidebar = ({
 }: SidebarProps) => {
   return (
     <div className={styles.sideBar}>
-      {sections?.map(section => {
-        return <SidebarSection name={section.name}>
+      {sections?.map((section, index) => {
+        return <SidebarSection key={index} name={section.name}>
           {
             section.titles.map((title, index) => {
               return (

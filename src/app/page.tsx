@@ -24,7 +24,7 @@ export default function Home() {
               <p>2</p>
           </Page>
           <Page
-            title={"Installation"}
+            title={"Installation2"}
           >
               <p>2</p>
           </Page>
