@@ -14,6 +14,7 @@ interface DocsContextType {
     titles: string[]
   }[],
   addTitleToSection: (title: string, section: string) => void
+  search: (input: string) => string[]
 }
 
 // Create the context with a default value
@@ -45,6 +46,18 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     });
   };
 
+  const search = (input: string) => {
+    let allTitles = sections.map(section => {
+      return section.titles
+    })
+
+    allTitles = allTitles.concat(titles)
+
+    return allTitles.flatMap((at) => {
+      return at
+    }).filter(f => f.includes(input))
+  }
+
   const addTitleToSection = (title: string, section: string) => {
     setSections((prevSections) => {
       // Check if the section already exists
@@ -73,7 +86,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   }
 
   return (
-    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection }}>
+    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search }}>
       {children}
     </DocsContext.Provider>
   );
