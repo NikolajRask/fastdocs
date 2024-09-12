@@ -14,7 +14,7 @@ const Docs: React.FC<DocsProps> = ({
     children
 }:DocsProps) => {
 
-  const titles = useDocsContext().titles
+  const { titles, sections } = useDocsContext()
 
   return (
     <>
@@ -22,6 +22,7 @@ const Docs: React.FC<DocsProps> = ({
         />
         <Sidebar
           titles={titles}
+          sections={sections}
         />
         <main className={styles.main}>
           {children}

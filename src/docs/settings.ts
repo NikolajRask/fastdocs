@@ -1,6 +1,7 @@
 const settings: any = {
     color: "red",
-    productName: "fastdocs"
+    productName: "fastdocs",
+    defaultPage: "Get Started"
 }
 
 
