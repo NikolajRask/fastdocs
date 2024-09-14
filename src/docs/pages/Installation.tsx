@@ -5,6 +5,8 @@ import CommandPrompt from '../ui/components/core/CommandPrompt/CommandPrompt'
 import Text from '../ui/components/core/Text/Text'
 import Link from '../ui/components/core/Link/Link'
 import Code from '../ui/components/core/Code/Code'
+import Grid from '../ui/components/core/Grid/Grid'
+import Card from '../ui/components/core/Card/Card'
 
 const Installation = () => {
   return (
@@ -26,6 +28,20 @@ function x() {
 }
             `}
         />
+        <Grid>
+          <Card>
+            Test
+          </Card>
+          <Card>
+            Test
+          </Card>
+          <Card>
+            Test
+          </Card>
+          <Card>
+            Test
+          </Card>
+        </Grid>
         <Navigator/>
     </div>
   )

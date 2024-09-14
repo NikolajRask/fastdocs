@@ -6,6 +6,9 @@ $border-color: rgb(226, 226, 226);
     position: absolute;
     left: 0px;
     border-right: 1px solid $border-color;
+    transition: margin-left 0.4s ease-in-out;
+    background: white;
+    z-index: 50;
 
     .item {
         width: 100%;
@@ -26,7 +29,6 @@ $border-color: rgb(226, 226, 226);
     font-weight: 700;
     padding-inline: 30px;
     padding-block: 8px;
-    cursor: pointer;
     display: flex;
     gap: 7px;
     align-items: center;
@@ -37,3 +39,22 @@ $border-color: rgb(226, 226, 226);
     }
 }
 
+.hover {
+    cursor: pointer;
+}
+
+.toggleIcon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}

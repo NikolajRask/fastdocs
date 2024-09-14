@@ -27,6 +27,13 @@ $border-color: rgb(226, 226, 226);
 
 .search {
     width: 300px;
+    padding-left: 40px;
+}
+
+.searchIcon{
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 14px;
 }
 
 .searchModal {

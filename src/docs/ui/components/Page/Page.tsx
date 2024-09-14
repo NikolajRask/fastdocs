@@ -26,7 +26,7 @@ const Page = ({
 
   useEffect(() => {
     if (section?.sectionName) {
-      section.addTitleToSection(title ,section.sectionName)
+      section.addTitleToSection(title ,section.sectionName, section.alwaysOpen ?? false)
     } else {
       addTitle(title);
     }

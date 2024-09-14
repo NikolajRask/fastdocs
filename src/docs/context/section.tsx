@@ -7,10 +7,12 @@ import { useDocsContext } from './context';
 export interface SectionContextType {
   sections: {
     name: string,
-    titles: string[]
+    titles: string[],
+    alwaysOpen?: boolean;
   }[],
-  addTitleToSection: (title: string, section: string) => void;
+  addTitleToSection: (title: string, section: string, alwaysOpen: boolean) => void;
   sectionName: string;
+  alwaysOpen?: boolean;
 }
 
 // Create the context with a default value
@@ -20,15 +22,16 @@ const SectionContext = createContext<SectionContextType | undefined>(undefined);
 interface SectionProviderProps {
   children: ReactNode;
   name: string;
+  alwaysOpen?: boolean;
 }
 
 // Provider component
-export const SectionProvider: React.FC<SectionProviderProps> = ({ children, name }) => {
+export const SectionProvider: React.FC<SectionProviderProps> = ({ children, name, alwaysOpen }) => {
 
     const higherContext = useDocsContext()
 
     return (
-        <SectionContext.Provider value={{ sections: higherContext.sections, addTitleToSection: higherContext.addTitleToSection, sectionName: name }}>
+        <SectionContext.Provider value={{ sections: higherContext.sections, addTitleToSection: higherContext.addTitleToSection, sectionName: name, alwaysOpen: alwaysOpen ?? false }}>
         {children}
         </SectionContext.Provider>
     );

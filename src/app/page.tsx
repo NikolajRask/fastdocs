@@ -12,7 +12,10 @@ export default function Home() {
   return (
     <DocsProvider>
       <Docs>
-        <Section name="Books">
+        <Section 
+          name="Books"
+          alwaysOpen={true}
+        >
           <Page
             title={"Get Started"}
           >

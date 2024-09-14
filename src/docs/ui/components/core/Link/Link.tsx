@@ -6,27 +6,48 @@ interface LinkProps {
     href?: string;
     page?: string;
     children: React.ReactNode;
+    openInNewWindow?: boolean
 }
 
 const Link = ({
     href,
     page,
-    children
+    children,
+    openInNewWindow=false
 }: LinkProps) => {
 
 const { setPage } = useDocsContext()
 
     return (
-        <a 
-            href={href}
-            onClick={() => {
-                if (page) {
-                    setPage(page)
-                }
-            }}
-        >
-            {children}
-        </a>
+        <>
+            {
+                openInNewWindow ? (
+                    <a 
+                        onClick={() => {
+                            if (page) {
+                                setPage(page)
+                            }
+                            if (href) {
+                                window.open(href)
+                            }
+                        }}
+                    >
+                        {children}
+                    </a>
+                ) : (
+                    <a 
+                        href={href}
+                        onClick={() => {
+                            if (page) {
+                                setPage(page)
+                            }
+                        }}
+                    >
+                        {children}
+                    </a>
+                )
+            }
+        </>
     )
 }
 

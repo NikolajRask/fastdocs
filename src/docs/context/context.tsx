@@ -10,11 +10,14 @@ interface DocsContextType {
   page: string;
   setPage: (page: string) => void;
   sections: {
-    name: string,
-    titles: string[]
+    name: string;
+    titles: string[];
+    alwaysOpen: boolean;
   }[],
-  addTitleToSection: (title: string, section: string) => void
+  addTitleToSection: (title: string, section: string, alwaysOpen: boolean) => void
   search: (input: string) => string[]
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 // Create the context with a default value
@@ -30,9 +33,11 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   const [titles, setTitles] = useState<string[]>([]);
   const [sections, setSections] = useState<{
     name: string,
-    titles: string[]
+    titles: string[],
+    alwaysOpen: boolean
   }[]>([])
   const [currentPage, setCurrentPage] = useState<string>(useSettings("defaultPage"))
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
 
 
 
@@ -58,7 +63,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     }).filter(f => f.includes(input))
   }
 
-  const addTitleToSection = (title: string, section: string) => {
+  const addTitleToSection = (title: string, section: string, alwaysOpen: boolean) => {
     setSections((prevSections) => {
       // Check if the section already exists
       const sectionExists = prevSections.find((s) => s.name === section);
@@ -68,7 +73,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
         if (!sectionExists.titles.includes(title)) {
           return prevSections.map((s) =>
             s.name === section
-              ? { ...s, titles: [...s.titles, title] }
+              ? { ...s, titles: [...s.titles, title], alwaysOpen: alwaysOpen }
               : s
           );
         } else {
@@ -76,7 +81,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
         }
       } else {
         // If section does not exist, add a new section
-        return [...prevSections, { name: section, titles: [title] }];
+        return [...prevSections, { name: section, titles: [title], alwaysOpen: alwaysOpen }];
       }
     });
   };
@@ -86,7 +91,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   }
 
   return (
-    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search }}>
+    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen }}>
       {children}
     </DocsContext.Provider>
   );

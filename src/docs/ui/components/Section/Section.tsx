@@ -5,15 +5,17 @@ import { SectionProvider } from '@/docs/context/section';
 interface SectionProps {
     name: string;
     children: React.ReactNode;
+    alwaysOpen?: boolean;
 }
 
 const Section = ({
     name,
-    children
+    children,
+    alwaysOpen=false
 }: SectionProps) => {
   return (
 
-    <SectionProvider name={name}>
+    <SectionProvider alwaysOpen={alwaysOpen} name={name}>
         <div>
             {children}
         </div>
