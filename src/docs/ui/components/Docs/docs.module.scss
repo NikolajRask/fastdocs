@@ -1,7 +1,7 @@
 .main  {
     padding-block: 30px;
     padding-inline: 50px;
-    background: white;
+    background: var(--background-color);
     transition: width 0.4s ease-in-out, margin-left 0.4s ease-in-out;
 }
 
@@ -17,6 +17,7 @@
     z-index: 0;
 
     svg {
+        color: var(--text-color);
         width: 20px;
         height: 20px;
     }

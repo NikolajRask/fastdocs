@@ -11,7 +11,7 @@ const Navigator = () => {
   return (
     <div className={styles.navigator}>
       <div 
-        className={styles.item}
+        className={getNeighbourPage(page).previous != null ? styles.item : styles.itemHidden}
         onClick={() => {
           if (getNeighbourPage(page).previous != null) {
             setPage(getNeighbourPage(page).previous ?? useSettings("defaultPage"))
@@ -21,17 +21,19 @@ const Navigator = () => {
         <ChevronLeftIcon/>
         <span>{getNeighbourPage(page).previous}</span>
       </div>
-      <div 
-        className={styles.item}
-        onClick={() => {
-          if (getNeighbourPage(page).next != null) {
-            setPage(getNeighbourPage(page).next ?? useSettings("defaultPage"))
-          }
-        }}
-      >
-        <span>{getNeighbourPage(page).next}</span>
-        <ChevronRightIcon/>
-      </div>
+      {getNeighbourPage(page).next &&
+        <div 
+          className={styles.item}
+          onClick={() => {
+            if (getNeighbourPage(page).next != null) {
+              setPage(getNeighbourPage(page).next ?? useSettings("defaultPage"))
+            }
+          }}
+        >
+          <span>{getNeighbourPage(page).next}</span>
+          <ChevronRightIcon/>
+        </div>
+      }
     </div>
   )
 }

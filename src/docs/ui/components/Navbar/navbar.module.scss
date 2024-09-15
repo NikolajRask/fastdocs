@@ -1,8 +1,6 @@
-$border-color: rgb(226, 226, 226);
-
 .navbar {
     width: 100%;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     padding-inline: 40px;
     padding-block: 10px;
@@ -10,6 +8,9 @@ $border-color: rgb(226, 226, 226);
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    
 
     .flex {
         display: flex;
@@ -28,6 +29,7 @@ $border-color: rgb(226, 226, 226);
 .search {
     width: 300px;
     padding-left: 40px;
+    border: 1px solid var(--border-color);
 }
 
 .searchIcon{
@@ -37,21 +39,27 @@ $border-color: rgb(226, 226, 226);
 }
 
 .searchModal {
-    background: white;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
 }
 
 .searchBar {
     margin-bottom: 0px;
     padding-inline: 20px;
-    padding-block: 20px;
+    padding-block: 10px;
+    border-radius: 10px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    border-bottom: 1px solid rgb(155, 155, 155);
+    border-bottom: 1px solid var(--border-color);
     outline: none;
+    color: var(--text-color);
+    background-color: var(--background-color);
 
     &:active {
         border: none;
-        border-bottom: 1px solid rgb(155, 155, 155);
+        border-bottom: 1px solid var(--border-color);
+        outline: none;
+        box-shadow: none;
     }
 }
 
@@ -73,9 +81,10 @@ $border-color: rgb(226, 226, 226);
         font-weight: 500;
         align-items: center;
         gap: 10px;
+        color: var(--text-color);
 
         &:hover {
-            background: rgba(0,0,0,0.1);
+            background: var(--hover-color);
         }
 
         svg {
@@ -92,6 +101,7 @@ $border-color: rgb(226, 226, 226);
     margin-top: 20px;
     font-size: 16px;
     font-weight: 600;
+    color: var(--text-color);
 }
 
 .modeLogo {
@@ -99,4 +109,22 @@ $border-color: rgb(226, 226, 226);
     height: 20px;
     margin-left: 5px;
     margin-top: 5px;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-self: left;
+    .navLink {
+        font-size: 17px;
+        font-weight: 400;
+        cursor: pointer;
+    }
+}
+
+.flexStart {
+    display: flex;
+    align-items: center;
+    gap: 150px;
 }

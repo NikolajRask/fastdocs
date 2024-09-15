@@ -7,6 +7,7 @@ import { ArrowDownIcon, CaretDownIcon, CaretLeftIcon, CaretUpIcon } from '@radix
 import classNames from '@/docs/utils/utils';
 import ActionIcon from '../core/ActionIcon/ActionIcon';
 import { useMonitor } from '@/docs/utils/debug/use-monitor';
+import useSettings from '@/docs/settings';
 
 interface SidebarProps {
   titles?: string[];
@@ -23,8 +24,6 @@ const Sidebar = ({
 }: SidebarProps) => {
 
   const { isSidebarOpen, setIsSidebarOpen } = useDocsContext()
-
-  useMonitor(isSidebarOpen)
 
   return (
     <div 
@@ -78,13 +77,14 @@ interface SidebarItemProps {
 
 const SidebarItem = (props: SidebarItemProps) => {
 
-  const { setPage } = useDocsContext()
+  const { setPage, page } = useDocsContext()
  
   return (
     <div 
       className={styles.item}
       style={{
-        paddingLeft: props.nested ? 40 : 30
+        paddingLeft: props.nested ? 40 : 30,
+        color: page == props.title ? useSettings().color : "var(--text-color)"
       }}
       onClick={() => {
         setPage(props.title)
@@ -102,8 +102,6 @@ interface SidebarSectionProps {
 const SidebarSection = (props: SidebarSectionProps) => {
 
   const [isOpen, setIsOpen] = useState(props.alwaysOpen)
- 
-  console.log(props.alwaysOpen)
 
   return (
     <>

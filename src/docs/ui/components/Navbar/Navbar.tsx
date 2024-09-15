@@ -10,6 +10,7 @@ import { useDocsContext } from '@/docs/context/context'
 import { FileIcon, GitHubLogoIcon, MagnifyingGlassIcon, SunIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
 import ActionIcon from '../core/ActionIcon/ActionIcon'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { useTheme } from '@/docs/utils/use-theme'
 
 export default function Navbar() {
 
@@ -21,13 +22,22 @@ export default function Navbar() {
     return (
         <>
             <nav className={styles.navbar}>
-                <h2
-                    style={{
-                        color: useSettings("color")
-                    }}
-                >
-                    {useSettings("productName")}
-                </h2>
+                <div className={styles.flexStart}>
+                    <h2
+                        style={{
+                            color: useSettings("color"),
+                            fontWeight: 700,
+                        }}
+                    >
+                        {useSettings("productName")}
+                    </h2>
+                    <div className={styles.navLinks}>
+                        {/* Add links here in the navbar */}
+                        <p className={styles.navLink}>Home</p>
+                        <p className={styles.navLink}>Docs</p>
+                        <p className={styles.navLink}>Templates</p>
+                    </div>
+                </div>
                 <div className={styles.flex}>
                     <Dialog>
                         <DialogTrigger>
@@ -46,7 +56,7 @@ export default function Navbar() {
                                     display: "none"
                                 }}
                             />
-                            <Input
+                            <input
                                 placeholder="Search"
                                 value={searchInput}
                                 className={styles.searchBar}
@@ -90,19 +100,44 @@ export default function Navbar() {
                         className={styles.logo}
                     />  
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
-                            <ActionIcon>
-                                <SunIcon
-                                    width={"20px"}
-                                    height={"20px"}
-                                    className={styles.modeLogo}
-                                />     
-                            </ActionIcon> 
+                        <DropdownMenuTrigger
+                            style={{
+                                border: "none",
+                                outline: "none"
+                            }}
+                        >
+                            <SunIcon
+                                className={styles.logo}
+                            />   
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuItem>Light</DropdownMenuItem>
-                            <DropdownMenuItem>Dark</DropdownMenuItem>
-                            <DropdownMenuItem>System</DropdownMenuItem>
+                        <DropdownMenuContent
+                            style={{
+                                backgroundColor: "var(--background-color)",
+                                color: "var(--text-color)",
+                                border: "1px solid var(--border-color)"
+                            }}
+                        >
+                            <DropdownMenuItem
+                                onClick={() => {
+                                    useTheme("light")
+                                }}
+                            >
+                                Light
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() => {
+                                    useTheme("dark")
+                                }}
+                            >
+                                Dark
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() => {
+                                    console.log(useTheme("system"))
+                                }}
+                            >
+                                System
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>              
                 </div>

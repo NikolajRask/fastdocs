@@ -27,7 +27,12 @@ export default function Home() {
               <p>2</p>
           </Page>
           <Page
-            title={"Installation2"}
+            title={"Setup"}
+          >
+              <p>2</p>
+          </Page>
+          <Page
+            title={"Settings"}
           >
               <p>2</p>
           </Page>
@@ -46,6 +51,16 @@ export default function Home() {
           <Page
               title={"CommandPrompt"}
             >
+              <p>3</p>
+          </Page>
+          <Page
+            title={"CodePreview"}
+          >
+              <p>3</p>
+          </Page>
+          <Page
+            title={"Header"}
+          >
               <p>3</p>
           </Page>
           <Page

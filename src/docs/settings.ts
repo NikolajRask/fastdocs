@@ -11,7 +11,13 @@ const settings: any = {
             action: () => {
                 console.log("Light Mode")
             }
-        }
+        },
+        {
+            label: "Dark Mode",
+            action: () => {
+                console.log("Dark Mode")
+            }
+        },
     ]
 }
 
