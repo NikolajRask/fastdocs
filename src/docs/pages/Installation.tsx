@@ -7,13 +7,12 @@ import Link from '../ui/components/core/Link/Link'
 import Code from '../ui/components/core/Code/Code'
 import Grid from '../ui/components/core/Grid/Grid'
 import Card from '../ui/components/core/Card/Card'
+import Breadcrumb from '../ui/components/core/Breadcrumb/Breadcrumb'
 
 const Installation = () => {
   return (
-    <div>
-        <Title>Test</Title>
+    <>  
         <Text>
-
           Use this command to install Next.js'
           <Link page={"Test"}>Next</Link>
         </Text>
@@ -42,8 +41,7 @@ function x() {
             Test
           </Card>
         </Grid>
-        <Navigator/>
-    </div>
+    </>
   )
 }
 

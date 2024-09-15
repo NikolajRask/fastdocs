@@ -25,3 +25,28 @@
         cursor: pointer;
     }
 }
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .clickable {
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+    
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.header {
+    font-size: 32px;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}

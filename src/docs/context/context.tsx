@@ -17,7 +17,10 @@ interface DocsContextType {
   addTitleToSection: (title: string, section: string, alwaysOpen: boolean) => void
   search: (input: string) => string[]
   isSidebarOpen: boolean;
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  docsTitle: string,
+  changeDocsTitle: (v: string) => void,
+  getPageSection: (v: string) => string | undefined
 }
 
 // Create the context with a default value
@@ -38,8 +41,11 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   }[]>([])
   const [currentPage, setCurrentPage] = useState<string>(useSettings("defaultPage"))
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [docsTitle, setDocsTitle] = useState<string>("")
 
-
+  const changeDocsTitle = (v: string) => {
+    setDocsTitle(v)
+  }
 
   const addTitle = (title: string) => {
     setTitles((prev) => {
@@ -86,12 +92,16 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     });
   };
 
+  function getPageSection (page: string): string | undefined {
+    return sections.find(section => section.titles.includes(page))?.name
+  }
+
   const setPage = (page: string) => {
     setCurrentPage(page)
   }
 
   return (
-    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen }}>
+    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection }}>
       {children}
     </DocsContext.Provider>
   );

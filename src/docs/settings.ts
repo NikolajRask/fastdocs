@@ -3,7 +3,8 @@ const settings: any = {
     productName: "fastdocs",
     defaultPage: "Get Started",
     githubRepo: "https://github.com/NikolajRask/fastdocs",
-    twitter: "https://x.com/nkjrask"
+    twitter: "https://x.com/nkjrask",
+    defaultDocsTitle: "Docs"
 }
 
 

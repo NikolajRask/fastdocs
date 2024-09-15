@@ -11,7 +11,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <DocsProvider>
-      <Docs>
+      <Docs title="Docs">
         <Section 
           name="Books"
           alwaysOpen={true}

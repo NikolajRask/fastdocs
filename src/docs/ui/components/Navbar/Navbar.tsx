@@ -9,6 +9,7 @@ import { DialogTrigger } from '@radix-ui/react-dialog'
 import { useDocsContext } from '@/docs/context/context'
 import { FileIcon, GitHubLogoIcon, MagnifyingGlassIcon, SunIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
 import ActionIcon from '../core/ActionIcon/ActionIcon'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 
 export default function Navbar() {
 
@@ -88,15 +89,22 @@ export default function Navbar() {
                         }}
                         className={styles.logo}
                     />  
-                    <ActionIcon>
-                        <SunIcon
-                            width={"16px"}
-                            height={"16px"}
-                            onClick={() => {
-                                window.open(useSettings("twitter"))
-                            }}
-                        />     
-                    </ActionIcon>               
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <ActionIcon>
+                                <SunIcon
+                                    width={"20px"}
+                                    height={"20px"}
+                                    className={styles.modeLogo}
+                                />     
+                            </ActionIcon> 
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem>Light</DropdownMenuItem>
+                            <DropdownMenuItem>Dark</DropdownMenuItem>
+                            <DropdownMenuItem>System</DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>              
                 </div>
             </nav>
         </>
