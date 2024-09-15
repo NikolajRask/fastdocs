@@ -21,6 +21,10 @@ interface DocsContextType {
   docsTitle: string,
   changeDocsTitle: (v: string) => void,
   getPageSection: (v: string) => string | undefined
+  getNeighbourPage: (v: string) => {
+    previous: string | null,
+    next: string | null
+  }
 }
 
 // Create the context with a default value
@@ -56,6 +60,33 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
       }
     });
   };
+
+  function getNeighbourPage(page: string) {
+
+    let allTitles = sections.map(section => {
+      return section.titles
+    })
+
+    allTitles = allTitles.concat(titles)
+
+    let arr = allTitles.flatMap((at) => at)
+
+    const index = arr.indexOf(page);
+  
+    // If target not found, return null neighbors
+    if (index === -1) {
+      return { previous: null, next: null };
+    }
+  
+    // Find previous and next neighbors
+    const previous = index > 0 ? arr[index - 1] : null;
+    const next = index < arr.length - 1 ? arr[index + 1] : null;
+  
+    return {
+      previous: previous,
+      next: next
+    };
+  }
 
   const search = (input: string) => {
     let allTitles = sections.map(section => {
@@ -101,7 +132,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   }
 
   return (
-    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection }}>
+    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage }}>
       {children}
     </DocsContext.Provider>
   );

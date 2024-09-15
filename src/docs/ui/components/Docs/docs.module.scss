@@ -1,9 +1,8 @@
 .main  {
-    margin-left: 351px;
-    width: calc(100vw - 351px);
     padding-block: 30px;
     padding-inline: 50px;
     background: white;
+    transition: width 0.4s ease-in-out, margin-left 0.4s ease-in-out;
 }
 
 .toggleIcon {

@@ -40,7 +40,13 @@ const Docs: React.FC<DocsProps> = ({
         >
           <CaretRightIcon/>
         </ActionIcon>  
-        <main className={styles.main}>
+        <main 
+          className={styles.main}
+          style={{
+            marginLeft: isSidebarOpen ? "351px" : "0px",
+            width: isSidebarOpen ? "calc(100vw - 351px)" : "100vw"
+          }}
+        >
           <Layout>
             {children}
           </Layout>

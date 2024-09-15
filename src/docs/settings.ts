@@ -4,7 +4,15 @@ const settings: any = {
     defaultPage: "Get Started",
     githubRepo: "https://github.com/NikolajRask/fastdocs",
     twitter: "https://x.com/nkjrask",
-    defaultDocsTitle: "Docs"
+    defaultDocsTitle: "Docs",
+    appendSearch: [
+        {
+            label: "Light Mode",
+            action: () => {
+                console.log("Light Mode")
+            }
+        }
+    ]
 }
 
 
