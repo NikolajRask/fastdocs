@@ -83,7 +83,7 @@ const HomePage = () => {
                             window.location.href = "/docs"
                         }}
                     >
-                        Docs
+                         Read Docs
                     </button>
                 </div>
             </section>

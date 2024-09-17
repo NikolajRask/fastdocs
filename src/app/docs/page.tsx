@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { DocsProvider } from "@/docs/context/context";
 import Installation from "@/docs/pages/Installation";
+import SettingsPage from "@/docs/pages/SettingsPage";
 import Docs from "@/docs/ui/components/Docs/Docs";
 import Page from "@/docs/ui/components/Page/Page";
 import Section from "@/docs/ui/components/Section/Section";
@@ -38,7 +39,7 @@ export default function Home() {
           <Page
             title={"Settings"}
           >
-              <p>2</p>
+              <SettingsPage/>
           </Page>
         </Section>
         <Section name="Components">
