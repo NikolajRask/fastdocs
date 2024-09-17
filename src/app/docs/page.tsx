@@ -6,9 +6,13 @@ import Installation from "@/docs/pages/Installation";
 import Docs from "@/docs/ui/components/Docs/Docs";
 import Page from "@/docs/ui/components/Page/Page";
 import Section from "@/docs/ui/components/Section/Section";
+import { useTheme } from "@/docs/utils/use-theme";
 import Image from "next/image";
 
 export default function Home() {
+
+  useTheme()
+
   return (
     <DocsProvider>
       <Docs title="Docs">

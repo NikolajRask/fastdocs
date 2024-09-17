@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect } from "react";
+
 export function useTheme(theme?: "dark" | "light" | "system") {
     if (theme) {
         if (theme == "system") {
@@ -15,6 +17,16 @@ export function useTheme(theme?: "dark" | "light" | "system") {
             document.documentElement.setAttribute('data-theme', theme);
         } 
     } else {
+
+        useEffect(() => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+              if (savedTheme == "dark" || savedTheme == "light" || savedTheme == "system") {
+                useTheme(savedTheme)
+              }
+            }
+          }, []);
         return window.localStorage.getItem("theme")
+        
     }  
 }

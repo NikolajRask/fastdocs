@@ -28,6 +28,9 @@ export default function Navbar() {
                             color: useSettings("color"),
                             fontWeight: 700,
                         }}
+                        onClick={() => {
+                            window.location.href = useSettings("homePage")
+                        }}
                     >
                         {useSettings("productName")}
                     </h2>

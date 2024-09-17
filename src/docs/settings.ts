@@ -1,6 +1,6 @@
 const settings: any = {
-    color: "red",
-    productName: "fastdocs",
+    color: "rgb(31, 102, 235)",
+    productName: "Fastdocs",
     defaultPage: "Get Started",
     githubRepo: "https://github.com/NikolajRask/fastdocs",
     twitter: "https://x.com/nkjrask",
@@ -18,7 +18,8 @@ const settings: any = {
                 console.log("Dark Mode")
             }
         },
-    ]
+    ],
+    homePage: "/"
 }
 
 

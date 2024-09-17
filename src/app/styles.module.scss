@@ -1,0 +1,99 @@
+.main {
+    width: 70vw;
+    margin-left: 15vw;
+    height: 100vh;
+    position: absolute;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo {
+        font-size: 30px;
+        font-weight: 900;
+        margin-left: 20px;
+        margin-top: 10px;
+        user-select: none;
+        color: var(--text-color);
+    
+        a {
+            color: rgb(31, 102, 235);
+        }
+    }
+}
+
+.themeLogo {
+    width: 24px;
+    height: 24px;
+    color: var(--text-color);
+}
+
+
+.header {
+    font-size: 70px;
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 700;
+    user-select: none;
+    margin-top: 250px;
+
+    a {
+        text-decoration: none;
+        color: var(--background-color);
+        background: var(--text-color);
+        padding-inline: 30px;
+    }
+    
+    .strike {
+        text-decoration: line-through;
+        color: rgb(31, 102, 235);
+    }
+}
+
+.description {
+    text-align: center;
+    font-size: 22px;
+    margin-inline: 20%;
+    margin-top: 30px;
+    color: var(--text-color);
+}
+
+.btns {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: var(--text-color);
+    color: var(--background-color);
+    font-weight: 600;
+    padding: 10px 25px 10px 25px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--reverse-hover);
+    }
+}
+
+.getStartedBtn {
+    color: white;
+    background-color: rgb(31, 102, 235);
+    font-size: 21px;
+
+    &:hover {
+        background-color: rgb(15, 99, 255)
+    }
+}
+
+.docsBtn {
+   font-size: 21px; 
+}
