@@ -20,9 +20,14 @@ const Docs: React.FC<DocsProps> = ({
     children
 }:DocsProps) => {
 
-  const { titles, sections, setIsSidebarOpen, isSidebarOpen, changeDocsTitle } = useDocsContext()
+  const { titles, sections, setIsSidebarOpen, isSidebarOpen, changeDocsTitle, setPage } = useDocsContext()
 
   changeDocsTitle(title ?? useSettings("defaultDocsTitle"))
+
+  const params = new URLSearchParams(window.location.search);
+  const tabValue = params.get('page');
+
+  setPage(tabValue ?? useSettings().defaultPage)
 
   return (
     <>

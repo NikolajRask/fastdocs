@@ -42,14 +42,14 @@
 
     a {
         text-decoration: none;
-        color: var(--background-color);
         background: var(--text-color);
         padding-inline: 30px;
+        color: rgb(31, 102, 235);
     }
     
     .strike {
         text-decoration: line-through;
-        color: rgb(31, 102, 235);
+        color: var(--background-color);
     }
 }
 

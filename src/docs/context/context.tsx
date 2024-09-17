@@ -129,6 +129,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
 
   const setPage = (page: string) => {
     setCurrentPage(page)
+    window.history.replaceState(null, '', window.location.pathname + '?page='+page);
   }
 
   return (

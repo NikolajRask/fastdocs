@@ -38,7 +38,7 @@ export default function Navbar() {
                         {/* Add links here in the navbar */}
                         <p className={styles.navLink}>Home</p>
                         <p className={styles.navLink}>Docs</p>
-                        <p className={styles.navLink}>Templates</p>
+                        <p className={styles.navLink}>Support</p>
                     </div>
                 </div>
                 <div className={styles.flex}>
