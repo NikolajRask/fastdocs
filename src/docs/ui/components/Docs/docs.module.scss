@@ -3,10 +3,14 @@
     padding-inline: 50px;
     background: var(--background-color);
     transition: width 0.4s ease-in-out, margin-left 0.4s ease-in-out;
+    overflow-y: scroll;
+    height: calc(100vh - 57px);
+    margin-top: 57px;
+    overflow-x: hidden;
 }
 
 .toggleIcon {
-    position: absolute;
+    position: fixed;
     top: 67px;
     left: 10px;
     width: 28px;
@@ -22,3 +26,4 @@
         height: 20px;
     }
 }
+

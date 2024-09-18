@@ -9,10 +9,11 @@ import Page from "@/docs/ui/components/Page/Page";
 import Section from "@/docs/ui/components/Section/Section";
 import { useTheme } from "@/docs/utils/use-theme";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Home() {
 
-  useTheme()
+  //d
 
   return (
     <DocsProvider>

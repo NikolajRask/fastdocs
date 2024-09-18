@@ -3,15 +3,18 @@
 import { useDocsContext } from '@/docs/context/context';
 import { SectionContextType, useSectionContext } from '@/docs/context/section';
 import React, { useEffect } from 'react'
+import styles from './page.module.scss'
 
 interface PageProps {
     children: React.ReactNode
     title: string
+    withTableOfContent?: boolean
 }
 
 const Page = ({
     children,
-    title
+    title,
+    withTableOfContent
 }: PageProps) => {
 
   const { addTitle, page } = useDocsContext();
@@ -36,7 +39,20 @@ const Page = ({
     <>
       {
         page == title && (
-          children
+          <div 
+            className={styles.pageFlex}
+          >
+            <div 
+              className={styles.pageContent}
+            >
+              {children}
+            </div>
+            <div
+              className={styles.pageTable}
+            >
+              <h3 className={styles.pageTableTitle}>On This Page</h3>
+            </div>
+          </div>
         )
       }
       

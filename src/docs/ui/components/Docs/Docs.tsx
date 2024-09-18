@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Sidebar from '../Sidebar/Sidebar'
 import { useDocsContext } from '@/docs/context/context'
@@ -9,6 +9,8 @@ import ActionIcon from '../core/ActionIcon/ActionIcon'
 import { CaretLeftIcon, CaretRightIcon } from '@radix-ui/react-icons'
 import useSettings from '@/docs/settings'
 import Layout from '@/docs/pages/layout'
+import { useRouter, useSearchParams } from 'next/navigation'
+import MissingPage from '../404/404'
 
 interface DocsProps {
     children: React.ReactNode
@@ -20,17 +22,24 @@ const Docs: React.FC<DocsProps> = ({
     children
 }:DocsProps) => {
 
-  const { titles, sections, setIsSidebarOpen, isSidebarOpen, changeDocsTitle, setPage } = useDocsContext()
+  const { titles, sections, setIsSidebarOpen, isSidebarOpen, changeDocsTitle, setPage, allTitles } = useDocsContext()
 
-  changeDocsTitle(title ?? useSettings("defaultDocsTitle"))
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page'); // This will capture 'Get Started'
 
-  const params = new URLSearchParams(window.location.search);
-  const tabValue = params.get('page');
-
-  setPage(tabValue ?? useSettings().defaultPage)
+  useEffect(() => {
+    changeDocsTitle(title ?? useSettings("defaultDocsTitle"))
+    setPage(page ?? useSettings().defaultPage)
+  }, [])
 
   return (
-    <>
+    <div
+      style={{
+        overflow: "hidden",
+        overflowY: "hidden",
+        height: "100vh"
+      }}
+    >
         <Navbar
         />     
         <Sidebar
@@ -51,12 +60,16 @@ const Docs: React.FC<DocsProps> = ({
             marginLeft: isSidebarOpen ? "351px" : "0px",
             width: isSidebarOpen ? "calc(100vw - 351px)" : "100vw"
           }}
-        >
-          <Layout>
-            {children}
-          </Layout>
+        >   
+          {allTitles().includes(page ?? "") ? (
+            <Layout>
+              {children}
+              </Layout>
+          ) : (
+            <MissingPage/>
+          )}
         </main>
-    </>
+    </div>
   )
 }
 

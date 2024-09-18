@@ -25,6 +25,7 @@ interface DocsContextType {
     previous: string | null,
     next: string | null
   }
+  allTitles: () => string[]
 }
 
 // Create the context with a default value
@@ -88,6 +89,18 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     };
   }
 
+  const allTitles = () => {
+    let allTitles = sections.map(section => {
+      return section.titles
+    })
+
+    allTitles = allTitles.concat(titles)
+
+    return allTitles.flatMap((at) => {
+      return at
+    })
+  }
+
   const search = (input: string) => {
     let allTitles = sections.map(section => {
       return section.titles
@@ -133,7 +146,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   }
 
   return (
-    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage }}>
+    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage, allTitles }}>
       {children}
     </DocsContext.Provider>
   );

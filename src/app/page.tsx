@@ -76,7 +76,14 @@ const HomePage = () => {
                 </h2>
                 <p className={styles.description}>The best way to build documentation in NextJS that are easy to understand, looks beautifull & that you own.</p>
                 <div className={styles.btns}>
-                    <button className={classNames(styles.btn, styles.getStartedBtn)}>Get Started</button>
+                    <button 
+                        className={classNames(styles.btn, styles.getStartedBtn)}
+                        onClick={() => {
+                            window.location.href = "/docs?page=Get%20Started"
+                        }}
+                    >
+                        Get Started
+                    </button>
                     <button 
                         className={classNames(styles.btn, styles.docsBtn)}
                         onClick={() => {
