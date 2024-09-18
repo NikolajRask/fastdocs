@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Sidebar from '../Sidebar/Sidebar'
 import { useDocsContext } from '@/docs/context/context'
@@ -24,12 +24,28 @@ const Docs: React.FC<DocsProps> = ({
 
   const { titles, sections, setIsSidebarOpen, isSidebarOpen, changeDocsTitle, setPage, allTitles } = useDocsContext()
 
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page'); // This will capture 'Get Started'
+  const searchParams = useSearchParams(); // This will capture 'Get Started'
 
   useEffect(() => {
-    changeDocsTitle(title ?? useSettings("defaultDocsTitle"))
-    setPage(page ?? useSettings().defaultPage)
+    const pageParam = searchParams.get('page'); // Get the `page` query parameter
+    if (pageParam) {
+      console.log(allTitles())
+      changeDocsTitle(title ?? useSettings("defaultDocsTitle"))
+      if (allTitles().includes(pageParam)) {
+        setPage(pageParam)
+      } else {
+        if (pageParam?.trim() == "" || pageParam?.trim() == null || pageParam?.trim() == undefined) {
+          setPage(useSettings().defaultPage)
+        } else {
+          setPage(useSettings("404"))
+        }
+      }
+    }
+  }, [searchParams]); // Re-run effect when searchParams change
+
+
+  useEffect(() => {
+    const page = searchParams.get('page');
   }, [])
 
   return (
@@ -61,13 +77,9 @@ const Docs: React.FC<DocsProps> = ({
             width: isSidebarOpen ? "calc(100vw - 351px)" : "100vw"
           }}
         >   
-          {allTitles().includes(page ?? "") ? (
-            <Layout>
-              {children}
-              </Layout>
-          ) : (
-            <MissingPage/>
-          )}
+          <Layout>
+            {children}
+          </Layout>
         </main>
     </div>
   )

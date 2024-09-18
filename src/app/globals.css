@@ -8,6 +8,7 @@
   --border-color: rgb(226, 226, 226);
   --hover-color: rgba(0,0,0,0.1);
   --reverse-hover:rgb(61, 61, 61);
+  --background-subdued: rgb(219, 219, 219);
 }
 
 [data-theme='dark'] {
@@ -16,6 +17,7 @@
   --border-color: rgb(26, 26, 26);
   --hover-color: rgba(255,255,255,0.1);
   --reverse-hover: #d8d8d8;
+  --background-subdued: rgb(45, 45, 45);
 }
 
 body {

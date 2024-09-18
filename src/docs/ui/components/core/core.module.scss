@@ -91,3 +91,14 @@
     border: 2px solid black;
     border-radius: 0px 0px 10px 10px;
 }
+
+
+// ############### Highlight Component ############### //
+
+.highlight {
+    padding-inline: 5px;
+    padding-block: 0px;
+    border-radius: 4px;
+    background: var(--background-subdued);
+    color: var(--text-color);
+}

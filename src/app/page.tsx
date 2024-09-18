@@ -11,7 +11,6 @@ const HomePage = () => {
 
     useTheme()
 
-
     return (
         <main className={styles.main}>
             <nav className={styles.navbar}>

@@ -19,7 +19,8 @@ const settings: any = {
             }
         },
     ],
-    homePage: "/"
+    homePage: "/",
+    404: "404.page"
 }
 
 

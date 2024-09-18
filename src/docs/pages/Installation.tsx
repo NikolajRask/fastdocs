@@ -9,12 +9,13 @@ import Grid from '../ui/components/core/Grid/Grid'
 import Card from '../ui/components/core/Card/Card'
 import Breadcrumb from '../ui/components/core/Breadcrumb/Breadcrumb'
 import CodePreview from '../ui/components/core/CodePreview/CodePreview'
+import Highlight from '../ui/components/core/Highlight/Highlight'
 
 const Installation = () => {
   return (
     <>  
         <Text>
-          Use this command to install Next.js'
+          Use this command to install <Highlight>Index</Highlight>
           <Link page={"Test"}>Next</Link>
         </Text>
         <CommandPrompt

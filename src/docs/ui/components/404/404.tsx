@@ -1,9 +1,13 @@
 import React from 'react'
+import styles from '../components.module.scss'
 
-const MissingPage = () => {
+const Page404 = () => {
   return (
-    <div>404</div>
+    <div className={styles.missingPage}>
+        <h2>404</h2>
+        <p>We couldn't find the page you were looking for!</p>
+    </div>
   )
 }
 
-export default MissingPage
+export default Page404
