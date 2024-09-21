@@ -5,7 +5,8 @@ import Header from '../ui/components/core/Header/Header'
 import { useDocsContext } from '../context/context'
 import MissingPage from '../ui/components/404/404'
 import Page404 from '../ui/components/404/404'
-import useSettings from '../settings'
+import use404 from '../utils/use-404'
+import useSettings from '../utils/settings/use-settings'
 
 interface LayoutProps {
     children: React.ReactNode
@@ -17,9 +18,14 @@ const Layout = ({
 
   const { page } = useDocsContext()
 
-  if (page == useSettings("404")) {
+  use404()
+
+  if (page == useSettings().missingPage) {
     return (
-      <Page404/>
+      <>
+        <Page404/>
+        {children}
+      </>
     )
   } else {
     return (

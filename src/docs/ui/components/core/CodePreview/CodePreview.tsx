@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from '../core.module.scss'
 import { CodeBlock, irBlack } from 'react-code-blocks'
-import useSettings from '@/docs/settings'
+import useSettings from '@/docs/utils/settings/use-settings'
 
 interface CodePreviewProps {
     code: string,

@@ -1,19 +1,23 @@
 import React from 'react'
 import styles from '../core.module.scss'
 import { useDocsContext } from '@/docs/context/context';
+import { ExternalLinkIcon } from '@radix-ui/react-icons';
+import LinkIcon from '@/docs/ui/svgs/LinkIcon';
 
 interface LinkProps {
     href?: string;
     page?: string;
     children: React.ReactNode;
-    openInNewWindow?: boolean
+    openInNewWindow?: boolean,
+    withIcon?: boolean
 }
 
 const Link = ({
     href,
     page,
     children,
-    openInNewWindow=false
+    openInNewWindow=false,
+    withIcon=true
 }: LinkProps) => {
 
 const { setPage } = useDocsContext()
@@ -31,8 +35,16 @@ const { setPage } = useDocsContext()
                                 window.open(href)
                             }
                         }}
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 3,
+                        }}
                     >
-                        {children}
+                        <span>
+                            {children}
+                        </span>
+                        {withIcon && <ExternalLinkIcon/>}
                     </a>
                 ) : (
                     <a 
@@ -42,8 +54,16 @@ const { setPage } = useDocsContext()
                                 setPage(page)
                             }
                         }}
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 3,
+                        }}
                     >
-                        {children}
+                        <span>
+                            {children}
+                        </span>
+                        {withIcon && <LinkIcon/>}
                     </a>
                 )
             }

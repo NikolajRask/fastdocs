@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './navigator.module.scss'
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import { useDocsContext } from '@/docs/context/context'
-import useSettings from '@/docs/settings'
+import useSettings from '@/docs/utils/settings/use-settings'
 
 const Navigator = () => {
 
@@ -14,7 +14,7 @@ const Navigator = () => {
         className={getNeighbourPage(page).previous != null ? styles.item : styles.itemHidden}
         onClick={() => {
           if (getNeighbourPage(page).previous != null) {
-            setPage(getNeighbourPage(page).previous ?? useSettings("defaultPage"))
+            setPage(getNeighbourPage(page).previous ?? useSettings().defaultPage)
           }
         }}
       >
@@ -26,7 +26,7 @@ const Navigator = () => {
           className={styles.item}
           onClick={() => {
             if (getNeighbourPage(page).next != null) {
-              setPage(getNeighbourPage(page).next ?? useSettings("defaultPage"))
+              setPage(getNeighbourPage(page).next ?? useSettings().defaultPage)
             }
           }}
         >

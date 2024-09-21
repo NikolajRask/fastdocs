@@ -18,6 +18,11 @@ export default function Home() {
   return (
     <DocsProvider>
       <Docs title="Docs">
+        <Page 
+          title={"Test"}
+        >
+          Test
+        </Page>
         <Section 
           name="Books"
           alwaysOpen={true}

@@ -15,14 +15,14 @@ const Installation = () => {
   return (
     <>  
         <Text>
-          Use this command to install <Highlight>Index</Highlight>
-          <Link page={"Test"}>Next</Link>
+          <Link page={"Installation"}>Next</Link>
         </Text>
         <CommandPrompt
           content="npx create-next-app@latest"
         />
         <Text>Use this code</Text>
         <Code
+          file="main.ts"
           code={`
 function x() {
   console.log("e")

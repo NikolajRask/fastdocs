@@ -1,0 +1,14 @@
+import { between, seconds } from "../utils"
+import { SettingsProps } from "./settings.type"
+
+export const settings: SettingsProps = {
+    color: "rgb(31, 102, 235)",
+    productName: "Fastdocs",
+    defaultPage: "Get Started",
+    githubRepo: "https://github.com/NikolajRask/fastdocs",
+    twitter: "https://x.com/nkjrask",
+    defaultDocsTitle: "Docs",
+    homePage: "/",
+    loadingTime: between( seconds(0.7), seconds(1.5) ),
+    missingPage: "404.page"
+}

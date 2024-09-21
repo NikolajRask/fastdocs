@@ -23,8 +23,8 @@ const Page = ({
 
   try {
     section = useSectionContext()
-  } catch (error) {
-    console.log(error)
+  } catch(e) {
+    
   }
 
   useEffect(() => {
@@ -38,24 +38,39 @@ const Page = ({
   return (
     <>
       {
-        page == title && (
-          <div 
-            className={styles.pageFlex}
-          >
-            <div 
-              className={styles.pageContent}
-            >
-              {children}
-            </div>
-            <div
-              className={styles.pageTable}
-            >
-              <h3 className={styles.pageTableTitle}>On This Page</h3>
-            </div>
-          </div>
+        withTableOfContent ? (
+          <>
+            {
+              page == title && (
+                <div 
+                  className={styles.pageFlex}
+                >
+                  <div 
+                    className={styles.pageContent}
+                  >
+                    {children}
+                  </div>
+                  <div
+                    className={styles.pageTable}
+                  >
+                    <h3 className={styles.pageTableTitle}>On This Page</h3>
+                  </div>
+                </div>
+              )
+            } 
+          </>
+        ) : (
+          <>
+            {
+              page == title && (
+                <>
+                  {children}
+                </>
+              )
+            }
+          </>
         )
       }
-      
     </>
   )
 }

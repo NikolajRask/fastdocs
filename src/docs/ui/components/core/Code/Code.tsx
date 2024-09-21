@@ -1,26 +1,36 @@
 import React from 'react'
 import { CodeBlock, irBlack } from 'react-code-blocks'
+import styles from '../core.module.scss'
 
 interface CodeProps{
-    code: string
+    code: string;
+    file?: string;
 }
 
 const Code = ({
-    code
+    code,
+    file
 }: CodeProps) => {
   return (
-    <CodeBlock
-        customStyle={{
-            borderRadius: "10px",
-            fontFamily: "monospace",
-            marginBottom: "10px",
-            fontStyle: "normal"
-        }}
-        text={code.trim()}
-        language='typescript'
-        showLineNumbers={true}
-        theme={irBlack}
-    />
+    <>
+      {
+        file && (
+          <p className={styles.codeFile}>{file}</p>
+        )
+      }
+      <CodeBlock
+          customStyle={{
+              borderRadius: "10px",
+              fontFamily: "monospace",
+              marginBottom: "10px",
+              fontStyle: "normal"
+          }}
+          text={code.trim()}
+          language='typescript'
+          showLineNumbers={true}
+          theme={irBlack}
+      />
+    </>
   )
 }
 

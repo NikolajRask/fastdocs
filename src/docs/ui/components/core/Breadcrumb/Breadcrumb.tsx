@@ -5,12 +5,15 @@ import { CaretRightIcon } from '@radix-ui/react-icons'
 
 const Breadcrumb = () => {
 
-    const { docsTitle, page, getPageSection } = useDocsContext()
+    const { docsTitle, page, getPageSection, setPage, sections, getFirstPageInSection, allTitles } = useDocsContext()
 
     return (
         <div className={styles.breadcrumb}>
             <b
                 className={styles.clickable}
+                onClick={() => {
+                    setPage(allTitles()[0])
+                }}
             >
                 {docsTitle}
             </b>
@@ -20,6 +23,14 @@ const Breadcrumb = () => {
                         <CaretRightIcon/>
                         <p
                             className={styles.clickable}
+                            onClick={() => {
+                                if (getPageSection(page) != undefined) {
+                                    let newPage = getFirstPageInSection(getPageSection(page) ?? "")
+                                    if (newPage != undefined) {
+                                        setPage(newPage)
+                                    }
+                                }
+                            }}
                         >
                             {getPageSection(page)}
                         </p>

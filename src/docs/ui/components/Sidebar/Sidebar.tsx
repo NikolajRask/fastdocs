@@ -7,7 +7,7 @@ import { ArrowDownIcon, CaretDownIcon, CaretLeftIcon, CaretUpIcon } from '@radix
 import classNames from '@/docs/utils/utils';
 import ActionIcon from '../core/ActionIcon/ActionIcon';
 import { useMonitor } from '@/docs/utils/debug/use-monitor';
-import useSettings from '@/docs/settings';
+import useSettings from '@/docs/utils/settings/use-settings';
 
 interface SidebarProps {
   titles?: string[];

@@ -1,7 +1,7 @@
 "use client"
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import useSettings from '../settings';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import useSettings from '../utils/settings/use-settings';
 
 // Define the type for the context
 interface DocsContextType {
@@ -25,7 +25,9 @@ interface DocsContextType {
     previous: string | null,
     next: string | null
   }
-  allTitles: () => string[]
+  allTitles: () => string[];
+  getFirstPageInSection: (v: string) => string | undefined;
+  isLoading: boolean;
 }
 
 // Create the context with a default value
@@ -44,9 +46,10 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     titles: string[],
     alwaysOpen: boolean
   }[]>([])
-  const [currentPage, setCurrentPage] = useState<string>(useSettings("defaultPage"))
+  const [currentPage, setCurrentPage] = useState<string>(useSettings().defaultPage)
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [docsTitle, setDocsTitle] = useState<string>("")
+  const [isLoading, setIsLoading] = useState(true)
 
   const changeDocsTitle = (v: string) => {
     setDocsTitle(v)
@@ -140,13 +143,23 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     return sections.find(section => section.titles.includes(page))?.name
   }
 
+  function getFirstPageInSection (name: string): string | undefined {
+    return sections.find(section => section.name == name)?.titles[0]
+  }
+
   const setPage = (page: string) => {
     setCurrentPage(page)
     window.history.replaceState(null, '', window.location.pathname + '?page='+page);
   }
 
+
+  useEffect(() => {
+    window.setTimeout(() => {
+      setIsLoading(false)
+    }, useSettings().loadingTime)
+  }, [])
   return (
-    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage, allTitles }}>
+    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage, allTitles, getFirstPageInSection, isLoading }}>
       {children}
     </DocsContext.Provider>
   );

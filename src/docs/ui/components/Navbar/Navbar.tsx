@@ -2,7 +2,6 @@
 
 import { Input } from '@/components/ui/input'
 import styles from './navbar.module.scss'
-import useSettings from '@/docs/settings'
 import { useState } from 'react'
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { DialogTrigger } from '@radix-ui/react-dialog'
@@ -11,6 +10,7 @@ import { FileIcon, GitHubLogoIcon, MagnifyingGlassIcon, SunIcon, TwitterLogoIcon
 import ActionIcon from '../core/ActionIcon/ActionIcon'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useTheme } from '@/docs/utils/use-theme'
+import useSettings from '@/docs/utils/settings/use-settings'
 
 export default function Navbar() {
 
@@ -25,14 +25,14 @@ export default function Navbar() {
                 <div className={styles.flexStart}>
                     <h2
                         style={{
-                            color: useSettings("color"),
+                            color: useSettings().color,
                             fontWeight: 700,
                         }}
                         onClick={() => {
-                            window.location.href = useSettings("homePage")
+                            window.location.href = useSettings().homePage
                         }}
                     >
-                        {useSettings("productName")}
+                        {useSettings().productName}
                     </h2>
                     <div className={styles.navLinks}>
                         {/* Add links here in the navbar */}
@@ -92,13 +92,13 @@ export default function Navbar() {
                     </Dialog>
                     <GitHubLogoIcon 
                         onClick={() => {
-                            window.open(useSettings("githubRepo"))
+                            window.open(useSettings().githubRepo)
                         }}
                         className={styles.logo}
                     />
                     <TwitterLogoIcon
                         onClick={() => {
-                            window.open(useSettings("twitter"))
+                            window.open(useSettings().twitter)
                         }}
                         className={styles.logo}
                     />  

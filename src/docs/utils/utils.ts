@@ -16,3 +16,11 @@ export default function classNames(
       .join(" ")
       .trim();
 }
+
+export function between(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
+export function seconds(s: number) {
+  return s * 1000
+}
