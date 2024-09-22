@@ -9,8 +9,6 @@ export default function use404() {
     useEffect(() => {
 
         if (!allTitles().includes(page)) {
-            console.log(page)
-            console.log(useSettings().defaultPage)
             if (page?.trim() == "" || page?.trim() == null || page?.trim() == undefined || page == useSettings().defaultPage) {
               setPage(useSettings().defaultPage)
             } else {

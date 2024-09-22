@@ -12,6 +12,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import MissingPage from '../404/404'
 import Loading from '../Loading/Loading'
 import useSettings from '@/docs/utils/settings/use-settings'
+import { useTheme } from '@/docs/utils/use-theme'
 
 interface DocsProps {
     children: React.ReactNode
@@ -27,6 +28,8 @@ const Docs: React.FC<DocsProps> = ({
 
   const searchParams = useSearchParams(); // This will capture 'Get Started'
 
+  useTheme()
+
   useEffect(() => {
     const pageParam = searchParams.get('page'); // Get the `page` query parameter
     if (pageParam) {
@@ -35,9 +38,6 @@ const Docs: React.FC<DocsProps> = ({
 
     }
   }, [searchParams]); // Re-run effect when searchParams change
-
-  console.log(titles)
-  console.log(sections)
 
   return (
     <>

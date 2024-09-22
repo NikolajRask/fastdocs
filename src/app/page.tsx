@@ -6,6 +6,7 @@ import classNames from '@/docs/utils/utils'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from '@/docs/utils/use-theme'
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
 
 const HomePage = () => {
 
@@ -72,7 +73,7 @@ const HomePage = () => {
                 </nav>
                 <section>
                     <h2 className={styles.header}>
-                        Write docs in <a>hours</a> not <a className={styles.strike}>days</a>
+                            Write docs in <a>hours</a> not <a className={styles.strike}>days</a>
                     </h2>
                     <p className={styles.description}>The best way to build documentation in NextJS that are easy to understand, looks beautifull & that you own.</p>
                     <div className={styles.btns}>
@@ -94,23 +95,45 @@ const HomePage = () => {
                         </button>
                     </div>
                 </section>
-                <section className={styles.fullWidth}>
-                    <h3>Fastdocs makes it easy to</h3>
-                    <p>+ Build a great UI and UX for documentation</p>
-                    <p>+ Write documentation that is to understand</p>
-                    <p>+ Customize your documentation to your liking</p>
-                    <p>+ Implement features such as themes, search and <br/>navigation into your documentation</p>
-                    <p>+ Write documentation that is 100% owned by you</p>
-                </section>
-                <section>
-                    <img
-                        className={styles.docsImage}
-                        src={'./docs.png'}
-                    />
-                </section>
             </main>
+            <Footer></Footer>
         </div>
     )
 }
 
 export default HomePage
+
+
+
+function Footer() {
+  return (
+    <footer className="py-8" style={{marginTop: 300, backgroundColor: "var(--background-color)", borderTop: "1px solid var(--border-color)"}}>
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-4 md:mb-0">
+            <h1
+                className={styles.smallLogo}
+            >
+                <a>F</a>astdocs
+            </h1>
+            <p style={{color: "var(--text-color)"}}>Build by Nikolaj Rask with ❤️</p>
+          </div>
+          <div className={styles.links}>
+            <a href="#">
+              <Facebook size={20} />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-800">
+              <Twitter size={20} />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-800">
+              <Instagram size={20} />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-800">
+              <Linkedin size={20} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

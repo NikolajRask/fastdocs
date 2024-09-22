@@ -6,8 +6,9 @@ interface CardProps {
 }
 
 const Card = ({
-    children
-}: CardProps) => {
+    children,
+    
+}: React.HTMLAttributes<HTMLDivElement> & CardProps) => {
   return (
     <div className={styles.card}>
         {children}

@@ -1,8 +1,6 @@
 .main {
     width: 70vw;
     margin-left: 15vw;
-    height: 100vh;
-    position: absolute;
 }
 
 .wrapper {
@@ -33,6 +31,17 @@
     }
 }
 
+.smallLogo {
+    font-size: 21px;
+    font-weight: 900;
+    user-select: none;
+    color: var(--text-color);
+
+    a {
+        color: rgb(31, 102, 235);
+    } 
+}
+
 .themeLogo {
     width: 24px;
     height: 24px;
@@ -46,7 +55,7 @@
     text-align: center;
     font-weight: 700;
     user-select: none;
-    margin-top: 250px;
+    margin-top: 300px;
 
     a {
         text-decoration: none;
@@ -106,17 +115,19 @@
    font-size: 21px; 
 }
 
-.fullWidth {
-    width: calc(100vw - 10px);
+.infoBox {
+    padding: 30px;
     padding-block: 50px;
+    width: 800px;
+    margin-left: calc(50% - 400px);
     background: var(--background-subdued);
-    margin-left: -15vw;
-    margin-top: 250px;
+    border: 1px solid var(--border-color);
+    margin-top: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-
+    border-radius: 25px;
 
     h3 {
         font-size: 40px;
@@ -138,4 +149,18 @@
     border-radius: 25px;
     margin-top: 250px;
     box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.2);
+}
+
+.links {
+    gap: 1rem;
+    display: flex;
+
+    a {
+        color: var(--text-color);
+
+        &:hover {
+            color: var(--text-hover);
+        }
+    }
+
 }

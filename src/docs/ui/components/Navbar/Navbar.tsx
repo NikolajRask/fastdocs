@@ -136,7 +136,7 @@ export default function Navbar() {
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() => {
-                                    console.log(useTheme("system"))
+                                    useTheme("system")
                                 }}
                             >
                                 System

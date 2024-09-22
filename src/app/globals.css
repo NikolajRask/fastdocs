@@ -8,7 +8,11 @@
   --border-color: rgb(226, 226, 226);
   --hover-color: rgba(0,0,0,0.1);
   --reverse-hover:rgb(61, 61, 61);
-  --background-subdued: rgb(219, 219, 219);
+  --background-subdued: rgb(241, 241, 241);
+  --scroll-base: #c0c0c0;
+  --scroll-hover: #b1b1b1;
+  --scroll-active: #a3a3a3;
+  --text-hover: rgb(56, 56, 56);
 }
 
 [data-theme='dark'] {
@@ -17,7 +21,11 @@
   --border-color: rgb(26, 26, 26);
   --hover-color: rgba(255,255,255,0.1);
   --reverse-hover: #d8d8d8;
-  --background-subdued: rgb(45, 45, 45);
+  --background-subdued: rgb(32, 32, 32);
+  --scroll-base: #313131;
+  --scroll-hover: #333333;
+  --scroll-active: #222222;
+  --text-hover: rgb(199, 199, 199);
 }
 
 body {
@@ -30,28 +38,28 @@ body {
 }
 *::-webkit-scrollbar-track {
   border-radius: 5px;
-  background-color: #DFE9EB;
+  background-color: var(--background-color);
 }
 
-*::-webkit-scrollbar-track:hover {
+/* *::-webkit-scrollbar-track:hover {
   background-color: #B8C0C2;
 }
 
 *::-webkit-scrollbar-track:active {
   background-color: #B8C0C2;
-}
+} */
 
 *::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background-color: #1666df;
+  background-color: var(--scroll-base);
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: #0557d3;
+  background-color: var(--scroll-hover);
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background-color: #115ccc;
+  background-color: var(--scroll-active);
 }
 
 @layer utilities {

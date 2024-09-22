@@ -17,7 +17,7 @@ const ActionIcon = ({
     children,
     onClick,
     ...props
-}: ActionIconProps) => {
+}:  React.HTMLAttributes<HTMLDivElement> & ActionIconProps) => {
   return (
     <div 
         className={classNames(styles.actionIcon, className)}

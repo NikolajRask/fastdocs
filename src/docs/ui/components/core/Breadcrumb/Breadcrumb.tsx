@@ -3,12 +3,12 @@ import React from 'react'
 import styles from '../core.module.scss'
 import { CaretRightIcon } from '@radix-ui/react-icons'
 
-const Breadcrumb = () => {
+const Breadcrumb = (props: React.HTMLAttributes<HTMLDivElement>) => {
 
     const { docsTitle, page, getPageSection, setPage, sections, getFirstPageInSection, allTitles } = useDocsContext()
 
     return (
-        <div className={styles.breadcrumb}>
+        <div className={styles.breadcrumb} {...props}>
             <b
                 className={styles.clickable}
                 onClick={() => {

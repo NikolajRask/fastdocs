@@ -21,8 +21,17 @@ const CommandPrompt = ({
   return (
     <div className={styles.commandprompt}>
         <div>
-            <span className={styles.white}>{content.split(" ")[0]}</span>
-            <span className={styles.gray}>{content.replace(content.split(" ")[0]," ")}</span>
+            {content.split("&&").map((line, index) => {
+
+              line = line.trim()
+
+              return (
+                <div key={index}>
+                  <span className={styles.white}>{line.split(" ")[0]}</span>
+                  <span className={styles.gray}>{line.replace(line.split(" ")[0]," ")}</span>
+                </div>
+              )
+            })}
         </div>
         <CopyIcon
             onClick={() => {

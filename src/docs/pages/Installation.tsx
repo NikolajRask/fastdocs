@@ -18,7 +18,7 @@ const Installation = () => {
           <Link page={"Installation"}>Next</Link>
         </Text>
         <CommandPrompt
-          content="npx create-next-app@latest"
+          content="npx create-next-app@latest && npx create-next-app@oldest && npx create-next-app@oldest && npx create-next-app@oldest && npx create-next-app@oldest && npx create-next-app@oldest && npx create-next-app@oldest && npx create-next-app@oldest"
         />
         <Text>Use this code</Text>
         <Code

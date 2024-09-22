@@ -9,6 +9,6 @@ export const settings: SettingsProps = {
     twitter: "https://x.com/nkjrask",
     defaultDocsTitle: "Docs",
     homePage: "/",
-    loadingTime: between( seconds(0.7), seconds(1.5) ),
+    loadingTime: 0,
     missingPage: "404.page"
 }
