@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './commandprompt.module.scss'
-import { CopyIcon } from '@radix-ui/react-icons'
+import { CheckIcon, CopyIcon } from '@radix-ui/react-icons'
 
 interface CommandPromptProps {
     content: string 
@@ -10,13 +10,23 @@ const CommandPrompt = ({
     content
 }: CommandPromptProps) => {
 
-    const copyText = async (text: string) => {
-        try {
-          await navigator.clipboard.writeText(text);
-        } catch (err) {
-          console.error("Failed to copy text: ", err);
-        }
-      };
+  const [isCopied, setIsCopied] = useState(false)
+
+  const copyText = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
+
+  useEffect(() => {
+    if (isCopied == true) {
+      window.setTimeout(() => {
+        setIsCopied(false)
+      }, 3000)
+    }
+  }, [isCopied])
 
   return (
     <div className={styles.commandprompt}>
@@ -33,12 +43,21 @@ const CommandPrompt = ({
               )
             })}
         </div>
-        <CopyIcon
-            onClick={() => {
-                copyText(content)
-            }}
-            className={styles.copy}
-        />
+        {
+          isCopied ? (
+            <CheckIcon 
+              className={styles.copy}
+            />
+          ) : (
+            <CopyIcon
+              onClick={() => {
+                  copyText(content)
+                  setIsCopied(true)
+              }}
+              className={styles.copy}
+            />
+          )
+        }
     </div>
   )
 }
