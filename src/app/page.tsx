@@ -6,7 +6,7 @@ import classNames from '@/docs/utils/utils'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from '@/docs/utils/use-theme'
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, Coffee, Github } from "lucide-react"
 
 const HomePage = () => {
 
@@ -119,17 +119,17 @@ function Footer() {
             <p style={{color: "var(--text-color)"}}>Build by Nikolaj Rask with ❤️</p>
           </div>
           <div className={styles.links}>
-            <a href="#">
-              <Facebook size={20} />
+            <a href="#" className="text-gray-600 hover:text-gray-800">
+              <Github size={20} />
             </a>
             <a href="#" className="text-gray-600 hover:text-gray-800">
               <Twitter size={20} />
             </a>
             <a href="#" className="text-gray-600 hover:text-gray-800">
-              <Instagram size={20} />
+              <Linkedin size={20} />
             </a>
             <a href="#" className="text-gray-600 hover:text-gray-800">
-              <Linkedin size={20} />
+              <Coffee size={20} />
             </a>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { useDocsContext } from '@/docs/context/context';
 import { SectionContextType, useSectionContext } from '@/docs/context/section';
 import React, { useEffect } from 'react'
 import styles from './page.module.scss'
+import { pages } from 'next/dist/build/templates/app-page';
 
 interface PageProps {
     children: React.ReactNode
@@ -14,10 +15,10 @@ interface PageProps {
 const Page = ({
     children,
     title,
-    withTableOfContent
+    withTableOfContent=false
 }: PageProps) => {
 
-  const { addTitle, page } = useDocsContext();
+  const { addTitle, page, setContentBarEnabled } = useDocsContext();
  
   let section: SectionContextType | undefined;
 
@@ -35,43 +36,26 @@ const Page = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (
+      page == title
+    ) {
+      setContentBarEnabled(withTableOfContent)
+    }
+  }, [page])
+
+
+
   return (
     <>
       {
-        withTableOfContent ? (
+        page == title && (
           <>
-            {
-              page == title && (
-                <div 
-                  className={styles.pageFlex}
-                >
-                  <div 
-                    className={styles.pageContent}
-                  >
-                    {children}
-                  </div>
-                  <div
-                    className={styles.pageTable}
-                  >
-                    <h3 className={styles.pageTableTitle}>On This Page</h3>
-                  </div>
-                </div>
-              )
-            } 
-          </>
-        ) : (
-          <>
-            {
-              page == title && (
-                <>
-                  {children}
-                </>
-              )
-            }
+            {children}
           </>
         )
       }
-    </>
+    </> 
   )
 }
 

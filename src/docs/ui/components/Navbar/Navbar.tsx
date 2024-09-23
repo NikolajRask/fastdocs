@@ -11,6 +11,7 @@ import ActionIcon from '../core/ActionIcon/ActionIcon'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useTheme } from '@/docs/utils/use-theme'
 import useSettings from '@/docs/utils/settings/use-settings'
+import Link from 'next/link'
 
 export default function Navbar() {
 
@@ -36,9 +37,9 @@ export default function Navbar() {
                     </h2>
                     <div className={styles.navLinks}>
                         {/* Add links here in the navbar */}
-                        <p className={styles.navLink}>Home</p>
-                        <p className={styles.navLink}>Docs</p>
-                        <p className={styles.navLink}>Support</p>
+                        <Link href={"/"}><p className={styles.navLink}>Home</p></Link>
+                        <Link href={"/docs"}><p className={styles.navLink}>Docs</p></Link>
+                        <Link href={"https://buymeacoffee.com/nikorask"}><p className={styles.navLink}>Support</p></Link>
                     </div>
                 </div>
                 <div className={styles.flex}>

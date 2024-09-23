@@ -28,6 +28,11 @@ interface DocsContextType {
   allTitles: () => string[];
   getFirstPageInSection: (v: string) => string | undefined;
   isLoading: boolean;
+  contentBarEnabled: boolean;
+  setContentBarEnabled: React.Dispatch<React.SetStateAction<boolean>>
+  contentOnPage: string[]
+  setContentOnPage: React.Dispatch<React.SetStateAction<string[]>>
+  addTitleToContent: (v: string) => void
 }
 
 // Create the context with a default value
@@ -50,6 +55,8 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [docsTitle, setDocsTitle] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
+  const [contentBarEnabled, setContentBarEnabled] = useState(false)
+  const [contentOnPage, setContentOnPage] = useState<string[]>([])
 
   const changeDocsTitle = (v: string) => {
     setDocsTitle(v)
@@ -147,6 +154,15 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     return sections.find(section => section.name == name)?.titles[0]
   }
 
+  function addTitleToContent(title: string) {
+    setContentOnPage((prev) => {
+      return [
+        ...prev,
+        title
+      ]
+    })
+  }
+
   const setPage = (page: string) => {
     setCurrentPage(page)
     window.history.replaceState(null, '', window.location.pathname + '?page='+page);
@@ -159,7 +175,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     }, useSettings().loadingTime)
   }, [])
   return (
-    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage, allTitles, getFirstPageInSection, isLoading }}>
+    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage, allTitles, getFirstPageInSection, isLoading, contentBarEnabled, setContentBarEnabled, contentOnPage, setContentOnPage, addTitleToContent }}>
       {children}
     </DocsContext.Provider>
   );

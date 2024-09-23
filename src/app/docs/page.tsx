@@ -20,6 +20,7 @@ export default function Home() {
       <Docs title="Docs">
         <Page 
           title={"Test"}
+          withTableOfContent={true}
         >
           Test
         </Page>
@@ -29,11 +30,13 @@ export default function Home() {
         >
           <Page
             title={"Get Started"}
+            withTableOfContent={true}
           >
               <Installation/>
           </Page>
           <Page
             title={"Installation"}
+            withTableOfContent={false}
           >
               <p>2</p>
           </Page>

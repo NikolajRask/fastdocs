@@ -24,7 +24,7 @@ const Docs: React.FC<DocsProps> = ({
     children
 }:DocsProps) => {
 
-  const { titles, sections, setIsSidebarOpen, isSidebarOpen, changeDocsTitle, setPage, isLoading } = useDocsContext()
+  const { titles, sections, setIsSidebarOpen, isSidebarOpen, changeDocsTitle, setPage, isLoading, contentBarEnabled, contentOnPage, setContentOnPage, page } = useDocsContext()
 
   const searchParams = useSearchParams(); // This will capture 'Get Started'
 
@@ -38,6 +38,10 @@ const Docs: React.FC<DocsProps> = ({
 
     }
   }, [searchParams]); // Re-run effect when searchParams change
+
+  useEffect(() => {
+    setContentOnPage([])
+  }, [page, contentBarEnabled])
 
   return (
     <>
@@ -64,18 +68,42 @@ const Docs: React.FC<DocsProps> = ({
               className={styles.toggleIcon}
             >
               <CaretRightIcon/>
-            </ActionIcon>  
-            <main 
-              className={styles.main}
-              style={{
-                marginLeft: isSidebarOpen ? "351px" : "0px",
-                width: isSidebarOpen ? "calc(100vw - 351px)" : "100vw"
-              }}
-            >   
-              <Layout>
-                {children}
-              </Layout>
-            </main>
+            </ActionIcon>
+            {
+              contentBarEnabled ? (
+                <div className={styles.mainFlex}>
+                  <main 
+                    className={styles.main}
+                    style={{
+                      marginLeft: isSidebarOpen ? "351px" : "0px",
+                      width: isSidebarOpen ? "calc(100vw - 701px)" : "calc(100vw - 350px)"
+                    }}
+                  >   
+                    <Layout>
+                      {children}
+                    </Layout>
+                  </main>
+                  <div className={styles.tableOfContents}>
+                    <h2>Content On This Page</h2>
+                    {contentOnPage.map((contentTitle, index) => {
+                      return <p key={index}>{contentTitle}</p>
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <main 
+                  className={styles.main}
+                  style={{
+                    marginLeft: isSidebarOpen ? "351px" : "0px",
+                    width: isSidebarOpen ? "calc(100vw - 351px)" : "100vw"
+                  }}
+                >   
+                  <Layout>
+                    {children}
+                  </Layout>
+                </main>
+              )
+            }  
         </div>
       )}
     </>
