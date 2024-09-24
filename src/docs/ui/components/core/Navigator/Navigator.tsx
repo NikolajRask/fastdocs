@@ -4,12 +4,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import { useDocsContext } from '@/docs/context/context'
 import useSettings from '@/docs/utils/settings/use-settings'
 
-const Navigator = () => {
+const Navigator = ({
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) => {
 
   const { getNeighbourPage, page, setPage } = useDocsContext()
 
   return (
-    <div className={styles.navigator}>
+    <div className={styles.navigator} {...rest}>
       <div 
         className={getNeighbourPage(page).previous != null ? styles.item : styles.itemHidden}
         onClick={() => {

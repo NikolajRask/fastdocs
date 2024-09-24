@@ -7,10 +7,12 @@ interface HighlightProps {
 
 const Highlight = ({
   children,
-}: HighlightProps) => {
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement> & HighlightProps) => {
   return (
     <span
       className={styles.highlight}
+      {...rest}
     >
       {children}
     </span>

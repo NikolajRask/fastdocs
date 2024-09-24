@@ -7,8 +7,9 @@ interface CommandPromptProps {
 }
 
 const CommandPrompt = ({
-    content
-}: CommandPromptProps) => {
+    content,
+    ...rest
+}: React.HTMLAttributes<HTMLDivElement> & CommandPromptProps) => {
 
   const [isCopied, setIsCopied] = useState(false)
 
@@ -29,7 +30,7 @@ const CommandPrompt = ({
   }, [isCopied])
 
   return (
-    <div className={styles.commandprompt}>
+    <div className={styles.commandprompt} {...rest}>
         <div>
             {content.split("&&").map((line, index) => {
 

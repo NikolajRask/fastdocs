@@ -30,9 +30,15 @@ interface DocsContextType {
   isLoading: boolean;
   contentBarEnabled: boolean;
   setContentBarEnabled: React.Dispatch<React.SetStateAction<boolean>>
-  contentOnPage: string[]
-  setContentOnPage: React.Dispatch<React.SetStateAction<string[]>>
-  addTitleToContent: (v: string) => void
+  contentOnPage: {
+    label: string,
+    id: string,
+  }[]
+  setContentOnPage: React.Dispatch<React.SetStateAction<{
+    label: string,
+    id: string,
+  }[]>>
+  addTitleToContent: (v: string, id: string) => void
 }
 
 // Create the context with a default value
@@ -56,7 +62,10 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   const [docsTitle, setDocsTitle] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const [contentBarEnabled, setContentBarEnabled] = useState(false)
-  const [contentOnPage, setContentOnPage] = useState<string[]>([])
+  const [contentOnPage, setContentOnPage] = useState<{
+    label: string,
+    id: string
+  }[]>([])
 
   const changeDocsTitle = (v: string) => {
     setDocsTitle(v)
@@ -154,11 +163,14 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     return sections.find(section => section.name == name)?.titles[0]
   }
 
-  function addTitleToContent(title: string) {
+  function addTitleToContent(title: string, id: string) {
     setContentOnPage((prev) => {
       return [
         ...prev,
-        title
+        {
+          label: title,
+          id: id
+        }
       ]
     })
   }

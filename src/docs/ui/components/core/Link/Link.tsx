@@ -17,8 +17,9 @@ const Link = ({
     page,
     children,
     openInNewWindow=false,
-    withIcon=true
-}: LinkProps) => {
+    withIcon=true,
+    ...rest
+}: React.HTMLAttributes<HTMLDivElement> & LinkProps) => {
 
 const { setPage } = useDocsContext()
 

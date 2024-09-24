@@ -6,10 +6,11 @@ interface GridProps {
 }
 
 const Grid = ({
-    children
-}: GridProps) => {
+    children,
+    ...rest
+}: React.HTMLAttributes<HTMLDivElement> & GridProps) => {
   return (
-    <div className={styles.grid}>
+    <div className={styles.grid} {...rest}>
         {children}
     </div>
   )

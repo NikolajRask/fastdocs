@@ -86,7 +86,16 @@ const Docs: React.FC<DocsProps> = ({
                   <div className={styles.tableOfContents}>
                     <h2>Content On This Page</h2>
                     {contentOnPage.map((contentTitle, index) => {
-                      return <p key={index}>{contentTitle}</p>
+                      return <a href={`#content-${contentTitle.label}`}>
+                        <p 
+                          key={index}
+                          style={{
+                            marginBottom: 5,
+                          }}
+                        >
+                          {contentTitle.label}
+                        </p>
+                      </a>
                     })}
                   </div>
                 </div>

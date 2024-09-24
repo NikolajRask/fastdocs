@@ -1,23 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../core.module.scss'
 import { CodeBlock, irBlack } from 'react-code-blocks'
 import useSettings from '@/docs/utils/settings/use-settings'
+import { cuid } from '@/docs/utils/utils';
+import { useDocsContext } from '@/docs/context/context';
 
 interface CodePreviewProps {
     code: string,
-    preview: React.ReactNode
+    preview: React.ReactNode,
+    file?: string;
 }
 
 const CodePreview = ({
     code,
-    preview
-}: CodePreviewProps) => {
+    preview,
+    file,
+    ...rest
+}: React.HTMLAttributes<HTMLDivElement> & CodePreviewProps) => {
 
     const [tab, setTab] = useState(true)
 
+    const { addTitleToContent } = useDocsContext()
+
+    const id = cuid()
+    
+    useEffect(() => {
+        if (file) {
+            addTitleToContent(file as string, id)
+        }
+    }, [])
+
     return (
         <>
-            <div className={styles.codeTabs}>
+            {
+                file && (
+                    <p className={styles.codeFile} id={`content-${file as string}`}>{file}</p>
+                )
+            }
+            <div className={styles.codeTabs} {...rest}>
                 <div
                     onClick={() => {
                         setTab(true)

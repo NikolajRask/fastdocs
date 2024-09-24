@@ -1,24 +1,28 @@
 import { useDocsContext } from '@/docs/context/context';
 import React, { useEffect } from 'react'
 import styles from '../core.module.scss'
+import { cuid } from '@/docs/utils/utils';
 
 interface HeaderProps {
     title?: string;
 }
 
 const Header = ({
-    title
-}: HeaderProps) => {
+    title,
+    ...rest
+}: React.HTMLAttributes<HTMLDivElement> & HeaderProps) => {
 
     const { page, addTitleToContent} = useDocsContext()
 
+    let id = cuid();
+
     useEffect(() => {
         console.log("Added")
-        addTitleToContent(title ?? page)
+        addTitleToContent(title ?? page, id)
     }, [])
 
     return (
-        <h1 className={styles.header}>{title ?? page}</h1>
+        <h1 className={styles.header} id={`content-${title ?? page}`} {...rest}>{title ?? page}</h1>
     )
 }
 

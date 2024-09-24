@@ -6,10 +6,11 @@ interface TextProps {
 }
 
 const Text = ({
-    children
-}: TextProps) => {
+    children,
+    ...rest
+}: React.HTMLAttributes<HTMLDivElement> & TextProps) => {
   return (
-    <div className={styles.text}>
+    <div className={styles.text} {...rest}>
       {children}
     </div>
   )

@@ -12,13 +12,15 @@ const Image = ({
     height,
     src,
     alt,
-}: ImageProps) => {
+    ...rest
+}: React.HTMLAttributes<HTMLDivElement> & ImageProps) => {
   return (
     <img
         width={width}
         height={height}
         src={src}
         alt={alt}
+        {...rest}
     />
   )
 }
