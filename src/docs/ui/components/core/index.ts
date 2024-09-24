@@ -12,3 +12,4 @@ export { default as Link } from './Link/Link';
 export { default as Navigator } from './Navigator/Navigator';
 export { default as Text } from './Text/Text';
 export { default as Title } from './Title/Title';
+export { default as SEO } from './SEO/SEO'

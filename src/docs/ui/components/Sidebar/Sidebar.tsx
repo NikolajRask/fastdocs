@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import styles from './sidebar.module.scss'
+import styles from '../components.module.scss'
 import { useDocsContext } from '@/docs/context/context'
 import { ArrowDownIcon, CaretDownIcon, CaretLeftIcon, CaretUpIcon } from '@radix-ui/react-icons';
 import classNames from '@/docs/utils/utils';
@@ -115,9 +115,9 @@ const SidebarSection = (props: SidebarSectionProps) => {
       >
         <span>{props.name}</span>
        {!props.alwaysOpen && <>
-          {
-            !isOpen ? <CaretDownIcon ></CaretDownIcon> : <CaretUpIcon ></CaretUpIcon>
-          }
+          <CaretDownIcon
+            className={isOpen ? styles.sectionOpen : styles.sectionClosed}
+          />
         </>}
       </div>
       <div 

@@ -1,13 +1,12 @@
 "use client"
 
 import { Input } from '@/components/ui/input'
-import styles from './navbar.module.scss'
+import styles from '../components.module.scss'
 import { useState } from 'react'
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { DialogTrigger } from '@radix-ui/react-dialog'
 import { useDocsContext } from '@/docs/context/context'
 import { FileIcon, GitHubLogoIcon, MagnifyingGlassIcon, SunIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
-import ActionIcon from '../core/ActionIcon/ActionIcon'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useTheme } from '@/docs/utils/use-theme'
 import useSettings from '@/docs/utils/settings/use-settings'
@@ -27,8 +26,8 @@ export default function Navbar() {
                     <h2
                         style={{
                             color: useSettings().color,
-                            fontWeight: 700,
                         }}
+                        className={styles.logo}
                         onClick={() => {
                             window.location.href = useSettings().homePage
                         }}
@@ -56,9 +55,7 @@ export default function Navbar() {
                         </DialogTrigger>
                         <DialogContent className={styles.searchModal}>
                             <DialogTitle
-                                style={{
-                                    display: "none"
-                                }}
+                                className={styles.dialogTitle}
                             />
                             <input
                                 placeholder="Search"
@@ -105,21 +102,14 @@ export default function Navbar() {
                     />  
                     <DropdownMenu>
                         <DropdownMenuTrigger
-                            style={{
-                                border: "none",
-                                outline: "none"
-                            }}
+                            className={styles.dropdown}
                         >
                             <SunIcon
                                 className={styles.logo}
                             />   
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
-                            style={{
-                                backgroundColor: "var(--background-color)",
-                                color: "var(--text-color)",
-                                border: "1px solid var(--border-color)"
-                            }}
+                            className={styles.dropdownContent}
                         >
                             <DropdownMenuItem
                                 onClick={() => {

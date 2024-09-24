@@ -10,5 +10,5 @@ export const settings: SettingsProps = {
     defaultDocsTitle: "Docs",
     homePage: "/",
     loadingTime: 0,
-    missingPage: "404.page"
+    missingPage: "404.page",
 }

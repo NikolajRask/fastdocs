@@ -3,7 +3,6 @@
 import { useDocsContext } from '@/docs/context/context';
 import { SectionContextType, useSectionContext } from '@/docs/context/section';
 import React, { useEffect } from 'react'
-import styles from './page.module.scss'
 import { pages } from 'next/dist/build/templates/app-page';
 
 interface PageProps {

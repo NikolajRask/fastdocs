@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './navigator.module.scss'
+import styles from '../core.module.scss'
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import { useDocsContext } from '@/docs/context/context'
 import useSettings from '@/docs/utils/settings/use-settings'

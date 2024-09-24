@@ -36,11 +36,7 @@ const { setPage } = useDocsContext()
                                 window.open(href)
                             }
                         }}
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 3,
-                        }}
+                        className={styles.link}
                     >
                         <span>
                             {children}
@@ -55,11 +51,7 @@ const { setPage } = useDocsContext()
                                 setPage(page)
                             }
                         }}
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 3,
-                        }}
+                        className={styles.link}
                     >
                         <span>
                             {children}

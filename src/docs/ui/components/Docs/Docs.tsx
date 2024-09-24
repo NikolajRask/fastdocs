@@ -1,15 +1,14 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Sidebar from '../Sidebar/Sidebar'
 import { useDocsContext } from '@/docs/context/context'
 import styles from '../components.module.scss'
 import ActionIcon from '../core/ActionIcon/ActionIcon'
-import { CaretLeftIcon, CaretRightIcon } from '@radix-ui/react-icons'
+import { CaretRightIcon } from '@radix-ui/react-icons'
 import Layout from '@/docs/pages/layout'
-import { useRouter, useSearchParams } from 'next/navigation'
-import MissingPage from '../404/404'
+import { useSearchParams } from 'next/navigation'
 import Loading from '../Loading/Loading'
 import useSettings from '@/docs/utils/settings/use-settings'
 import { useTheme } from '@/docs/utils/use-theme'
@@ -43,6 +42,7 @@ const Docs: React.FC<DocsProps> = ({
     setContentOnPage([])
   }, [page, contentBarEnabled])
 
+
   return (
     <>
       {isLoading ? (
@@ -65,7 +65,7 @@ const Docs: React.FC<DocsProps> = ({
               onClick={() => {
                 setIsSidebarOpen(!isSidebarOpen);
               }}
-              className={styles.toggleIcon}
+              className={styles.toggleIconDocs}
             >
               <CaretRightIcon/>
             </ActionIcon>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './commandprompt.module.scss'
+import styles from '../core.module.scss'
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons'
 
 interface CommandPromptProps {

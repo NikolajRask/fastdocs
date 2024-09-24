@@ -7,17 +7,5 @@ export interface SettingsProps {
     defaultDocsTitle: string
     homePage: string,
     loadingTime: number,
-    missingPage: string
-}
-
-export enum SettingsEnum {
-    color,
-    productName,
-    defaultPage,
-    githubRepo,
-    twitter,
-    defaultDocsTitle,
-    homePage,
-    loadingTime,
-    missingPage
+    missingPage: string,
 }

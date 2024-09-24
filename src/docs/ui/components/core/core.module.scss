@@ -1,8 +1,12 @@
+// ############### Title Component ############### //
+
 .title {
     font-size: 26px;
     font-weight: 600;
     color: var(--text-color);
 }
+
+// ############### Text Component ############### //
 
 .text {
     font-size: 16px;
@@ -11,12 +15,16 @@
     color: var(--text-color);
 }
 
+// ############### Grid Component ############### //
+
 .grid {
     display: grid;
     grid-template-columns: auto auto;
     gap: 10px;
     color: var(--text-color);
 }
+
+// ############### Card Component ############### //
 
 .card {
     border: 1px solid var(--border-color);
@@ -29,6 +37,8 @@
         cursor: pointer;
     }
 }
+
+// ############### Breadcrumb Component ############### //
 
 .breadcrumb {
     display: flex;
@@ -48,6 +58,8 @@
         height: 20px;
     }
 }
+
+// ############### Header Component ############### //
 
 .header {
     font-size: 32px;
@@ -108,4 +120,98 @@
     font-size: 17px;
     font-weight: 600;
     margin-bottom: 5px;
+}
+
+
+// ############### ActionIcon Component ############### //
+
+.actionIcon {
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+
+    &:hover {
+        background: var(--hover-color);
+        cursor: pointer;
+    }
+}
+
+
+// ############### CommandPrompt Component ############### //
+
+.commandprompt {
+    padding-block: 12px;
+    padding-inline: 30px;
+    border-radius: 10px;
+    background: rgb(9, 9, 11);
+    font-family: monospace;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-block: 5px;
+
+    .white {
+        color: white;
+        font-weight: 600;
+    }
+
+    .gray {
+        color: gray;
+    }
+
+    .copy {
+        color: white;
+        cursor: pointer;
+    }
+}
+
+// ############### Link Component ############### //
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 3;
+}
+
+
+// ############### Navigator Component ############### //
+
+
+.navigator {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 50px;
+
+    .item {
+        border-radius: 10px;
+        padding-inline: 100px;
+        padding-block: 10px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        color: var(--text-color);
+        background: var(--background-color);
+        border: 1px solid var(--border-color);
+
+        &:hover {
+            background: var(--hover-color);
+            cursor: pointer;
+        }
+    }
+
+    .itemHidden {
+        border-radius: 10px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: transparent;
+        user-select: none;
+        pointer-events: none;
+        padding-inline: 100px;
+        padding-block: 10px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
 }

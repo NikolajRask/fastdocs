@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from  './actionicon.module.scss'
+import styles from  '../core.module.scss'
 import classNames from '@/docs/utils/utils';
 
 interface ActionIconProps {

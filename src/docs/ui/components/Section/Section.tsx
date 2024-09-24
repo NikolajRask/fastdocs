@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './section.module.scss'
 import { SectionProvider } from '@/docs/context/section';
 
 interface SectionProps {
