@@ -116,19 +116,22 @@ function Footer() {
             >
                 <a>F</a>astdocs
             </h1>
-            <p style={{color: "var(--text-color)"}}>Build by Nikolaj Rask with ❤️</p>
+            <p style={{color: "var(--text-color)"}}>Build by <a style={{
+                color: "black",
+                textDecoration: "underline",
+            }} href="https://nkjrask.com">Nikolaj Rask</a> with ❤️</p>
           </div>
           <div className={styles.links}>
-            <a href="#" className="text-gray-600 hover:text-gray-800">
+            <a href="https://github.com/NikolajRask" className="text-gray-600 hover:text-gray-800">
               <Github size={20} />
             </a>
-            <a href="#" className="text-gray-600 hover:text-gray-800">
+            <a href="https://x.com/nkjrask" className="text-gray-600 hover:text-gray-800">
               <Twitter size={20} />
             </a>
-            <a href="#" className="text-gray-600 hover:text-gray-800">
+            <a href="https://www.linkedin.com/in/nikolaj-rask-a1350622b/" className="text-gray-600 hover:text-gray-800">
               <Linkedin size={20} />
             </a>
-            <a href="#" className="text-gray-600 hover:text-gray-800">
+            <a href="https://buymeacoffee.com/nikorask" className="text-gray-600 hover:text-gray-800">
               <Coffee size={20} />
             </a>
           </div>

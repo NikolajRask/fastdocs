@@ -17,7 +17,6 @@ const Header = ({
     let id = cuid();
 
     useEffect(() => {
-        console.log("Added")
         addTitleToContent(title ?? page, id)
     }, [])
 

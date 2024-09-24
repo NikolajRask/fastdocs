@@ -8,4 +8,5 @@ export interface SettingsProps {
     homePage: string,
     loadingTime: number,
     missingPage: string,
+    appendSearch: string[]
 }

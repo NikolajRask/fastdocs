@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import useSettings from '../utils/settings/use-settings';
+import { fuzzyFilter } from '../utils/search/search';
 
 // Define the type for the context
 interface DocsContextType {
@@ -127,9 +128,11 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
 
     allTitles = allTitles.concat(titles)
 
-    return allTitles.flatMap((at) => {
-      return at
-    }).filter(f => f.includes(input))
+    return fuzzyFilter(input, 
+      allTitles.flatMap((at) => {
+        return at
+      })
+    )
   }
 
   const addTitleToSection = (title: string, section: string, alwaysOpen: boolean) => {
