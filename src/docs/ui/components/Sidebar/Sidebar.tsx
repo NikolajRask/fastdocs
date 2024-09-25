@@ -23,7 +23,7 @@ const Sidebar = ({
   sections
 }: SidebarProps) => {
 
-  const { isSidebarOpen, setIsSidebarOpen } = useDocsContext()
+  const { isSidebarOpen, setIsSidebarOpen, sidebar } = useDocsContext()
 
   return (
     <div 
@@ -40,29 +40,33 @@ const Sidebar = ({
       >
         <CaretLeftIcon/>
       </ActionIcon>
-      {sections?.map((section, index) => {
-        return <SidebarSection key={index} name={section.name} alwaysOpen={section.alwaysOpen}>
-          {
-            section.titles.map((title, index) => {
-              return (
-                <SidebarItem 
-                  nested={true}
-                  key={index}
-                  title={title}
-                />
-              )
-            })  
+      {
+        sidebar.map((section, i) => {
+          if (section.section.startsWith("_")) {
+            return (
+              <SidebarItem 
+                key={i}
+                title={section.titles[0]}
+              />
+            )
+          } else {
+            return (
+            <SidebarSection key={i} name={section.section} alwaysOpen={true}>
+              {
+                section.titles.map((title, index) => {
+                  return (
+                    <SidebarItem 
+                      nested={true}
+                      key={index}
+                      title={title}
+                    />
+                  )
+                })  
+              }
+          </SidebarSection>)
           }
-        </SidebarSection>
-      })}
-      {titles?.map((title, index) => {
-        return (
-          <SidebarItem 
-            key={index}
-            title={title}
-          />
-        )
-      })}
+        })
+      }
     </div>
   )
 }

@@ -51,6 +51,12 @@ export default function Home() {
               <SettingsPage/>
           </Page>
         </Section>
+        <Page 
+          title={"Test2"}
+          withTableOfContent={true}
+        >
+          Test2
+        </Page>
         <Section name="Components">
           <Page
               title={"Title"}
@@ -88,6 +94,12 @@ export default function Home() {
               <p>Custom Components</p>
           </Page>
         </Section>
+        <Page 
+          title={"Test3"}
+          withTableOfContent={true}
+        >
+          Test2
+        </Page>
       </Docs>
     </DocsProvider>
   );

@@ -7,6 +7,5 @@ export interface SettingsProps {
     defaultDocsTitle: string
     homePage: string,
     loadingTime: number,
-    missingPage: string,
-    appendSearch: string[]
+    missingPage: string
 }

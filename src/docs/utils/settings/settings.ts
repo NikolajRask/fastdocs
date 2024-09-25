@@ -11,5 +11,4 @@ export const settings: SettingsProps = {
     homePage: "/",
     loadingTime: 0,
     missingPage: "404.page",
-    appendSearch: ["Light Mode", "Dark Mode", "System"]
 }

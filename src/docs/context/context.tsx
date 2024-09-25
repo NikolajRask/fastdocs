@@ -39,7 +39,15 @@ interface DocsContextType {
     label: string,
     id: string,
   }[]>>
-  addTitleToContent: (v: string, id: string) => void
+  addTitleToContent: (v: string, id: string) => void;
+  sidebar: ({
+    section: string;
+    titles: string[];
+  })[];
+  setSidebar: React.Dispatch<React.SetStateAction<({
+    section: string;
+    titles: string[];
+  })[]>>;
 }
 
 // Create the context with a default value
@@ -67,6 +75,12 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     label: string,
     id: string
   }[]>([])
+  const [sidebar, setSidebar] = useState<(
+    {
+      section: string,
+      titles: string[]
+    }
+  )[]>([])
 
   const changeDocsTitle = (v: string) => {
     setDocsTitle(v)
@@ -190,7 +204,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     }, useSettings().loadingTime)
   }, [])
   return (
-    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage, allTitles, getFirstPageInSection, isLoading, contentBarEnabled, setContentBarEnabled, contentOnPage, setContentOnPage, addTitleToContent }}>
+    <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage, allTitles, getFirstPageInSection, isLoading, contentBarEnabled, setContentBarEnabled, contentOnPage, setContentOnPage, addTitleToContent, sidebar, setSidebar }}>
       {children}
     </DocsContext.Provider>
   );

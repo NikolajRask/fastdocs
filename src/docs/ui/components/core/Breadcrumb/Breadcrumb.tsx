@@ -2,6 +2,7 @@ import { useDocsContext } from '@/docs/context/context'
 import React from 'react'
 import styles from '../core.module.scss'
 import { CaretRightIcon } from '@radix-ui/react-icons'
+import useSettings from '@/docs/utils/settings/use-settings'
 
 const Breadcrumb = (props: React.HTMLAttributes<HTMLDivElement>) => {
 
@@ -15,7 +16,7 @@ const Breadcrumb = (props: React.HTMLAttributes<HTMLDivElement>) => {
                     setPage(allTitles()[0])
                 }}
             >
-                {docsTitle}
+                {docsTitle.trim() == "" ? useSettings().defaultDocsTitle : docsTitle}
             </b>
             {
                 getPageSection(page) != undefined && (
