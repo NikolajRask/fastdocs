@@ -51,7 +51,7 @@ const Sidebar = ({
             )
           } else {
             return (
-            <SidebarSection key={i} name={section.section} alwaysOpen={true}>
+            <SidebarSection key={i} name={section.section} alwaysOpen={sections?.find((x) => x.name == section.section)?.alwaysOpen ?? true}>
               {
                 section.titles.map((title, index) => {
                   return (
