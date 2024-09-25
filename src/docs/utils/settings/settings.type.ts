@@ -7,5 +7,10 @@ export interface SettingsProps {
     defaultDocsTitle: string
     homePage: string,
     loadingTime: number,
-    missingPage: string
+    missingPage: string,
+    appendSearch: {
+        label: string,
+        action: () => void,
+        icon?: React.ReactNode,
+    }[]
 }

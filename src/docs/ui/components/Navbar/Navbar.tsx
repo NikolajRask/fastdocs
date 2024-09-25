@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input'
 import styles from '../components.module.scss'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { DialogTrigger } from '@radix-ui/react-dialog'
 import { useDocsContext } from '@/docs/context/context'
@@ -11,6 +11,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { useTheme } from '@/docs/utils/use-theme'
 import useSettings from '@/docs/utils/settings/use-settings'
 import Link from 'next/link'
+import { PlayIcon } from 'lucide-react'
 
 export default function Navbar() {
 
@@ -66,20 +67,52 @@ export default function Navbar() {
                                 }}
                             />
                             {
-                                search(searchInput).length > 0 ? (
-                                    <div className={styles.searchResults}>
-                                        {
-                                            search(searchInput).map((result, index) => {
-                                                return (
-                                                    <div key={index}>
-                                                        <DialogClose style={{width: '100%'}}>
-                                                            <SearchItem title={result}/>
-                                                        </DialogClose>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
+                                search(searchInput).length + (useSettings().appendSearch.filter((item) => item.label.includes(searchInput)) ?? 0).length > 0 ? (
+                                    <>
+                                        <div className={styles.searchResults}>
+                                            {
+                                                search(searchInput).map((result, index) => {
+                                                    return (
+                                                        <div key={index}>
+                                                            <DialogClose style={{width: '100%'}}>
+                                                                <SearchItem title={result}/>
+                                                            </DialogClose>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                            {
+                                               search(searchInput).length > 0 && (useSettings().appendSearch.filter((item) => item.label.includes(searchInput)) ?? 0).length > 0 && (
+                                                    <div
+                                                        style={{
+                                                            width: '100%',
+                                                            height: "1px",
+                                                            background: "var(--border-color-subdued)"
+                                                        }}
+                                                    />
+                                               ) 
+                                            }
+                                            {
+                                                useSettings().appendSearch.map((item, index) => {
+                                                    if (item.label.includes(searchInput)) {
+                                                        return (
+                                                            <div key={index}>
+                                                                <DialogClose style={{width: '100%'}}>
+                                                                    <AppendSearchItem 
+                                                                        icon={item.icon}
+                                                                        title={item.label}
+                                                                        onClick={() => {
+                                                                            item.action()
+                                                                        }}
+                                                                    />
+                                                                </DialogClose>
+                                                            </div>
+                                                        )
+                                                    }
+                                                })
+                                            }  
+                                        </div>
+                                    </>
                                 ) : (
                                     <div>
                                         <p className={styles.noResult}>No results found</p>
@@ -158,6 +191,40 @@ function SearchItem({
             }}
         >
             <FileIcon/>
+            <p>{title}</p>
+        </div>
+    )
+}
+
+interface AppendSearchItemProps{
+    title: string,
+    onClick: () => void,
+    icon?: React.ReactNode
+}
+
+
+function AppendSearchItem({
+    title,
+    onClick,
+    icon
+}: AppendSearchItemProps) {
+
+    return (
+        <div 
+            className={styles.searchItem}
+            onClick={() => {
+                onClick()
+            }}
+        >
+            {
+                icon == undefined ? (
+                    <PlayIcon/>
+                ) : (
+                    <>
+                        {icon}
+                    </>
+                )
+            }
             <p>{title}</p>
         </div>
     )

@@ -98,11 +98,9 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
 
   function getNeighbourPage(page: string) {
 
-    let allTitles = sections.map(section => {
-      return section.titles
+    let allTitles = sidebar.flatMap((item) => {
+      return item.titles
     })
-
-    allTitles = allTitles.concat(titles)
 
     let arr = allTitles.flatMap((at) => at)
 
