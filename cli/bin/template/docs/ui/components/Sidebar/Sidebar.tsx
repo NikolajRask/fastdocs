@@ -3,9 +3,10 @@
 import React, { useState } from 'react'
 import styles from '../components.module.scss'
 import { useDocsContext } from '@/docs/context/context'
-import { ArrowDownIcon, CaretDownIcon, CaretLeftIcon, CaretUpIcon } from '@radix-ui/react-icons';
+import { CaretDownIcon, CaretLeftIcon} from '@radix-ui/react-icons';
 import classNames from '@/docs/utils/utils';
 import ActionIcon from '../core/ActionIcon/ActionIcon';
+import { useMonitor } from '@/docs/utils/debug/use-monitor';
 import useSettings from '@/docs/utils/settings/use-settings';
 
 interface SidebarProps {
