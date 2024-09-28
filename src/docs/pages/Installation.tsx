@@ -1,5 +1,5 @@
 import React from 'react'
-import { CommandPrompt, Link, SEO, Text } from '../ui/components/core'
+import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title } from '../ui/components/core'
 
 const Installation = () => {
   return (

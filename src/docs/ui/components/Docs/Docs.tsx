@@ -12,6 +12,7 @@ import { useSearchParams } from 'next/navigation'
 import Loading from '../Loading/Loading'
 import useSettings from '@/docs/utils/settings/use-settings'
 import { useTheme } from '@/docs/utils/use-theme'
+import useAd from '@/docs/utils/ads/useAd'
 
 interface DocsProps {
     children: React.ReactNode
@@ -97,6 +98,7 @@ const Docs: React.FC<DocsProps> = ({
                         </p>
                       </a>
                     })}
+                    {useAd("card")}
                   </div>
                 </div>
               ) : (
