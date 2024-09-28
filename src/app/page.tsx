@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react'
 import styles from './styles.module.scss'
 import classNames from '@/docs/utils/utils'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from '@/docs/utils/use-theme'
 import { Facebook, Twitter, Instagram, Linkedin, Coffee, Github } from "lucide-react"
@@ -21,7 +20,7 @@ const HomePage = () => {
                     >
                         <a>F</a>astdocs
                     </h1>
-                    <DropdownMenu>
+                    {/* <DropdownMenu>
                         <DropdownMenuTrigger
                             style={{
                                 border: "none",
@@ -69,7 +68,7 @@ const HomePage = () => {
                                 System
                             </DropdownMenuItem>
                         </DropdownMenuContent>
-                    </DropdownMenu>   
+                    </DropdownMenu>    */}
                 </nav>
                 <section>
                     <h2 className={styles.header}>

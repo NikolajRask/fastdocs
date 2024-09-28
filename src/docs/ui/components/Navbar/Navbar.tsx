@@ -1,17 +1,15 @@
 "use client"
 
-import { Input } from '@/components/ui/input'
 import styles from '../components.module.scss'
 import React, { useState } from 'react'
-import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { DialogTrigger } from '@radix-ui/react-dialog'
 import { useDocsContext } from '@/docs/context/context'
 import { FileIcon, GitHubLogoIcon, MagnifyingGlassIcon, SunIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useTheme } from '@/docs/utils/use-theme'
 import useSettings from '@/docs/utils/settings/use-settings'
 import Link from 'next/link'
 import { PlayIcon } from 'lucide-react'
+import Modal from '../custom/Modal/Modal'
 
 export default function Navbar() {
 
@@ -22,6 +20,83 @@ export default function Navbar() {
 
     return (
         <>
+            <Modal
+                isOpen={searchModelOpen}
+                onClose={() => {
+                    setSearchModalOpen(false)
+                }}
+                style={{
+                    background: "var(--background-color)",
+                    width: 500,
+                    height: 300,
+                    borderRadius: 20,
+                    border: "1px solid var(--border-color)",
+                }}
+            >
+                <input
+                    placeholder="Search"
+                    value={searchInput}
+                    className={styles.searchBar}
+                    onChange={(e) => {
+                        setSearchInput(e.target.value)
+                    }}
+                />
+                {
+                    search(searchInput).length + (useSettings().appendSearch.filter((item) => item.label.includes(searchInput)) ?? 0).length > 0 ? (
+                        <>
+                            <div className={styles.searchResults}>
+                                {
+                                    search(searchInput).map((result, index) => {
+                                        return (
+                                            <div key={index}>
+                                                <SearchItem 
+                                                    title={result}
+                                                    onClick={() => {
+                                                        setSearchModalOpen(false)
+                                                    }}
+                                                />
+                                            </div>
+                                        )
+                                    })
+                                }
+                                {
+                                search(searchInput).length > 0 && (useSettings().appendSearch.filter((item) => item.label.includes(searchInput)) ?? 0).length > 0 && (
+                                        <div
+                                            style={{
+                                                width: '100%',
+                                                height: "1px",
+                                                background: "var(--border-color-subdued)"
+                                            }}
+                                        />
+                                ) 
+                                }
+                                {
+                                    useSettings().appendSearch.map((item, index) => {
+                                        if (item.label.includes(searchInput)) {
+                                            return (
+                                                <div key={index}>
+                                                    <AppendSearchItem 
+                                                        icon={item.icon}
+                                                        title={item.label}
+                                                        onClick={() => {
+                                                            setSearchModalOpen(false)
+                                                            item.action()
+                                                        }}
+                                                    />
+                                                </div>
+                                            )
+                                        }
+                                    })
+                                }  
+                            </div>
+                        </>
+                    ) : (
+                        <div>
+                            <p className={styles.noResult}>No results found</p>
+                        </div>
+                    )
+                }
+            </Modal>
             <nav className={styles.navbar}>
                 <div className={styles.flexStart}>
                     <h2
@@ -43,84 +118,17 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className={styles.flex}>
-                    <Dialog>
-                        <DialogTrigger>
-                            <Input 
-                                readOnly={true}
-                                placeholder='Search'
-                                className={styles.search}
-                            />
-                            <MagnifyingGlassIcon
-                                className={styles.searchIcon}
-                            />
-                        </DialogTrigger>
-                        <DialogContent className={styles.searchModal}>
-                            <DialogTitle
-                                className={styles.dialogTitle}
-                            />
-                            <input
-                                placeholder="Search"
-                                value={searchInput}
-                                className={styles.searchBar}
-                                onChange={(e) => {
-                                    setSearchInput(e.target.value)
-                                }}
-                            />
-                            {
-                                search(searchInput).length + (useSettings().appendSearch.filter((item) => item.label.includes(searchInput)) ?? 0).length > 0 ? (
-                                    <>
-                                        <div className={styles.searchResults}>
-                                            {
-                                                search(searchInput).map((result, index) => {
-                                                    return (
-                                                        <div key={index}>
-                                                            <DialogClose style={{width: '100%'}}>
-                                                                <SearchItem title={result}/>
-                                                            </DialogClose>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                            {
-                                               search(searchInput).length > 0 && (useSettings().appendSearch.filter((item) => item.label.includes(searchInput)) ?? 0).length > 0 && (
-                                                    <div
-                                                        style={{
-                                                            width: '100%',
-                                                            height: "1px",
-                                                            background: "var(--border-color-subdued)"
-                                                        }}
-                                                    />
-                                               ) 
-                                            }
-                                            {
-                                                useSettings().appendSearch.map((item, index) => {
-                                                    if (item.label.includes(searchInput)) {
-                                                        return (
-                                                            <div key={index}>
-                                                                <DialogClose style={{width: '100%'}}>
-                                                                    <AppendSearchItem 
-                                                                        icon={item.icon}
-                                                                        title={item.label}
-                                                                        onClick={() => {
-                                                                            item.action()
-                                                                        }}
-                                                                    />
-                                                                </DialogClose>
-                                                            </div>
-                                                        )
-                                                    }
-                                                })
-                                            }  
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div>
-                                        <p className={styles.noResult}>No results found</p>
-                                    </div>
-                                )
-                            }
-                        </DialogContent>
-                    </Dialog>
+                    <input
+                        readOnly={true}
+                        placeholder='Search'
+                        className={styles.search}
+                        onClick={() => {
+                            setSearchModalOpen(true)
+                        }}
+                    />
+                    <MagnifyingGlassIcon
+                        className={styles.searchIcon}
+                    />
                     <GitHubLogoIcon 
                         onClick={() => {
                             window.open(useSettings().githubRepo)
@@ -133,7 +141,7 @@ export default function Navbar() {
                         }}
                         className={styles.logo}
                     />  
-                    <DropdownMenu>
+                    {/* <DropdownMenu>
                         <DropdownMenuTrigger
                             className={styles.dropdown}
                         >
@@ -166,7 +174,7 @@ export default function Navbar() {
                                 System
                             </DropdownMenuItem>
                         </DropdownMenuContent>
-                    </DropdownMenu>              
+                    </DropdownMenu>               */}
                 </div>
             </nav>
         </>
@@ -174,11 +182,13 @@ export default function Navbar() {
 }
 
 interface SearchItemProps{
-    title: string
+    title: string,
+    onClick: () => void
 }
 
 function SearchItem({
-    title
+    title,
+    onClick
 }: SearchItemProps) {
 
     const { setPage } = useDocsContext()
@@ -188,6 +198,7 @@ function SearchItem({
             className={styles.searchItem}
             onClick={() => {
                 setPage(title)
+                onClick()
             }}
         >
             <FileIcon/>

@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button";
 import { DocsProvider } from "@/docs/context/context";
 import LinkPage from "@/docs/pages/components/Link";
 import Installation from "@/docs/pages/Installation";
