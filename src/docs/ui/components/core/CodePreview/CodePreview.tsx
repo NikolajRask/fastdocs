@@ -7,13 +7,13 @@ import { useDocsContext } from '@/docs/context/context';
 
 interface CodePreviewProps {
     code: string,
-    preview: React.ReactNode,
+    children: React.ReactNode,
     file?: string;
 }
 
 const CodePreview = ({
     code,
-    preview,
+    children,
     file,
     ...rest
 }: React.HTMLAttributes<HTMLDivElement> & CodePreviewProps) => {
@@ -75,7 +75,7 @@ const CodePreview = ({
                     />
                 ) : (
                     <div className={styles.codePreview}>
-                        {preview}
+                        {children}
                     </div>
                 )
             }

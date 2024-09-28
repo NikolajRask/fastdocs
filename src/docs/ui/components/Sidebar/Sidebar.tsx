@@ -31,14 +31,16 @@ const Sidebar = ({
         marginLeft: isSidebarOpen ? "0px" : "-351px"
       }}
     >
-      <ActionIcon
-        onClick={() => {
-          setIsSidebarOpen(!isSidebarOpen);
-        }}
-        className={styles.toggleIcon}
-      >
-        <CaretLeftIcon/>
-      </ActionIcon>
+      <div className={styles.toggleIconWrapper}>
+        <ActionIcon
+          onClick={() => {
+            setIsSidebarOpen(!isSidebarOpen);
+          }}
+          className={styles.toggleIcon}
+        >
+          <CaretLeftIcon/>
+        </ActionIcon>
+      </div>
       {
         sidebar.map((section, i) => {
           if (section.section.startsWith("_")) {

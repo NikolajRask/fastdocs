@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import React from 'react'
 
 interface SEOProps {
@@ -21,7 +20,7 @@ const SEO = ({
     viewport
 }: SEOProps) => {
   return (
-    <Head>
+    <head>
         {
             title && <title>{title}</title>
         }
@@ -43,7 +42,7 @@ const SEO = ({
         {
             viewport && <meta name="viewport" content={viewport}/>
         }
-    </Head>
+    </head>
   )
 }
 

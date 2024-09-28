@@ -2,8 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { DocsProvider } from "@/docs/context/context";
+import LinkPage from "@/docs/pages/components/Link";
 import Installation from "@/docs/pages/Installation";
-import SettingsPage from "@/docs/pages/SettingsPage";
+import Introductions from "@/docs/pages/Introduction";
+import Usage from "@/docs/pages/Usage";
 import Docs from "@/docs/ui/components/Docs/Docs";
 import Page from "@/docs/ui/components/Page/Page";
 import Section from "@/docs/ui/components/Section/Section";
@@ -12,94 +14,160 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 export default function Home() {
-
-  //d
-
   return (
     <DocsProvider>
       <Docs title="Docs">
-        <Page 
-          title={"Test"}
+        <Page
+          title={"Introduction"}
           withTableOfContent={true}
         >
-          Test
+          <Introductions/>
         </Page>
-        <Section 
-          name="Books"
-          alwaysOpen={true}
+        <Page
+          title={"Installation"}
         >
-          <Page
-            title={"Get Started"}
-            withTableOfContent={true}
+          <Installation/>
+        </Page>
+        <Page
+            title={"Usage"}
           >
-              <Installation/>
+            <Usage/>
+          </Page>
+        <Section name="Features" alwaysOpen={true}>
+          <Page
+            title={"Pages"}
+          >
+            <p>3</p>
           </Page>
           <Page
-            title={"Installation"}
-            withTableOfContent={false}
+            title={"Sections"}
           >
-              <p>2</p>
+            <p>3</p>
           </Page>
           <Page
-            title={"Setup"}
+            title={"Layout"}
           >
-              <p>2</p>
+            <p>3</p>
+          </Page>
+          <Page
+            title={"Navigating"}
+          >
+            <p>3</p>
+          </Page>
+          <Page
+            title={"Search"}
+          >
+            <p>3</p>
+          </Page>
+          <Page
+            title={"Themes"}
+          >
+            <p>3</p>
+          </Page>
+          <Page
+            title={"Components"}
+          >
+            <p>3</p>
           </Page>
           <Page
             title={"Settings"}
           >
-              <SettingsPage/>
+            <p>3</p>
+          </Page>
+          <Page
+            title={"404"}
+          >
+            <p>3</p>
+          </Page>
+          <Page
+            title={"Customizability"}
+          >
+            <p>3</p>
           </Page>
         </Section>
-        <Page 
-          title={"Test2"}
-          withTableOfContent={true}
-        >
-          Test2
-        </Page>
-        <Section name="Components">
+        <Section name="Components" alwaysOpen={true}>
           <Page
-              title={"Title"}
+              title={"ActionIcon"}
             >
               <p>3</p>
           </Page>
           <Page
-              title={"Text"}
-            >
-              <p>3</p>
-          </Page>
-          <Page
-              title={"CommandPrompt"}
-            >
-              <p>3</p>
-          </Page>
-          <Page
-            title={"CodePreview"}
+            title={"Breadcrumb"}
           >
-              <p>3</p>
+            <p></p>
           </Page>
           <Page
-            title={"Header"}
+            title={"Card"}
           >
-              <p>3</p>
+            <p></p>
           </Page>
           <Page
             title={"Code"}
           >
-              <p>3</p>
+            <p></p>
+          </Page>
+          <Page
+            title={"CodePreview"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"CommandPrompt"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"Grid"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"Header"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"Highlight"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"Image"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"Link"}
+          >
+            <LinkPage/>
+          </Page>
+          <Page
+            title={"Navigator"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"SEO"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"Text"}
+          >
+            <p></p>
+          </Page>
+          <Page
+            title={"Title"}
+          >
+            <p></p>
           </Page>
           <Page
             title={"Custom Components"}
           >
-              <p>Custom Components</p>
+            <p></p>
           </Page>
-        </Section>
-        <Page 
-          title={"Test3"}
-          withTableOfContent={true}
-        >
-          Test2
-        </Page>
+  
+        </Section> 
       </Docs>
     </DocsProvider>
   );

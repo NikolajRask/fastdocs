@@ -111,6 +111,10 @@
     height: calc(100vh - 57px);
     margin-top: 57px;
     overflow-x: hidden;
+
+    @media (min-width: 800px) {
+        width: 100vw;
+    }
 }
 
 .mainFlex {
@@ -196,7 +200,6 @@
     color: var(--text-color);
     background-color: var(--background-color);
     position: fixed;
-    
 
     .flex {
         display: flex;
@@ -326,7 +329,7 @@
 .sideBar {
     width: 350px;
     height: calc(100vh - 57px);
-    position: fixed;
+    position: absolute;
     margin-top: 57px;
     left: 0px;
     border-right: 1px solid var(--border-color);
@@ -334,9 +337,12 @@
     background: var(--background-color);
     color: var(--text-color);
     z-index: 50;
+    overflow-y: scroll;
 
     .item {
-        width: 100%;
+        width: calc(100% - 20px);    
+        margin-inline: 10px;
+        border-radius: 10px;
         padding-inline: 30px;
         padding-block: 10px;
         font-size: 16px;
@@ -368,10 +374,14 @@
     cursor: pointer;
 }
 
-.toggleIcon {
-    position: absolute;
-    right: 10px;
+.toggleIconWrapper {
+    position: absolute; 
+    left: 310px;
     top: 10px;
+}
+
+.toggleIcon {
+    position: fixed;
     width: 28px;
     height: 28px;
     display: flex;
@@ -381,6 +391,7 @@
     svg {
         width: 20px;
         height: 20px;
+        position: fixed;
     }
 }
 
