@@ -10,6 +10,7 @@ import useSettings from '@/docs/utils/settings/use-settings'
 import Link from 'next/link'
 import { PlayIcon } from 'lucide-react'
 import Modal from '../custom/Modal/Modal'
+import ThemePicker from '../custom/theme-picker/ThemePicker'
 
 export default function Navbar() {
 
@@ -141,6 +142,7 @@ export default function Navbar() {
                         }}
                         className={styles.logo}
                     />  
+                    <ThemePicker/>
                     {/* <DropdownMenu>
                         <DropdownMenuTrigger
                             className={styles.dropdown}

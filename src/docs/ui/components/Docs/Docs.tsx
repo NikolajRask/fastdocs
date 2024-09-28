@@ -86,10 +86,11 @@ const Docs: React.FC<DocsProps> = ({
                   <div className={styles.tableOfContents}>
                     <h2>Content On This Page</h2>
                     {contentOnPage.map((contentTitle, index) => {
-                      return <a href={`#content-${contentTitle.label}`} key={index}>
+                      return <a style={{width: 'fit-content'}} href={`#content-${contentTitle.label}`} key={index}>
                         <p 
                           style={{
                             marginBottom: 5,
+                            width: 'fit-content'
                           }}
                         >
                           {contentTitle.label}

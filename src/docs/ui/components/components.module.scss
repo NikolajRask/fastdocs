@@ -224,6 +224,7 @@
     font-weight: 400;
     padding-block: 5px;
     outline: none;
+    background: var(--background-color);
 }
 
 .searchIcon{
@@ -448,5 +449,38 @@
         position: absolute;
         z-index: 1010;
         pointer-events: all;
+    }
+}
+
+
+// ###################### Sidebar Component ####################### //
+
+.themePickerIcon {
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.themeDropdown {
+    position: absolute;
+    background: var(--background-color);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transform: translateX(-50%); 
+    width: 130px;   
+    margin-top: 10px;
+
+    div {
+        padding-inline: 10px;
+        padding-block: 5px;
+        margin-block: 5px;
+        border-radius: 10px;
+        font-size: 15px;
+        color: var(--text-color);
+        
+        &:hover {
+            background: var(--hover-color);
+            cursor: pointer;
+        }
     }
 }

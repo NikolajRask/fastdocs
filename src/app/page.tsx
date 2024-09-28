@@ -6,6 +6,7 @@ import classNames from '@/docs/utils/utils'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from '@/docs/utils/use-theme'
 import { Facebook, Twitter, Instagram, Linkedin, Coffee, Github } from "lucide-react"
+import ThemePicker from '@/docs/ui/components/custom/theme-picker/ThemePicker'
 
 const HomePage = () => {
 
@@ -20,55 +21,7 @@ const HomePage = () => {
                     >
                         <a>F</a>astdocs
                     </h1>
-                    {/* <DropdownMenu>
-                        <DropdownMenuTrigger
-                            style={{
-                                border: "none",
-                                outline: "none"
-                            }}
-                        >
-                            {
-                                useTheme() == "dark" ? (
-                                    <SunIcon
-                                        className={styles.themeLogo}
-                                    /> 
-                                ) : (
-                                    <MoonIcon
-                                        className={styles.themeLogo}
-                                    /> 
-                                )
-                            }  
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                            style={{
-                                backgroundColor: "var(--background-color)",
-                                color: "var(--text-color)",
-                                border: "1px solid var(--border-color)"
-                            }}
-                        >
-                            <DropdownMenuItem
-                                onClick={() => {
-                                    useTheme("light")
-                                }}
-                            >
-                                Light
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                                onClick={() => {
-                                    useTheme("dark")
-                                }}
-                            >
-                                Dark
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                                onClick={() => {
-                                    useTheme("system")
-                                }}
-                            >
-                                System
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>    */}
+                    <ThemePicker/>
                 </nav>
                 <section>
                     <h2 className={styles.header}>
