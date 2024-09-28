@@ -32,7 +32,7 @@ export default function Home() {
           >
             <Usage/>
           </Page>
-        <Section name="Features" alwaysOpen={true}>
+        <Section name="Features" alwaysOpen={false}>
           <Page
             title={"Pages"}
           >

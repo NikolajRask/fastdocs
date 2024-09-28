@@ -112,8 +112,9 @@
     margin-top: 57px;
     overflow-x: hidden;
 
-    @media (min-width: 800px) {
-        width: 100vw;
+    @media (max-width: 1300px) {
+        width: 100vw !important;
+        margin-left: 0px !important;
     }
 }
 
@@ -127,6 +128,10 @@
 	margin-top: 57px;
 	padding: 20px;
 	color: var(--text-color);
+
+    @media (max-width: 1300px) {
+        display: none;
+    }
 
 	h2 {
 		font-size: 20px;
@@ -225,18 +230,37 @@
     padding-block: 5px;
     outline: none;
     background: var(--background-color);
+    @media (max-width: 1100px) {
+        display: none;
+    }
 }
 
 .searchIcon{
     position: absolute;
     margin-top: -1px;
     margin-left: 14px;
+    
+    @media (max-width: 1100px) {
+        display: none;
+    }
+}
+
+.resSearchIcon {
+    width: 24px;
+    height: 24px;
+    color: var(--text-color);
+    display: none;
+
+    @media (max-width: 1100px) {
+        display: block;
+    }
 }
 
 .searchModal {
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
 }
+
 
 .searchContainer {
     background-color: var(--background-color);
@@ -449,9 +473,20 @@
         position: absolute;
         z-index: 1010;
         pointer-events: all;
+        animation: searchAnim 0.2s ease
     }
 }
 
+
+@keyframes searchAnim {
+    0% {
+        transform: scale(0.6)
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
 
 // ###################### Sidebar Component ####################### //
 
@@ -469,11 +504,12 @@
     transform: translateX(-50%); 
     width: 130px;   
     margin-top: 10px;
+    animation: dropdownAnim 0.2s ease;
 
     div {
         padding-inline: 10px;
         padding-block: 5px;
-        margin-block: 5px;
+        margin-block: 2px;
         border-radius: 10px;
         font-size: 15px;
         color: var(--text-color);
@@ -482,5 +518,15 @@
             background: var(--hover-color);
             cursor: pointer;
         }
+    }
+}
+
+@keyframes dropdownAnim {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }

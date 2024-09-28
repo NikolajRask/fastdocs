@@ -67,7 +67,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
     alwaysOpen: boolean
   }[]>([])
   const [currentPage, setCurrentPage] = useState<string>(useSettings().defaultPage)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [isSidebarOpen, setIsSidebarOpen] = useState((window.localStorage.getItem('side-bar-state') == "false" ? false : true))
   const [docsTitle, setDocsTitle] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const [contentBarEnabled, setContentBarEnabled] = useState(false)
@@ -201,6 +201,15 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
       setIsLoading(false)
     }, useSettings().loadingTime)
   }, [])
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      window.localStorage.setItem('side-bar-state', "true")
+    } else {
+      window.localStorage.setItem('side-bar-state', "false")
+    }
+  }, [isSidebarOpen])
+
   return (
     <DocsContext.Provider value={{ titles, addTitle, page: currentPage, setPage, sections, addTitleToSection, search, isSidebarOpen, setIsSidebarOpen, docsTitle, changeDocsTitle, getPageSection, getNeighbourPage, allTitles, getFirstPageInSection, isLoading, contentBarEnabled, setContentBarEnabled, contentOnPage, setContentOnPage, addTitleToContent, sidebar, setSidebar }}>
       {children}

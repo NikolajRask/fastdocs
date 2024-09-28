@@ -130,6 +130,12 @@ export default function Navbar() {
                     <MagnifyingGlassIcon
                         className={styles.searchIcon}
                     />
+                    <MagnifyingGlassIcon
+                        onClick={() => {
+                            setSearchModalOpen(true)
+                        }}
+                        className={styles.resSearchIcon}
+                    />
                     <GitHubLogoIcon 
                         onClick={() => {
                             window.open(useSettings().githubRepo)
@@ -143,40 +149,6 @@ export default function Navbar() {
                         className={styles.logo}
                     />  
                     <ThemePicker/>
-                    {/* <DropdownMenu>
-                        <DropdownMenuTrigger
-                            className={styles.dropdown}
-                        >
-                            <SunIcon
-                                className={styles.logo}
-                            />   
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                            className={styles.dropdownContent}
-                        >
-                            <DropdownMenuItem
-                                onClick={() => {
-                                    useTheme("light")
-                                }}
-                            >
-                                Light
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                                onClick={() => {
-                                    useTheme("dark")
-                                }}
-                            >
-                                Dark
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                                onClick={() => {
-                                    useTheme("system")
-                                }}
-                            >
-                                System
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>               */}
                 </div>
             </nav>
         </>
