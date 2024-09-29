@@ -111,6 +111,7 @@ export default function Navbar() {
                         {/* Add links here in the navbar */}
                         <Link href={"/"}><p className={styles.navLink}>Home</p></Link>
                         <Link href={"/docs"}><p className={styles.navLink}>Docs</p></Link>
+                        <Link href={"/studio"}><p className={styles.navLink}>Studio</p></Link>
                         <Link href={"https://buymeacoffee.com/nikorask"}><p className={styles.navLink}>Support</p></Link>
                     </div>
                 </div>
@@ -159,6 +160,7 @@ export default function Navbar() {
                 <div className={styles.menuContainer}>
                     <Link href={"/"}><p className={styles.navLink}>Home</p></Link>
                     <Link href={"/docs"}><p className={styles.navLink}>Docs</p></Link>
+                    <Link href={"/studio"}><p className={styles.navLink}>Studio</p></Link>
                     <Link href={"https://buymeacoffee.com/nikorask"}><p className={styles.navLink}>Support</p></Link>
                     <div className={styles.smallSection}>
                         <GitHubLogoIcon 

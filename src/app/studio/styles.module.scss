@@ -1,0 +1,125 @@
+$nav-height: 50px;
+
+.studioContainer {
+    width: 100vw;
+    overflow-y: hidden;
+    
+    .studioNav {
+        width: 100%;
+        height: $nav-height;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        position: absolute;
+        top: 0px;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline: 10px;
+
+        .studioNavMenu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-left: 10px;
+
+            svg {
+                cursor: pointer;
+            }
+
+            .logo {
+                font-size: 18px;
+                font-weight: 900;
+                user-select: none;
+                color: var(--text-color);
+            
+                a {
+                    color: rgb(31, 102, 235);
+                }
+            }
+        }
+
+        .tabs {
+            display: flex;
+            gap: 5px;
+
+            .tab {
+                padding-inline: 12px;
+                padding-block: 4px;
+                border-radius: 5px;
+                background: var(--background-subdued);
+                cursor: pointer;
+
+                &:hover {
+                    background: var(--background-subdued);
+                }
+            }
+        }
+    }
+
+    .studioContentContainer {
+        display: flex;
+        width: 100vw;
+        margin-top: calc($nav-height);
+
+        .studioEditorWrapper {
+
+            width: 50%;
+            position: relative;
+            height: calc(100vh - ($nav-height + 1px));
+
+            .studioEditor {
+                width: 100%;
+                height: calc(100vh - ($nav-height + 1px));
+                resize: none;
+                outline: none;
+                padding: 20px;
+                position: relative;
+            }
+
+            .help {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                right: 10px;
+                top: 10px;
+                z-index: 10;
+                border: 1px solid var(--border-color);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            
+                svg {
+                    width: 16px;
+                    height: 16px,
+                }
+
+                &:hover {
+                    background: var(--hover-color);
+                }
+            }
+        }
+
+
+        .studioResult {
+            width: 50%;
+            height: calc(100vh - ($nav-height + 1px));
+            resize: none;
+            border-left: 1px solid var(--border-color);
+            padding: 20px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+    }
+
+}
+
+
+.header {
+    font-size: 27px;
+}
+
+.title {
+    font-size: 24px;
+}
+
