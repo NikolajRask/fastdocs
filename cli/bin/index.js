@@ -14,20 +14,28 @@ const rl = readline.createInterface({
 
 if (args[0] == "init") {
   init()
+  setTimeout(() => {
+    exit()
+  }, 3100)
 }
 
 if (args[0] == "add") {
   add(args[1])
+  setTimeout(() => {
+    exit()
+  }, 100)
 }
 
 if (args[0] == "reset") {
   reset()
+  setTimeout(() => {
+    exit()
+  }, 3100)
 }
 
-if (args[0] == "help" || args[0].length == 0) {
+if (args[0] == "help" || args[0] == undefined) {
   help()
 }
-
 
 function init() {
   console.log('\x1b[36m%s\x1b[0m',`
@@ -72,13 +80,13 @@ function init() {
   const targetDirectory = process.cwd(); // This will give you the directory where the command is run
 
   // Copy the folder to the target directory
-  copyDirectory(folderToCopy, path.join(targetDirectory, "./src"));
+  copyDirectory(folderToCopy, targetDirectory);
 }
 
 function reset() {
 
   try {
-    fs.readdirSync(path.join(process.cwd(), "./src/docs"), 'utf-8')
+    fs.readdirSync(path.join(process.cwd(), "./docs"), 'utf-8')
   } catch (e) {
     console.log("Error: Couldn't find a fastdocs project to reset. try npx fastdocs init")
     exit()
@@ -101,7 +109,7 @@ function reset() {
 
   const spinnerChars = ['|', '/', '-', '\\'];
   let current = 0;
-  let message = "Loading files..."
+  let message = "Resetting files..."
 
   // Start the spinner
   const spinner = setInterval(() => {
@@ -117,13 +125,13 @@ function reset() {
   }, 3000);
 
   // Define the folder inside your bin directory you want to copy
-  const folderToCopy = path.join(__dirname, './template/v1.0'); // Replace 'folderName' with your folder
+  const folderToCopy = path.join(__dirname, './template/reset/v1.0'); // Replace 'folderName' with your folder
 
   // Get the current working directory (where the CLI is invoked)
   const targetDirectory = process.cwd(); // This will give you the directory where the command is run
 
   // Copy the folder to the target directory
-  copyDirectory(folderToCopy, path.join(targetDirectory, "./src"));
+  copyDirectory(folderToCopy, targetDirectory);
 }
 
 function add(arg) {
@@ -131,7 +139,7 @@ function add(arg) {
   function createPage(page) {
     try {
     if (page != undefined) {
-      fs.writeFileSync(path.join(process.cwd(), "./src/docs/pages/"+page+".tsx"), `import React from 'react'
+      fs.writeFileSync(path.join(process.cwd(), "./docs/pages/"+page+".tsx"), `import React from 'react'
 import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title } from '../ui/components/core'
       
 const ${page.slice(0,1).toUpperCase()+page.replace(page.slice(0,1),"")} = () => {
@@ -165,11 +173,12 @@ export default ${page.slice(0,1).toUpperCase()+page.replace(page.slice(0,1),"")}
 
 function help() {
   console.log('\x1b[36m%s\x1b[0m',`Fastdocs Version ${version}:`)
-  console.log("\x1b[37m","\n")
+  console.log("\x1b[37m","")
   console.log("npx fastdocs init | Downloads the fastdocs source code into your project at /docs")
   console.log("npx fastdocs reset | Resets all of the source code except the pages folder")
   console.log("npx fastdocs add [page] | Add a new page into your pages folder with everything ready to go.")
-  console.log("npx fastdocs help | Shows this page")
+  console.log("npx fastdocs help | Shows this page\n")
+  exit()
 }
 
 // Import the copy function
