@@ -20,8 +20,12 @@ if (args[0] == "add") {
   add(args[1])
 }
 
-if (args[0] == "help") {
-  add(args[1])
+if (args[0] == "reset") {
+  reset()
+}
+
+if (args[0] == "help" || args[0].length == 0) {
+  help()
 }
 
 
@@ -71,6 +75,57 @@ function init() {
   copyDirectory(folderToCopy, path.join(targetDirectory, "./src"));
 }
 
+function reset() {
+
+  try {
+    fs.readdirSync(path.join(process.cwd(), "./src/docs"), 'utf-8')
+  } catch (e) {
+    console.log("Error: Couldn't find a fastdocs project to reset. try npx fastdocs init")
+    exit()
+  }
+
+
+  console.log('\x1b[36m%s\x1b[0m',`
+
+    ______                   __        __                             
+   / ____/  ____ _   _____  / /_  ____/ /  ____   _____   _____       
+  / /_     / __  /  / ___/ / __/ / __  /  / __ \ / ___/  / ___/       
+ / __/    / /_/ /  (__  ) / /_  / /_/ /  / /_/ // /__   (__  )        
+/_/       \__,_/  /____/  \__/  \__,_/   \____/ \___/  /____/         
+
+
+` )
+
+  console.log("\x1b[32m", `\nFastdocs ${version}:`)
+  console.log("\x1b[37m", "\n\nResetting your project\n")
+
+  const spinnerChars = ['|', '/', '-', '\\'];
+  let current = 0;
+  let message = "Loading files..."
+
+  // Start the spinner
+  const spinner = setInterval(() => {
+  process.stdout.write(`\r${spinnerChars[current++]} ${message}`);  // \r returns the cursor to the beginning of the line
+  current %= spinnerChars.length;  // Reset to 0 when reaching the end of the array
+  }, 100);  // Update every 100 milliseconds
+
+  // Stop the spinner after 5 seconds (for demo purposes)
+  setTimeout(() => {
+  message = ""
+  clearInterval(spinner);  // Stop the spinner
+  process.stdout.write('\rDone! Your fastdocs project has been reset\n');  // Clear spinner and show "Done"
+  }, 3000);
+
+  // Define the folder inside your bin directory you want to copy
+  const folderToCopy = path.join(__dirname, './template/v1.0'); // Replace 'folderName' with your folder
+
+  // Get the current working directory (where the CLI is invoked)
+  const targetDirectory = process.cwd(); // This will give you the directory where the command is run
+
+  // Copy the folder to the target directory
+  copyDirectory(folderToCopy, path.join(targetDirectory, "./src"));
+}
+
 function add(arg) {
 
   function createPage(page) {
@@ -106,6 +161,15 @@ export default ${page.slice(0,1).toUpperCase()+page.replace(page.slice(0,1),"")}
     console.log(`\nPage ${arg} how been created in your pages directory\n`);
     createPage(arg)
   }
+}
+
+function help() {
+  console.log('\x1b[36m%s\x1b[0m',`Fastdocs Version ${version}:`)
+  console.log("\x1b[37m","\n")
+  console.log("npx fastdocs init | Downloads the fastdocs source code into your project at /docs")
+  console.log("npx fastdocs reset | Resets all of the source code except the pages folder")
+  console.log("npx fastdocs add [page] | Add a new page into your pages folder with everything ready to go.")
+  console.log("npx fastdocs help | Shows this page")
 }
 
 // Import the copy function
