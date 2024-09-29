@@ -8,14 +8,16 @@ import { FileIcon, GitHubLogoIcon, MagnifyingGlassIcon, SunIcon, TwitterLogoIcon
 import { useTheme } from '@/docs/utils/use-theme'
 import useSettings from '@/docs/utils/settings/use-settings'
 import Link from 'next/link'
-import { PlayIcon } from 'lucide-react'
+import { MenuIcon, PlayIcon } from 'lucide-react'
 import Modal from '../custom/Modal/Modal'
 import ThemePicker from '../custom/theme-picker/ThemePicker'
+import classNames from '@/docs/utils/utils'
 
 export default function Navbar() {
 
     const [searchModelOpen, setSearchModalOpen] = useState(false)
     const [searchInput, setSearchInput] = useState("")
+    const [menuIsOpen, setMenuIsOpen] = useState(false)
 
     const { search } = useDocsContext()
 
@@ -26,13 +28,7 @@ export default function Navbar() {
                 onClose={() => {
                     setSearchModalOpen(false)
                 }}
-                style={{
-                    background: "var(--background-color)",
-                    width: 500,
-                    height: 300,
-                    borderRadius: 20,
-                    border: "1px solid var(--border-color)",
-                }}
+                className={styles.searchModal}
             >
                 <input
                     placeholder="Search"
@@ -140,17 +136,47 @@ export default function Navbar() {
                         onClick={() => {
                             window.open(useSettings().githubRepo)
                         }}
-                        className={styles.logo}
+                        className={classNames(styles.logo, styles.hideLogo)}
                     />
                     <TwitterLogoIcon
                         onClick={() => {
                             window.open(useSettings().twitter)
                         }}
-                        className={styles.logo}
+                        className={classNames(styles.logo, styles.hideLogo)}
                     />  
-                    <ThemePicker/>
+                    <div className={styles.hideLogo}>
+                        <ThemePicker/>
+                    </div>
+                    <MenuIcon
+                        className={styles.menuLogo}
+                        onClick={() => {
+                            setMenuIsOpen(!menuIsOpen)
+                        }}
+                    />
                 </div>
             </nav>
+            {menuIsOpen && (
+                <div className={styles.menuContainer}>
+                    <Link href={"/"}><p className={styles.navLink}>Home</p></Link>
+                    <Link href={"/docs"}><p className={styles.navLink}>Docs</p></Link>
+                    <Link href={"https://buymeacoffee.com/nikorask"}><p className={styles.navLink}>Support</p></Link>
+                    <div className={styles.smallSection}>
+                        <GitHubLogoIcon 
+                            onClick={() => {
+                                window.open(useSettings().githubRepo)
+                            }}
+                            className={styles.logo}
+                        />
+                        <TwitterLogoIcon
+                            onClick={() => {
+                                window.open(useSettings().twitter)
+                            }}
+                            className={styles.logo}
+                        /> 
+                        <ThemePicker/>
+                    </div>
+                </div>
+            )}
         </>
     )
 }
