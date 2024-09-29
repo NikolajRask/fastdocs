@@ -114,6 +114,49 @@ $nav-height: 50px;
 
 }
 
+.studioMenu {
+    height: 100vw;
+    width: 300px;
+    border-right: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    z-index: 100;
+    position: fixed;
+    transition: margin-left 0.3s ease;
+    
+
+    .closeMenuIcon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+
+    .menuLink {
+        padding-inline: 20px;
+        padding-block: 5px;
+        display: flex;
+        gap: 15px;
+        font-size: 18px;
+
+
+        &:hover {
+            background: var(--hover-color);
+            cursor: pointer;
+            font-weight: 500;
+        }
+    }
+
+    .projectManager {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        border-top: 1px solid var(--border-color);
+    }
+}
+
+
 
 .header {
     font-size: 27px;

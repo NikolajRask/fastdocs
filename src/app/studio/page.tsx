@@ -3,17 +3,18 @@
 import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import { Markdown } from './utils/translator'
-import { QuestionMarkIcon } from '@radix-ui/react-icons'
+import { CaretLeftIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
 import Modal from '@/docs/ui/components/custom/Modal/Modal'
 import { atomOneDark, atomOneLight, CodeBlock, irBlack } from 'react-code-blocks'
 import useSettings from '@/docs/utils/settings/use-settings'
-import { MenuIcon } from 'lucide-react'
+import { BoxIcon, DnaIcon, HomeIcon, MenuIcon } from 'lucide-react'
 
 const StudioPage = () => {
 
     const [result, setResult] = useState(<></>)
     const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
     const [pageState, setPageState] = useState("preview")
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     return (
         <>
@@ -32,10 +33,40 @@ const StudioPage = () => {
             >
                 <p>Markdown Guide</p>
             </Modal>
+            <div 
+                className={styles.studioMenu}
+                style={{
+                    marginLeft: isMenuOpen ? "0px" : "-301px"
+                }}
+            >
+                <CaretLeftIcon
+                    className={styles.closeMenuIcon}
+                    onClick={() => {
+                        setIsMenuOpen(!isMenuOpen)
+                    }}
+                />
+                <div className={styles.menuLink}>
+                    <HomeIcon/>
+                    <span>Home</span>
+                </div>
+                <div className={styles.menuLink}>
+                    <BoxIcon/>
+                    <span>Docs</span>
+                </div>
+                <div className={styles.menuLink}>
+                    <DnaIcon/>
+                    <span>Support</span>
+                </div>
+                <div className={styles.projectManager}></div>
+            </div>
             <div className={styles.studioContainer}>
                 <div className={styles.studioNav}>
                     <div className={styles.studioNavMenu}>
-                        <MenuIcon/>
+                        <MenuIcon
+                            onClick={() => {
+                                setIsMenuOpen(!isMenuOpen)
+                            }}
+                        />
                         <h1
                             className={styles.logo}
                         >
