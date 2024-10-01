@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 import { Markdown } from './utils/translator'
 import { CaretLeftIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
 import Modal from '@/docs/ui/components/custom/Modal/Modal'
-import { atomOneDark, atomOneLight, CodeBlock, irBlack } from 'react-code-blocks'
+import { a11yDark, a11yLight, atomOneDark, atomOneLight, CodeBlock, github, irBlack, obsidian, paraisoDark, pojoaque, xt256 } from 'react-code-blocks'
 import useSettings from '@/docs/utils/settings/use-settings'
 import { BoxIcon, DnaIcon, HomeIcon, MenuIcon } from 'lucide-react'
 import ProjectManager, { DataType } from './project-manager/ProjectManager'
@@ -65,6 +65,9 @@ const StudioPage = () => {
 
         }
     }
+
+    const darkTheme = a11yDark
+    darkTheme.backgroundColor = "#121212"
 
     return (
         <>
@@ -279,7 +282,7 @@ const Installation = () => {
 export default Installation`}
                                 language='ts'
                                 showLineNumbers={true}
-                                theme={theme == "dark" ? atomOneDark : atomOneLight}
+                                theme={theme == "dark" ? darkTheme : github}
                             />
                         )
                     }
