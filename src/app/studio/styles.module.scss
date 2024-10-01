@@ -20,6 +20,7 @@ $nav-height: 50px;
             gap: 20px;
             align-items: center;
             margin-left: 10px;
+            color: var(--text-color);
 
             svg {
                 cursor: pointer;
@@ -73,6 +74,8 @@ $nav-height: 50px;
                 outline: none;
                 padding: 20px;
                 position: relative;
+                color: var(--text-color);
+                background: var(--background-color);
             }
 
             .help {
@@ -88,6 +91,7 @@ $nav-height: 50px;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
+                color: var(--text-color);
             
                 svg {
                     width: 16px;
@@ -131,6 +135,7 @@ $nav-height: 50px;
         width: 16px;
         height: 16px;
         cursor: pointer;
+        color: var(--text-color);
     }
 
     .menuLink {
@@ -139,7 +144,7 @@ $nav-height: 50px;
         display: flex;
         gap: 15px;
         font-size: 18px;
-
+        color: var(--text-color);
 
         &:hover {
             background: var(--hover-color);
@@ -171,6 +176,7 @@ $nav-height: 50px;
 
 .project {
     width: 100%;
+    color: var(--text-color);
     
     .projectTitle {
         padding-inline: 20px;
@@ -232,6 +238,7 @@ $nav-height: 50px;
     padding-block: 5px;
     display: flex;
     gap: 5px;
+    color: var(--text-color);
 
     &:hover {
         background: var(--hover-color);

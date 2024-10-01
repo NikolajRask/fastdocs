@@ -182,6 +182,10 @@ function Page({
     const [isEditing, setIsEditing] = useState(false)
     const [editValue, setEditValue] = useState(children as string)
 
+    function editPageName(newName: string) {
+        const projects = useMemory
+    }
+
     return (
         <div
             onDoubleClick={() => {

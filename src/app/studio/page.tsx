@@ -12,6 +12,8 @@ import ProjectManager, { DataType } from './project-manager/ProjectManager'
 import { Highlight } from '@/docs/ui/components/core'
 import { ProjectManageProvider } from './project-manager/context'
 import { useMemory } from './project-manager/hooks/useMemory'
+import { useTheme } from '@/docs/utils/use-theme'
+import ThemePicker from '@/docs/ui/components/custom/theme-picker/ThemePicker'
 
 const StudioPage = () => {
 
@@ -21,6 +23,8 @@ const StudioPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [currentMarkdown, setCurrentMarkdown] = useState("")
     const [currentPage, setCurrentPage] = useState(useMemory("currentPage"))
+
+    const theme = useTheme()
 
     useEffect(() => { // Fetch saved changes
         let lookup = useMemory("projects") as DataType[]
@@ -75,6 +79,7 @@ const StudioPage = () => {
                     width: 560,
                     height: 350,
                     borderRadius: 20,
+                    color: "var(--text-color)"
                 }}
             >
                 <p className={styles.markdownGuideTitle}>
@@ -135,18 +140,24 @@ const StudioPage = () => {
                         setIsMenuOpen(!isMenuOpen)
                     }}
                 />
-                <div className={styles.menuLink}>
-                    <HomeIcon/>
-                    <span>Home</span>
-                </div>
-                <div className={styles.menuLink}>
-                    <BoxIcon/>
-                    <span>Docs</span>
-                </div>
-                <div className={styles.menuLink}>
-                    <DnaIcon/>
-                    <span>Support</span>
-                </div>
+                <a href={"/"}>
+                    <div className={styles.menuLink}>
+                        <HomeIcon/>
+                        <span>Home</span>
+                    </div>
+                </a>
+                <a href={"/docs"}>
+                    <div className={styles.menuLink}>
+                        <BoxIcon/>
+                        <span>Docs</span>
+                    </div>
+                </a>
+                <a href={"/support"}>
+                    <div className={styles.menuLink}>
+                        <DnaIcon/>
+                        <span>Support</span>
+                    </div>
+                </a>
                 <ProjectManager 
                     currentMarkdown={currentMarkdown} 
                     setCurrentMarkdown={setCurrentMarkdown} 
@@ -169,6 +180,15 @@ const StudioPage = () => {
                         </h1>
                     </div>
                     <div className={styles.tabs}>
+                        <div
+                            style={{
+                                marginLeft: 20,
+                                marginRight: 20,
+                                marginTop: 4,
+                            }}
+                        >
+                            <ThemePicker/>
+                        </div>
                         <div 
                             className={styles.tab}
                             onClick={() => {
@@ -259,7 +279,7 @@ const Installation = () => {
 export default Installation`}
                                 language='ts'
                                 showLineNumbers={true}
-                                theme={atomOneDark}
+                                theme={theme == "dark" ? atomOneDark : atomOneLight}
                             />
                         )
                     }
