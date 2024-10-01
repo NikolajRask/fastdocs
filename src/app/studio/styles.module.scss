@@ -166,3 +166,105 @@ $nav-height: 50px;
     font-size: 24px;
 }
 
+
+// Project Manager //
+
+.project {
+    width: 100%;
+    
+    .projectTitle {
+        padding-inline: 20px;
+        padding-block: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        font-weight: 500;
+
+        &:hover {
+            background: var(--hover-color);
+        }
+
+        .arrowIcon {
+            transition: transform 0.3s ease;
+        }
+    }
+
+    .projectPages {
+        display: flex;
+        flex-direction: column;
+        max-height: 400px;
+        overflow: scroll;
+        transition: height 0.5s ease;
+
+        .projectPage {
+            padding-inline: 30px;
+            padding-block: 3px;
+
+            &:hover {
+                background: var(--hover-color);
+            }
+        }
+
+        .projectPageEdit {
+            padding-inline: 30px;
+            padding-block: 3px;
+            outline: none;
+        }
+    }
+}
+
+.newPageBtn {
+    width: fit-content;
+    padding-inline: 20px;
+    padding-block: 3px;
+    margin-left: 30px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+.addProjectBtn {
+    padding-inline: 20px;
+    padding-block: 5px;
+    display: flex;
+    gap: 5px;
+
+    &:hover {
+        background: var(--hover-color);
+        cursor: pointer;
+    }
+}
+
+
+
+// Markdown Guide //
+
+.markdownGuideTitle {
+    text-align: center;
+    font-size: 21px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.markdownGuideWrapper {
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .markdownGuide {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        margin-left: 20px;
+        font-size: 16px;
+    }
+}
+
+.page { //Page used in sidebar
+    cursor: pointer;
+}

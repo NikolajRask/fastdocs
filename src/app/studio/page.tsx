@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { Markdown } from './utils/translator'
 import { CaretLeftIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
@@ -8,6 +8,10 @@ import Modal from '@/docs/ui/components/custom/Modal/Modal'
 import { atomOneDark, atomOneLight, CodeBlock, irBlack } from 'react-code-blocks'
 import useSettings from '@/docs/utils/settings/use-settings'
 import { BoxIcon, DnaIcon, HomeIcon, MenuIcon } from 'lucide-react'
+import ProjectManager, { DataType } from './project-manager/ProjectManager'
+import { Highlight } from '@/docs/ui/components/core'
+import { ProjectManageProvider } from './project-manager/context'
+import { useMemory } from './project-manager/hooks/useMemory'
 
 const StudioPage = () => {
 
@@ -15,6 +19,48 @@ const StudioPage = () => {
     const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
     const [pageState, setPageState] = useState("preview")
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [currentMarkdown, setCurrentMarkdown] = useState("")
+    const [currentPage, setCurrentPage] = useState(useMemory("currentPage"))
+
+    useEffect(() => { // Fetch saved changes
+        let lookup = useMemory("projects") as DataType[]
+
+        let currentProject = lookup.find((x) => x.pages.map((page) => page.id).includes(currentPage))
+
+        let pageContent = currentProject?.pages.find((x) => x.id == currentPage)
+
+
+        if (pageContent != undefined) {
+            setCurrentMarkdown(pageContent.content)
+            setResult(Markdown(pageContent.content))
+        }
+
+    }, [currentPage])
+
+    function saveProgress(markdown: string) {
+        let projects = useMemory("projects") as DataType[]
+
+        let currentProjectIndex = projects.findIndex((x) => x.pages.map((page) => page.id).includes(currentPage))
+
+        if (currentProjectIndex != -1) {
+            let copyCurrentProject = projects[currentProjectIndex]
+    
+            let currentPageIndex = copyCurrentProject.pages.findIndex((x) => x.id == currentPage)
+
+            if (currentPageIndex != -1) {
+                let copyCurrentPage = copyCurrentProject.pages[currentPageIndex]
+    
+                copyCurrentPage.content = markdown
+        
+                copyCurrentProject.pages[currentPageIndex] = copyCurrentPage
+        
+                projects[currentProjectIndex] = copyCurrentProject
+        
+                useMemory("projects", projects)
+            }
+
+        }
+    }
 
     return (
         <>
@@ -26,12 +72,56 @@ const StudioPage = () => {
                 style={{
                     border: "1px solid var(--border-color)",
                     background: "var(--background-color)",
-                    width: 500,
+                    width: 560,
                     height: 350,
                     borderRadius: 20,
                 }}
             >
-                <p>Markdown Guide</p>
+                <p className={styles.markdownGuideTitle}>
+                    Markdown Guide
+                </p>
+                <div className={styles.markdownGuideWrapper}>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>#</Highlight>
+                        <p>Use # with a space in the begginging of a line to make a header</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>##</Highlight>
+                        <p>Use ## with a space in the begginging of a line to make a title</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>{">"}</Highlight>
+                        <p>Use {">"} with a space in the begginging of a line to make a blockquote</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>*italic*</Highlight>
+                        <p>Use ** around text to make it italic</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>**bold**</Highlight>
+                        <p>Use **** around text to make it bold</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>`code`</Highlight>
+                        <p>Use `` around text to make it code</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>/terminal/</Highlight>
+                        <p>Use // around text to make it a terminal view</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>%Highligt%</Highlight>
+                        <p>Use %% around text to highlight it</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>{"[Link Text](url)"}</Highlight>
+                        <p>Use [Links Text](url) to make a link</p>
+                    </div>
+                    <div className={styles.markdownGuide}>
+                        <Highlight>{"![Alt Text](image url)"}</Highlight>
+                        <p>Use ![Alt Text](image url) to make an image</p>
+                    </div>
+                </div>
             </Modal>
             <div 
                 className={styles.studioMenu}
@@ -57,7 +147,12 @@ const StudioPage = () => {
                     <DnaIcon/>
                     <span>Support</span>
                 </div>
-                <div className={styles.projectManager}></div>
+                <ProjectManager 
+                    currentMarkdown={currentMarkdown} 
+                    setCurrentMarkdown={setCurrentMarkdown} 
+                    currentPage={currentPage} 
+                    setCurrentPage={setCurrentPage}                    
+                />
             </div>
             <div className={styles.studioContainer}>
                 <div className={styles.studioNav}>
@@ -114,8 +209,11 @@ const StudioPage = () => {
                             className={styles.studioEditor}
                             onChange={(e) => {
                                 setResult(Markdown(e.target.value))
+                                setCurrentMarkdown(e.target.value)
+                                saveProgress(e.target.value)
                             }}
                             placeholder={"Write markdown here"}
+                            value={currentMarkdown}
                         >
                         </textarea>
                     </div>
