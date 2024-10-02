@@ -218,82 +218,98 @@ const StudioPage = () => {
                         >Code</div>
                     </div>
                 </div>
-                <div className={styles.studioContentContainer}>
-                    <div className={styles.studioEditorWrapper}>
-                        <div 
-                            className={styles.help}
-                            onClick={() => {
-                                setIsHelpModalOpen(true)
-                            }}
-                        >
-                            <QuestionMarkIcon/>
-                        </div>
-                        <textarea 
-                            onKeyDown={(e) => {
-                                if (e.key == "Tab") {
-                                    e.preventDefault()
-                                    e.stopPropagation()
-                                }
-                            }}
-                            className={styles.studioEditor}
-                            onChange={(e) => {
-                                setResult(Markdown(e.target.value))
-                                setCurrentMarkdown(e.target.value)
-                                saveProgress(e.target.value)
-                            }}
-                            placeholder={"Write markdown here"}
-                            value={currentMarkdown}
-                        >
-                        </textarea>
-                    </div>
-                    {
-                        pageState == "preview" && (
-                            <div className={styles.studioResult}>
-                                {result}
-                            </div>
-                        )
-                    }
-                    {
-                        pageState == "code" && (
-                            <CodeBlock
-                                customStyle={{
-                                    fontFamily: "monospace",
-                                    fontStyle: "normal",
-                                    width: "50%"
+                {
+                (currentPage != "") ? (
+                    
+                    <div className={styles.studioContentContainer}>
+                        <div className={styles.studioEditorWrapper}>
+                            <div 
+                                className={styles.help}
+                                onClick={() => {
+                                    setIsHelpModalOpen(true)
                                 }}
-                                text={`import React from 'react'
-import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title } from '../ui/components/core'
+                            >
+                                <QuestionMarkIcon/>
+                            </div>
+                            <textarea 
+                                onKeyDown={(e) => {
+                                    if (e.key == "Tab") {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                    }
+                                }}
+                                className={styles.studioEditor}
+                                onChange={(e) => {
+                                    setResult(Markdown(e.target.value))
+                                    setCurrentMarkdown(e.target.value)
+                                    saveProgress(e.target.value)
+                                }}
+                                placeholder={"Write markdown here"}
+                                value={currentMarkdown}
+                            >
+                            </textarea>
+                        </div>
+                        {
+                            pageState == "preview" && (
+                                <div className={styles.studioResult}>
+                                    {result}
+                                </div>
+                            )
+                        }
+                        {
+                            pageState == "code" && (
+                                <CodeBlock
+                                    customStyle={{
+                                        fontFamily: "monospace",
+                                        fontStyle: "normal",
+                                        width: "50%"
+                                    }}
+                                    text={`import React from 'react'
+    import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title } from '../ui/components/core'
 
-const Installation = () => {
-  return (
-    <>
-      <SEO
-        title={"Installation - Fastdocs"}
-      />
-      <Text>
-        Before installing FastDocs into your project you need to have <Link openInNewWindow={true} href={"https://nodejs.org/download"}>Node.js</Link> installed on your system.
-        Along with a React project to install into.
-      </Text>
-      <Text>
-        To install run:
-      </Text>
-      <CommandPrompt
-        content='npx fastdocs init'
-      />
-      <Text>If you didn't receive any error messages in your terminal that means FastDocs has been successfully installed into your project.</Text>
-    </>
-  ) 
-}
+    const Installation = () => {
+    return (
+        <>
+        <SEO
+            title={"Installation - Fastdocs"}
+        />
+        <Text>
+            Before installing FastDocs into your project you need to have <Link openInNewWindow={true} href={"https://nodejs.org/download"}>Node.js</Link> installed on your system.
+            Along with a React project to install into.
+        </Text>
+        <Text>
+            To install run:
+        </Text>
+        <CommandPrompt
+            content='npx fastdocs init'
+        />
+        <Text>If you didn't receive any error messages in your terminal that means FastDocs has been successfully installed into your project.</Text>
+        </>
+    ) 
+    }
 
-export default Installation`}
-                                language='ts'
-                                showLineNumbers={true}
-                                theme={theme == "dark" ? darkTheme : github}
-                            />
-                        )
-                    }
-                </div>
+    export default Installation`}
+                                    language='ts'
+                                    showLineNumbers={true}
+                                    theme={theme == "dark" ? darkTheme : github}
+                                />
+                            )
+                        }
+                    </div>
+
+                ) : (
+
+                    <div className={styles.noPageSelected}>
+                        <div>
+                            <h2>Select a page to edit</h2>
+                            <p>Use the sidebar menu to create, select and delete pages</p>
+                        </div>
+                    </div>
+
+                )
+            }
             </div>
+
         </>
     )
 }

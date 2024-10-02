@@ -7,6 +7,7 @@ import { CaretDownIcon, TrashIcon } from '@radix-ui/react-icons';
 import { cuid } from '@/docs/utils/utils';
 import { Pen, Pencil, PlusIcon, SquareArrowOutUpRight, Trash2 } from 'lucide-react';
 import useSettings from '@/docs/utils/settings/use-settings';
+import { pages } from 'next/dist/build/templates/app-page';
 
 export interface DataType {
     name: string;
@@ -75,6 +76,7 @@ const ProjectManager = ({
         newProjectVersion[projectIndex] = copy
 
         useMemory('currentPage', pageId)
+        setCurrentPage(pageId)
 
         useMemory("projects", newProjectVersion)
 
@@ -113,6 +115,7 @@ const ProjectManager = ({
                             }} 
                             title={project.name} 
                             key={index}
+                            setCurrentPage={setCurrentPage}
                         >
                             {
                                 project.pages.map((page, index) => {
@@ -146,7 +149,8 @@ interface ProjectProps {
     children: React.ReactNode,
     addPage: () => void
     uid: string,
-    update: () => void
+    update: () => void;
+    setCurrentPage: React.Dispatch<React.SetStateAction<string>>
 }
 
 function Project({
@@ -154,7 +158,8 @@ function Project({
     children,
     addPage,
     uid,
-    update
+    update,
+    setCurrentPage
 }: ProjectProps) {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -171,7 +176,16 @@ function Project({
     function deleteProject() {
         let projects = useMemory("projects") as DataType[]
 
+        const projectPageIds = projects.find((project) => project.id == uid)?.pages.map((page) => page.id)
+
+        if (projectPageIds?.includes(useMemory("currentPage"))) {
+            useMemory("currentPage", "")
+            setCurrentPage("")
+        }
+
         const newProjects = projects.filter((project) => project.id != uid)
+
+        
 
         useMemory("projects", newProjects)
 
@@ -387,6 +401,11 @@ function Page({
 
     function deletePage() {
         let projects = useMemory("projects") as DataType[]
+
+        if (uid == useMemory("currentPage")) {
+            useMemory("currentPage", "")
+            setCurrentPage("")
+        }
 
         const currentProjectIndex = projects.findIndex((project) => project.pages.map((page) => page.id).includes(uid))
         

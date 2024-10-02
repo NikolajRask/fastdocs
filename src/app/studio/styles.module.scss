@@ -219,6 +219,7 @@ $nav-height: 50px;
             padding-inline: 30px;
             padding-block: 3px;
             outline: none;
+            background: transparent;
         }
     }
 }
@@ -305,4 +306,27 @@ $nav-height: 50px;
 .projectEdit {
     outline: none;
     background: transparent;
+}
+
+.noPageSelected {
+    width: 100vw;
+    height: calc(100vh - 51px);
+    margin-top: 51px;
+    display: flex;
+    background: var(--background-color);
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+
+
+    div {
+        h2 {
+            font-size: 30px;
+            text-align: center;
+        }
+    
+        p {
+            text-align: center;
+        }
+    }
 }
