@@ -7,7 +7,7 @@ import { CaretLeftIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
 import Modal from '@/docs/ui/components/custom/Modal/Modal'
 import { a11yDark, a11yLight, atomOneDark, atomOneLight, CodeBlock, github, irBlack, obsidian, paraisoDark, pojoaque, xt256 } from 'react-code-blocks'
 import useSettings from '@/docs/utils/settings/use-settings'
-import { BoxIcon, DnaIcon, HomeIcon, MenuIcon } from 'lucide-react'
+import { BookOpen, BoxIcon, DnaIcon, HomeIcon, House, MenuIcon, PiggyBank } from 'lucide-react'
 import ProjectManager, { DataType } from './project-manager/ProjectManager'
 import { Highlight } from '@/docs/ui/components/core'
 import { ProjectManageProvider } from './project-manager/context'
@@ -145,19 +145,19 @@ const StudioPage = () => {
                 />
                 <a href={"/"}>
                     <div className={styles.menuLink}>
-                        <HomeIcon/>
+                        <House />
                         <span>Home</span>
                     </div>
                 </a>
                 <a href={"/docs"}>
                     <div className={styles.menuLink}>
-                        <BoxIcon/>
+                        <BookOpen />
                         <span>Docs</span>
                     </div>
                 </a>
                 <a href={"/support"}>
                     <div className={styles.menuLink}>
-                        <DnaIcon/>
+                        <PiggyBank />
                         <span>Support</span>
                     </div>
                 </a>
@@ -168,7 +168,13 @@ const StudioPage = () => {
                     setCurrentPage={setCurrentPage}                    
                 />
             </div>
-            <div className={styles.studioContainer}>
+            <div 
+                className={styles.studioContainer}
+                // style={{
+                //     width: isMenuOpen ? "calc(100vw - 300px)" : "100vw",
+                //     marginLeft: isMenuOpen ? "300px" : "0px",
+                // }}
+            >
                 <div className={styles.studioNav}>
                     <div className={styles.studioNavMenu}>
                         <MenuIcon

@@ -3,7 +3,8 @@ $nav-height: 50px;
 .studioContainer {
     width: 100vw;
     overflow-y: hidden;
-    
+    overflow-x: hidden;
+
     .studioNav {
         width: 100%;
         height: $nav-height;
@@ -158,6 +159,8 @@ $nav-height: 50px;
         flex-direction: column;
         gap: 0px;
         border-top: 1px solid var(--border-color);
+        overflow-y: auto;
+        height: calc(100vh - 112px);
     }
 }
 
@@ -200,8 +203,7 @@ $nav-height: 50px;
     .projectPages {
         display: flex;
         flex-direction: column;
-        max-height: 400px;
-        overflow: scroll;
+        overflow: hidden;
         transition: height 0.5s ease;
 
         .projectPage {
@@ -274,4 +276,33 @@ $nav-height: 50px;
 
 .page { //Page used in sidebar
     cursor: pointer;
+}
+
+.contextMenu {
+    position: fixed;
+    width: 200px;
+    height: fit-content;
+    border-radius: 10px;
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    z-index: 101;
+    color: var(--text-color);
+
+    .contextMenuItem {
+        padding-inline: 15px;
+        padding-block: 5px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        
+        &:hover {
+            background: var(--hover-color);
+            cursor: pointer;
+        }
+    }
+}
+
+.projectEdit {
+    outline: none;
+    background: transparent;
 }
