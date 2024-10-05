@@ -1,8 +1,8 @@
 import React from 'react'
 
 interface ImageProps {
-    width: string | number;
-    height: string | number;
+    width?: string | number;
+    height?: string | number;
     src: string;
     alt: string
 }

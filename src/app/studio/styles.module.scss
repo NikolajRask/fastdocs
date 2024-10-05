@@ -1,20 +1,55 @@
 $nav-height: 50px;
 
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    user-select: none;
+    color: var(--text-color);
+    margin: 10px;
+    text-align: center;
+    margin-bottom: 0px;
+
+    a {
+        color: rgb(31, 102, 235);
+    }
+
+    span {
+        font-size: 12px;
+        margin-top: 0px;
+    }
+}
+
+.smallLogo {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: -5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .studioContainer {
     width: 100vw;
     overflow-y: hidden;
     overflow-x: hidden;
+    transition: margin-left 0.2s linear, width 0.2s linear;
 
     .studioNav {
-        width: 100%;
         height: $nav-height;
         border-bottom: 1px solid var(--border-color);
+        border-left: 1px solid var(--border-color);
         display: flex;
-        position: absolute;
         top: 0px;
+        position: absolute;
         justify-content: space-between;
         align-items: center;
         padding-inline: 10px;
+        transition: width 0.2 linear;
+        width: 100%;
+        background: var(--background-color);
+        transition: margin-left 0.2s linear, width 0.2s linear;
 
         .studioNavMenu {
             display: flex;
@@ -25,17 +60,6 @@ $nav-height: 50px;
 
             svg {
                 cursor: pointer;
-            }
-
-            .logo {
-                font-size: 18px;
-                font-weight: 900;
-                user-select: none;
-                color: var(--text-color);
-            
-                a {
-                    color: rgb(31, 102, 235);
-                }
             }
         }
 
@@ -59,14 +83,14 @@ $nav-height: 50px;
 
     .studioContentContainer {
         display: flex;
-        width: 100vw;
-        margin-top: calc($nav-height);
+        transition: margin-left 0.2s linear, width 0.2s linear;
 
         .studioEditorWrapper {
 
             width: 50%;
             position: relative;
             height: calc(100vh - ($nav-height + 1px));
+            transition: margin-left 0.2s linear, width 0.2s linear;
 
             .studioEditor {
                 width: 100%;
@@ -77,6 +101,7 @@ $nav-height: 50px;
                 position: relative;
                 color: var(--text-color);
                 background: var(--background-color);
+                transition: margin-left 0.2s linear, width 0.2s linear;
             }
 
             .help {
@@ -107,13 +132,15 @@ $nav-height: 50px;
 
 
         .studioResult {
-            width: 50%;
+            width: 100%;
             height: calc(100vh - ($nav-height + 1px));
             resize: none;
             border-left: 1px solid var(--border-color);
             padding: 20px;
             overflow-x: hidden;
             overflow-y: scroll;
+            margin-top: 51px;
+            transition: margin-left 0.2s linear, width 0.2s linear;
         }
     }
 
@@ -126,7 +153,7 @@ $nav-height: 50px;
     background-color: var(--background-color);
     z-index: 100;
     position: fixed;
-    transition: margin-left 0.3s ease;
+    transition: margin-left 0.2s linear, width 0.2s linear;
     
 
     .closeMenuIcon {
@@ -141,26 +168,39 @@ $nav-height: 50px;
 
     .menuLink {
         padding-inline: 20px;
-        padding-block: 5px;
+        padding-block: 10px;
         display: flex;
         gap: 15px;
         font-size: 18px;
         color: var(--text-color);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        align-items: center;
 
         &:hover {
             background: var(--hover-color);
             cursor: pointer;
             font-weight: 500;
         }
+
+        span {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            align-items: center;
+        }
+
     }
 
     .projectManager {
         display: flex;
         flex-direction: column;
-        gap: 0px;
-        border-top: 1px solid var(--border-color);
+        gap: 7px;
+        border-top: 1px dashed var(--border-color);
         overflow-y: auto;
         height: calc(100vh - 112px);
+        margin: 7px;
+        padding-top: 7px;
     }
 }
 
@@ -183,6 +223,7 @@ $nav-height: 50px;
     
     .projectTitle {
         padding-inline: 20px;
+        border-radius: 5px;
         padding-block: 5px;
         font-size: 18px;
         cursor: pointer;
@@ -190,6 +231,9 @@ $nav-height: 50px;
         gap: 5px;
         align-items: center;
         font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
         &:hover {
             background: var(--hover-color);
@@ -205,10 +249,15 @@ $nav-height: 50px;
         flex-direction: column;
         overflow: hidden;
         transition: height 0.5s ease;
+        gap: 5px;
 
         .projectPage {
             padding-inline: 30px;
             padding-block: 3px;
+            border-radius: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
 
             &:hover {
                 background: var(--hover-color);
@@ -233,6 +282,9 @@ $nav-height: 50px;
     border: 1px solid var(--border-color);
     font-size: 12px;
     margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 
@@ -240,8 +292,13 @@ $nav-height: 50px;
     padding-inline: 20px;
     padding-block: 5px;
     display: flex;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
     gap: 5px;
     color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &:hover {
         background: var(--hover-color);
@@ -309,9 +366,8 @@ $nav-height: 50px;
 }
 
 .noPageSelected {
-    width: 100vw;
     height: calc(100vh - 51px);
-    margin-top: 51px;
+    transition: width 0.2 linear;
     display: flex;
     background: var(--background-color);
     align-items: center;
@@ -329,4 +385,19 @@ $nav-height: 50px;
             text-align: center;
         }
     }
+}
+
+.header {
+    font-size: 32px;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    width: fit-content;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-color);
 }

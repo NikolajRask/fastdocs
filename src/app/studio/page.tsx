@@ -2,27 +2,34 @@
 
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { Markdown } from './utils/translator'
-import { CaretLeftIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
+import { Markdown, TranslateCode } from './utils/translator'
+import { QuestionMarkIcon } from '@radix-ui/react-icons'
 import Modal from '@/docs/ui/components/custom/Modal/Modal'
-import { a11yDark, a11yLight, atomOneDark, atomOneLight, CodeBlock, github, irBlack, obsidian, paraisoDark, pojoaque, xt256 } from 'react-code-blocks'
+import { a11yDark, CodeBlock, github } from 'react-code-blocks'
 import useSettings from '@/docs/utils/settings/use-settings'
-import { BookOpen, BoxIcon, DnaIcon, HomeIcon, House, MenuIcon, PiggyBank } from 'lucide-react'
+import { BookOpen, BoxIcon, CopyIcon, DnaIcon, House, MenuIcon, PiggyBank } from 'lucide-react'
+
 import ProjectManager, { DataType } from './project-manager/ProjectManager'
 import { Highlight } from '@/docs/ui/components/core'
 import { ProjectManageProvider } from './project-manager/context'
 import { useMemory } from './project-manager/hooks/useMemory'
 import { useTheme } from '@/docs/utils/use-theme'
 import ThemePicker from '@/docs/ui/components/custom/theme-picker/ThemePicker'
+import HomeIcon from '@/assets/svg/HomeIcon'
+import CloseIcon from '@/assets/svg/CloseIcon'
+import OpenIcon from '@/assets/svg/OpenIcon'
+import DocsIcon from '@/assets/svg/DocsIcon'
+import SupportIcon from '@/assets/svg/SupportIcon'
 
 const StudioPage = () => {
 
-    const [result, setResult] = useState(<></>)
+    const [result, setResult] = useState<React.ReactNode>()
     const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
     const [pageState, setPageState] = useState("preview")
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [currentMarkdown, setCurrentMarkdown] = useState("")
     const [currentPage, setCurrentPage] = useState(useMemory("currentPage"))
+    const [code, setCode] = useState(``)
 
     const theme = useTheme()
 
@@ -37,6 +44,7 @@ const StudioPage = () => {
         if (pageContent != undefined) {
             setCurrentMarkdown(pageContent.content)
             setResult(Markdown(pageContent.content))
+            setCode(TranslateCode(pageContent.content, currentPage))
         }
 
     }, [currentPage])
@@ -68,6 +76,21 @@ const StudioPage = () => {
 
     const darkTheme = a11yDark
     darkTheme.backgroundColor = "#121212"
+
+    function copyCode() {
+        if (navigator?.clipboard?.writeText) {
+            navigator.clipboard.writeText(code).then(
+              () => {
+                
+              },
+              (err) => {
+                console.error('Failed to copy text: ', err);
+              }
+            );
+          } else {
+            console.error('Clipboard API not supported');
+          }
+    }
 
     return (
         <>
@@ -118,8 +141,8 @@ const StudioPage = () => {
                         <p>Use // around text to make it a terminal view</p>
                     </div>
                     <div className={styles.markdownGuide}>
-                        <Highlight>%Highligt%</Highlight>
-                        <p>Use %% around text to highlight it</p>
+                        <Highlight>==Highligt==</Highlight>
+                        <p>Use ==== around text to highlight it</p>
                     </div>
                     <div className={styles.markdownGuide}>
                         <Highlight>{"[Link Text](url)"}</Highlight>
@@ -134,94 +157,140 @@ const StudioPage = () => {
             <div 
                 className={styles.studioMenu}
                 style={{
-                    marginLeft: isMenuOpen ? "0px" : "-301px"
+                    width: isMenuOpen ? "300px" : "50px"
                 }}
             >
-                <CaretLeftIcon
-                    className={styles.closeMenuIcon}
-                    onClick={() => {
-                        setIsMenuOpen(!isMenuOpen)
-                    }}
-                />
-                <a href={"/"}>
-                    <div className={styles.menuLink}>
-                        <House />
-                        <span>Home</span>
-                    </div>
-                </a>
-                <a href={"/docs"}>
-                    <div className={styles.menuLink}>
-                        <BookOpen />
-                        <span>Docs</span>
-                    </div>
-                </a>
-                <a href={"/support"}>
-                    <div className={styles.menuLink}>
-                        <PiggyBank />
-                        <span>Support</span>
-                    </div>
-                </a>
-                <ProjectManager 
-                    currentMarkdown={currentMarkdown} 
-                    setCurrentMarkdown={setCurrentMarkdown} 
-                    currentPage={currentPage} 
-                    setCurrentPage={setCurrentPage}                    
-                />
-            </div>
-            <div 
-                className={styles.studioContainer}
-                // style={{
-                //     width: isMenuOpen ? "calc(100vw - 300px)" : "100vw",
-                //     marginLeft: isMenuOpen ? "300px" : "0px",
-                // }}
-            >
-                <div className={styles.studioNav}>
-                    <div className={styles.studioNavMenu}>
-                        <MenuIcon
-                            onClick={() => {
-                                setIsMenuOpen(!isMenuOpen)
-                            }}
-                        />
+                {isMenuOpen ? (
+                    <>
                         <h1
                             className={styles.logo}
                         >
-                            <a>F</a>astdocs Studio
+                            <a>F</a>astdocs
+                            <br/>
                         </h1>
+                    </>
+                ) : (
+                    <h1
+                        className={styles.logo}
+                    >
+                        <a>F</a>
+                    </h1>
+                )}
+                <a href={"/"}>
+                    <div 
+                        className={styles.menuLink}
+                        style={{
+                            margin: isMenuOpen ? 7 : 7,
+                            padding: isMenuOpen ? 5 :  5,
+                            borderRadius: isMenuOpen ? 5 : 5,
+                            marginBlock: isMenuOpen ? 7 : 9.5,
+                        }}
+                    >
+                        <HomeIcon />
+                        <span
+                            style={{
+                                display: isMenuOpen ? "block" : "none"
+                            }}
+                        >Home</span>
                     </div>
-                    <div className={styles.tabs}>
-                        <div
+                </a>
+                <a href={"/docs"}>
+                    <div 
+                        className={styles.menuLink}
+                        style={{
+                            margin: isMenuOpen ? 7 : 7,
+                            padding: isMenuOpen ? 5 :  5,
+                            borderRadius: isMenuOpen ? 5 : 5,
+                            marginBlock: isMenuOpen ? 7 : 9.5,
+                        }}
+                    >
+                        <DocsIcon />
+                        <span
                             style={{
-                                marginLeft: 20,
-                                marginRight: 20,
-                                marginTop: 4,
+                                display: isMenuOpen ? "block" : "none"
                             }}
-                        >
-                            <ThemePicker/>
-                        </div>
-                        <div 
-                            className={styles.tab}
-                            onClick={() => {
-                                setPageState("preview")
-                            }}
-                            style={{
-                                color: pageState == "preview" ? useSettings().color : "var(--text-color)"
-                            }}
-                        >Preview</div>
-                        <div 
-                            className={styles.tab}
-                            onClick={() => {
-                                setPageState("code")
-                            }}
-                            style={{
-                                color: pageState == "code" ? useSettings().color : "var(--text-color)"
-                            }}
-                        >Code</div>
+                        >Docs</span>
                     </div>
-                </div>
+                </a>
+                <a href={"/support"}>
+                    <div 
+                        className={styles.menuLink}
+                        style={{
+                            margin: isMenuOpen ? 7 : 7,
+                            padding: isMenuOpen ? 5 :  5,
+                            borderRadius: isMenuOpen ? 5 : 5,
+                            marginBlock: isMenuOpen ? 7 : 9.5,
+                        }}
+                    >
+                        <SupportIcon />
+                        <span
+                            style={{
+                                display: isMenuOpen ? "block" : "none"
+                                
+                            }}
+                        >Support</span>
+                    </div>
+                </a>
+                {
+                    isMenuOpen && (
+                        <ProjectManager 
+                            currentMarkdown={currentMarkdown} 
+                            setCurrentMarkdown={setCurrentMarkdown} 
+                            currentPage={currentPage} 
+                            setCurrentPage={setCurrentPage}                    
+                        />
+                    ) 
+                }
+                {
+                    isMenuOpen && (
+                        <CloseIcon
+                            style={{
+                                position: "fixed",
+                                bottom: "10px",
+                                zIndex: 40,
+                                left: 13,
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                setIsMenuOpen(!isMenuOpen)
+                            }}
+                        />       
+                    )
+                }
+                {
+                    !isMenuOpen && (
+                        <OpenIcon
+                            style={{
+                                position: "fixed",
+                                bottom: "10px",
+                                zIndex: 40,
+                                left: 13,
+                                cursor: "pointer",
+                                translate: "rotate(180deg)"
+                            }}
+                            onClick={() => {
+                                setIsMenuOpen(!isMenuOpen)
+                            }}
+                        />       
+                    )
+                }
+            </div>
+            <div 
+                className={styles.studioContainer}
+                style={{
+                    width: isMenuOpen ? "calc(100vw - 300px)" : "calc(100vw - 50px)",
+                    marginLeft: isMenuOpen ? "300px" : "50px",
+                }}
+            >
                 {
                 (currentPage != "") ? (
                     
-                    <div className={styles.studioContentContainer}>
+                    <div 
+                        className={styles.studioContentContainer}
+                        style={{
+                            width: isMenuOpen ? "calc(100vw - 301px)" : "calc(100vw - 51px)"
+                        }}
+                    >
                         <div className={styles.studioEditorWrapper}>
                             <div 
                                 className={styles.help}
@@ -241,6 +310,7 @@ const StudioPage = () => {
                                 className={styles.studioEditor}
                                 onChange={(e) => {
                                     setResult(Markdown(e.target.value))
+                                    setCode(TranslateCode(e.target.value, currentPage))
                                     setCurrentMarkdown(e.target.value)
                                     saveProgress(e.target.value)
                                 }}
@@ -249,57 +319,87 @@ const StudioPage = () => {
                             >
                             </textarea>
                         </div>
-                        {
-                            pageState == "preview" && (
-                                <div className={styles.studioResult}>
-                                    {result}
+                        <div style={{
+                            width: "50%",
+                            position: "relative"
+                        }}>
+                            <div 
+                                className={styles.studioNav}
+                            >
+                                <div className={styles.tabs}>
+                                    <div 
+                                        className={styles.tab}
+                                        onClick={() => {
+                                            setPageState("preview")
+                                        }}
+                                        style={{
+                                            color: pageState == "preview" ? useSettings().color : "var(--text-color)"
+                                        }}
+                                    >Preview</div>
+                                    <div 
+                                        className={styles.tab}
+                                        onClick={() => {
+                                            setPageState("code")
+                                        }}
+                                        style={{
+                                            color: pageState == "code" ? useSettings().color : "var(--text-color)"
+                                        }}
+                                    >Code</div>
                                 </div>
-                            )
-                        }
-                        {
-                            pageState == "code" && (
-                                <CodeBlock
-                                    customStyle={{
-                                        fontFamily: "monospace",
-                                        fontStyle: "normal",
-                                        width: "50%"
+                                <div
+                                    style={{
+                                        marginLeft: 20,
+                                        marginRight: 20,
+                                        marginTop: 0,
+                                        display: "flex",
+                                        gap: 10,
                                     }}
-                                    text={`import React from 'react'
-    import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title } from '../ui/components/core'
-
-    const Installation = () => {
-    return (
-        <>
-        <SEO
-            title={"Installation - Fastdocs"}
-        />
-        <Text>
-            Before installing FastDocs into your project you need to have <Link openInNewWindow={true} href={"https://nodejs.org/download"}>Node.js</Link> installed on your system.
-            Along with a React project to install into.
-        </Text>
-        <Text>
-            To install run:
-        </Text>
-        <CommandPrompt
-            content='npx fastdocs init'
-        />
-        <Text>If you didn't receive any error messages in your terminal that means FastDocs has been successfully installed into your project.</Text>
-        </>
-    ) 
-    }
-
-    export default Installation`}
-                                    language='ts'
-                                    showLineNumbers={true}
-                                    theme={theme == "dark" ? darkTheme : github}
-                                />
-                            )
-                        }
+                                >
+                                    <CopyIcon
+                                        style={{
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={() => copyCode()}
+                                    />
+                                    <ThemePicker/>
+                                </div>
+                            </div>
+                            {
+                                pageState == "preview" && (
+                                    <div className={styles.studioResult}>
+                                        {result}
+                                    </div>
+                                )
+                            }
+                            {
+                                pageState == "code" && (
+                                    <CodeBlock
+                                        customStyle={{
+                                            fontFamily: "monospace",
+                                            fontStyle: "normal",
+                                            width: "100%",
+                                            height: "calc(100vh - 51px)",
+                                            borderLeft: "1px solid var(--border-color)",
+                                            marginTop: "51px",
+                                        }}
+                                        text={code}
+                                        language='ts'
+                                        showLineNumbers={true}
+                                        theme={theme == "dark" ? darkTheme : github}
+                                    />
+                                )
+                            }
+                        </div>
                     </div>
 
                 ) : (
 
-                    <div className={styles.noPageSelected}>
+                    <div 
+                        className={styles.noPageSelected}
+                        style={{
+                            width: isMenuOpen ? "calc(100vw - 301px)" : "calc(100vw - 51px)"
+                        }}
+                    >
                         <div>
                             <h2>Select a page to edit</h2>
                             <p>Use the sidebar menu to create, select and delete pages</p>
