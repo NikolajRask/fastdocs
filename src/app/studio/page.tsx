@@ -20,6 +20,7 @@ import CloseIcon from '@/assets/svg/CloseIcon'
 import OpenIcon from '@/assets/svg/OpenIcon'
 import DocsIcon from '@/assets/svg/DocsIcon'
 import SupportIcon from '@/assets/svg/SupportIcon'
+import CheckIcon from '@/assets/svg/CheckIcon'
 
 const StudioPage = () => {
 
@@ -29,6 +30,7 @@ const StudioPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [currentMarkdown, setCurrentMarkdown] = useState("")
     const [currentPage, setCurrentPage] = useState(useMemory("currentPage"))
+    const [isCopied, setIsCopied] = useState(false)
     const [code, setCode] = useState(``)
 
     const theme = useTheme()
@@ -81,7 +83,7 @@ const StudioPage = () => {
         if (navigator?.clipboard?.writeText) {
             navigator.clipboard.writeText(code).then(
               () => {
-                
+                setIsCopied(true)
               },
               (err) => {
                 console.error('Failed to copy text: ', err);
@@ -91,6 +93,14 @@ const StudioPage = () => {
             console.error('Clipboard API not supported');
           }
     }
+
+    useEffect(() => {
+        if (isCopied == true) {
+            setTimeout(() => {
+                setIsCopied(false)
+            }, 2500)
+        }
+    }, [isCopied])
 
     return (
         <>
@@ -355,12 +365,18 @@ const StudioPage = () => {
                                         gap: 10,
                                     }}
                                 >
-                                    <CopyIcon
-                                        style={{
-                                            cursor: "pointer",
-                                        }}
-                                        onClick={() => copyCode()}
-                                    />
+                                    {
+                                        isCopied ? (
+                                            <CheckIcon/>
+                                        ) : (
+                                            <CopyIcon
+                                                style={{
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() => copyCode()}
+                                            />
+                                        )
+                                    }
                                     <ThemePicker/>
                                 </div>
                             </div>
