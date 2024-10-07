@@ -21,6 +21,8 @@ import OpenIcon from '@/assets/svg/OpenIcon'
 import DocsIcon from '@/assets/svg/DocsIcon'
 import SupportIcon from '@/assets/svg/SupportIcon'
 import CheckIcon from '@/assets/svg/CheckIcon'
+import CodeIcon from '@/assets/svg/CodeIcon'
+import PreviewIcon from '@/assets/svg/PreviewIcon'
 
 const StudioPage = () => {
 
@@ -347,7 +349,10 @@ const StudioPage = () => {
                                         style={{
                                             color: pageState == "preview" ? useSettings().color : "var(--text-color)"
                                         }}
-                                    >Preview</div>
+                                    >
+                                        <PreviewIcon/>
+                                        <span>Preview</span>
+                                    </div>
                                     <div 
                                         className={styles.tab}
                                         onClick={() => {
@@ -356,7 +361,10 @@ const StudioPage = () => {
                                         style={{
                                             color: pageState == "code" ? useSettings().color : "var(--text-color)"
                                         }}
-                                    >Code</div>
+                                    >
+                                        <CodeIcon/>
+                                        <span>Code</span>
+                                    </div>
                                 </div>
                                 <div
                                     style={{

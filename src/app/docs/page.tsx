@@ -3,6 +3,8 @@
 import { DocsProvider } from "@/docs/context/context";
 import LinkPage from "@/docs/pages/components/Link";
 import Page404 from "@/docs/pages/concepts/404Page";
+import PagesPage from "@/docs/pages/concepts/Pages";
+import SectionPage from "@/docs/pages/concepts/Sections";
 import Installation from "@/docs/pages/Installation";
 import Introductions from "@/docs/pages/Introduction";
 import Usage from "@/docs/pages/Usage";
@@ -37,12 +39,12 @@ export default function Home() {
           <Page
             title={"Pages"}
           >
-            <p>3</p>
+            <PagesPage/>
           </Page>
           <Page
             title={"Sections"}
           >
-            <p>3</p>
+            <SectionPage/>
           </Page>
           <Page
             title={"Layout"}

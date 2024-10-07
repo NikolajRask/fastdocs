@@ -11,7 +11,7 @@
 .text {
     font-size: 20px;
     font-weight: 400;
-    margin-block: 10px;
+    margin-block: 0px;
     line-height: 145%;
     color: var(--text-color);
 }
@@ -242,4 +242,12 @@
 
 .steps {
     color: var(--text-color);
+}
+
+// ############### blockquote Component ############### //
+
+.blockquote {
+    padding-inline: 20px;
+    padding-block: 10px;
+    background: var(--background-subdued);
 }

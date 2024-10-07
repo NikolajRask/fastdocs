@@ -4,6 +4,7 @@ import { CodeBlock, irBlack } from 'react-code-blocks'
 import React from "react"
 import { useMemory } from "../project-manager/hooks/useMemory"
 import { DataType } from "../project-manager/ProjectManager"
+import Blockquote from "@/docs/ui/components/core/Blockquote/Blockquote"
 
 const CodeReplicate = ({
     code
@@ -58,11 +59,17 @@ const markdownToJsx = (text: string): (string | JSX.Element)[] => {
   // Split text into parts based on different Markdown elements and newline (\n)
   const parts = text.split(/(\*\*\*.*?\*\*\*|\*\*.*?\*\*|\*.*?\*|`[^`]+`|\[.*?\]\(.*?\)|!\[.*?\]\(.*?\)|^# .*$|^## .*$|^> .*|\/.*?\/|==.*?==|\n)/gm);
 
+  let lastPart = "\n"
   // Map over the parts and transform them into JSX elements where applicable
   return parts.map((part, index) => {
     // Match newline (\n) and render <br />
     if (part === '\n') {
-      return <br key={index} />;
+      if (lastPart != "\n") {
+        lastPart = "\n"
+        return <br key={index} />;
+      } else {
+        return ""
+      }
     }
     // Match inline code (`code`)
     else if (part.match(/`([^`]+)`/)) {
@@ -88,7 +95,7 @@ const markdownToJsx = (text: string): (string | JSX.Element)[] => {
     }
     // Match blockquotes (> text)
     else if (part.match(/^> (.*)$/m)) {
-      return <blockquote key={index}>{part.slice(2).trim()}</blockquote>;
+      return <Blockquote key={index}>{part.slice(2).trim()}</Blockquote>;
     }
     // Match headers (## Heading 2)
     else if (part.match(/^## (.*)$/)) {
@@ -106,20 +113,20 @@ const markdownToJsx = (text: string): (string | JSX.Element)[] => {
     else if (part.match(/\*\*\*(.*?)\*\*\*/)) {
       return <b key={index}><i>{part.slice(3, -3)}</i></b>;
     }
-    // Match italic (*text*)
-    else if (part.match(/\*(.*?)\*/)) {
-      return <i key={index}>{part.slice(1, -1)}</i>;
-    }
     // Match bold (**text**)
     else if (part.match(/\*\*(.*?)\*\*/)) {
       return <b key={index}>{" "}{part.slice(2, -2)}{" "}</b>;
+    }
+    // Match italic (*text*)
+    else if (part.match(/\*(.*?)\*/)) {
+      return <i key={index}>{part.slice(1, -1)}</i>;
     }
     // Match custom ==text== (highlighted text)
     else if (part.match(/==(.*?)==/)) {
       return <Highlight key={index}>{part.slice(2, -2)}</Highlight>;
     }
     // Return plain text if no match
-    return part ? <React.Fragment key={index}>{part}</React.Fragment> : <></>;
+    return part ? <Text>{part}</Text> : <></>;
   }).filter(Boolean); // Filter out any null values
 };
 
@@ -128,18 +135,27 @@ const markdownToCode = (text: string): string[] => {
   // Split text into parts based on different Markdown elements and newline (\n)
   const parts = text.split(/(\*\*\*.*?\*\*\*|\*\*.*?\*\*|\*.*?\*|`[^`]+`|\[.*?\]\(.*?\)|!\[.*?\]\(.*?\)|^# .*$|^## .*$|^> .*|\/.*?\/|==.*?==|\n)/gm);
 
+  let lastPart = "\n"
   // Map over the parts and transform them into JSX elements where applicable
   return parts.map((part, index) => {
     // Match newline (\n) and render <br />
+    if (part === '\n') {
+      if (lastPart != "\n") {
+        lastPart = "\n"
+        return "\n      <br/>";
+      } else {
+        return ""
+      }
+    }
     if (part.match(/`([^`]+)`/)) {
-      return `<Code code=${"`"}${part.slice(1, -1)}${"`"}
+      return `\n      <Code code={${"`"}${part.slice(1, -1)}${"`"}}
       />`;
     }
     // Match images ![alt](url)
     else if (part.match(/!\[(.*?)\]\((.*?)\)/)) {
       const match = part.match(/!\[(.*?)\]\((.*?)\)/);
       if (match) {
-        return `<Image src="{${match[2]}}" alt="{${match[1]}}" />`;
+        return `\n      <Image src="{${match[2]}}" alt="{${match[1]}}" />`;
       }
     }
     // Match links [text](url)
@@ -147,56 +163,56 @@ const markdownToCode = (text: string): string[] => {
       const match = part.match(/\[(.*?)\]\((.*?)\)/);
       if (match) {
         return (
-          `<Link href="{${match[2]}}">
+          `\n      <Link href="{${match[2]}}">
             {${match[1]}}
           </Link>`
         );
       }
     }
     // Match blockquotes (> text)
-    // else if (part.match(/^> (.*)$/m)) {
-    //   return <blockquote key={index}>{part.slice(2).trim()}</blockquote>;
-    // }
+    else if (part.match(/^> (.*)$/m)) {
+      return `\n      <Blockquote>${part.slice(2).trim()}</Blockquote>`;
+    }
     // Match headers (## Heading 2)
     else if (part.match(/^## (.*)$/)) {
-      return `<Title>${part.slice(3).trim()}</Title>`;
+      return `\n      <Title>${part.slice(3).trim()}</Title>`;
     }
     // Match headers (# Heading 1)
     else if (part.match(/^# (.*)$/)) {
-      return `<Header>${part.slice(2).trim()}</Header>`;
+      return `\n      <Header>${part.slice(2).trim()}</Header>`;
     }
     // Match custom /text/ -> <p>text</p>
     else if (part.match(/\/(.*?)\//)) {
-      return `<CommandPrompt content=${"`"}{${part.slice(1, -1)}}${"`"}/>`;
+      return `\n      <CommandPrompt content={${"`"}{${part.slice(1, -1)}}${"`"}}/>`;
     }
     // Match bold and italic (***text***)
     else if (part.match(/\*\*\*(.*?)\*\*\*/)) {
-      return `<b><i>${part.slice(3, -3)}</i></b>`;
+      return `\n      <b><i>${part.slice(3, -3)}</i></b>`;
     }
+      // Match bold (**text**)
+      else if (part.match(/\*\*(.*?)\*\*/)) {
+        return `\n      <b>${part.slice(2, -2)}</b>`;
+      }
     // Match italic (*text*)
     else if (part.match(/\*(.*?)\*/)) {
-      return `<i>${part.slice(1, -1)}</i>`;
-    }
-    // Match bold (**text**)
-    else if (part.match(/\*\*(.*?)\*\*/)) {
-      return `<b>${part.slice(2, -2)}</b>`;
+      return `\n      <i>${part.slice(1, -1)}</i>`;
     }
     // Match custom ==text== (highlighted text)
     else if (part.match(/==(.*?)==/)) {
-      return `<Highlight>${part.slice(2, -2)}</Highlight>`;
+      return `\n      <Highlight>{"${part.slice(2, -2)}"}</Highlight>`;
     }
     // Return plain text if no match
-    return part ? `${part}` : "";
+    return part ? `\n      <Text>${part}</Text>` : "";
   }).filter(Boolean); // Filter out any null values
 };
-
+    
 export function TranslateCode(content: string, fileName: string): string {
 
   let name = findPageName(fileName)
 
   let code2 = ``
 
-  const code = markdownToCode(content).map((x) => {return x})
+  const code = markdownToCode(content).map((x) => {return `${x}`})
 
   let lastItem: string | undefined = undefined
 
@@ -220,7 +236,7 @@ export function TranslateCode(content: string, fileName: string): string {
   })
 
   return `import React from 'react'
-import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title } from '../ui/components/core'
+import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title, Blockquote } from '../ui/components/core'
 
 const ${name?.replaceAll(" ","")} = () => {
   return (

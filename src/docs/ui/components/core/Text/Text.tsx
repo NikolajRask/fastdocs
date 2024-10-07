@@ -10,9 +10,9 @@ const Text = ({
     ...rest
 }: React.HTMLAttributes<HTMLDivElement> & TextProps) => {
   return (
-    <div className={styles.text} {...rest}>
+    <p className={styles.text} {...rest}>
       {children}
-    </div>
+    </p>
   )
 }
 

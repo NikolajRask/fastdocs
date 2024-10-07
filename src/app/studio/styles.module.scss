@@ -73,6 +73,14 @@ $nav-height: 50px;
                 border-radius: 5px;
                 background: var(--background-subdued);
                 cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                
+                svg {
+                    width: 19px;
+                    height: 19px;
+                }
 
                 &:hover {
                     background: var(--background-subdued);
@@ -109,6 +117,7 @@ $nav-height: 50px;
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
+                background-color: var(--background-color);
                 right: 10px;
                 top: 10px;
                 z-index: 10;
