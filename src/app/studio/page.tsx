@@ -260,6 +260,7 @@ const StudioPage = () => {
                                 zIndex: 40,
                                 left: 13,
                                 cursor: "pointer",
+                                color: "var(--text-color)",
                             }}
                             onClick={() => {
                                 setIsMenuOpen(!isMenuOpen)
@@ -276,7 +277,8 @@ const StudioPage = () => {
                                 zIndex: 40,
                                 left: 13,
                                 cursor: "pointer",
-                                translate: "rotate(180deg)"
+                                translate: "rotate(180deg)",
+                                color: "var(--text-color)",
                             }}
                             onClick={() => {
                                 setIsMenuOpen(!isMenuOpen)
@@ -367,11 +369,16 @@ const StudioPage = () => {
                                 >
                                     {
                                         isCopied ? (
-                                            <CheckIcon/>
+                                            <CheckIcon
+                                                style={{
+                                                    color: "var(--text-color)"
+                                                }}
+                                            />
                                         ) : (
                                             <CopyIcon
                                                 style={{
                                                     cursor: "pointer",
+                                                    color: "var(--text-color)"
                                                 }}
                                                 onClick={() => copyCode()}
                                             />

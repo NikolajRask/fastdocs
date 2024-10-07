@@ -2,6 +2,7 @@
 
 import { DocsProvider } from "@/docs/context/context";
 import LinkPage from "@/docs/pages/components/Link";
+import Page404 from "@/docs/pages/concepts/404Page";
 import Installation from "@/docs/pages/Installation";
 import Introductions from "@/docs/pages/Introduction";
 import Usage from "@/docs/pages/Usage";
@@ -32,7 +33,7 @@ export default function Home() {
           >
             <Usage/>
           </Page>
-        <Section name="Features" alwaysOpen={false}>
+        <Section name="Features" alwaysOpen={true}>
           <Page
             title={"Pages"}
           >
@@ -76,7 +77,7 @@ export default function Home() {
           <Page
             title={"404"}
           >
-            <p>3</p>
+            <Page404/>
           </Page>
           <Page
             title={"Customizability"}
@@ -85,11 +86,6 @@ export default function Home() {
           </Page>
         </Section>
         <Section name="Components" alwaysOpen={true}>
-          <Page
-              title={"ActionIcon"}
-            >
-              <p>3</p>
-          </Page>
           <Page
             title={"Breadcrumb"}
           >

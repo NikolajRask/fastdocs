@@ -159,11 +159,11 @@ const markdownToCode = (text: string): string[] => {
     // }
     // Match headers (## Heading 2)
     else if (part.match(/^## (.*)$/)) {
-      return `<Header>${part.slice(3).trim()}</Header>`;
+      return `<Title>${part.slice(3).trim()}</Title>`;
     }
     // Match headers (# Heading 1)
     else if (part.match(/^# (.*)$/)) {
-      return `<Title>${part.slice(2).trim()}</Title>`;
+      return `<Header>${part.slice(2).trim()}</Header>`;
     }
     // Match custom /text/ -> <p>text</p>
     else if (part.match(/\/(.*?)\//)) {
