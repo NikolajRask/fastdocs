@@ -9,6 +9,7 @@ import { cuid } from '@/docs/utils/utils';
 import { Pencil, PlusIcon, SquareArrowOutUpRight, Trash2 } from 'lucide-react';
 import useSettings from '@/docs/utils/settings/use-settings';
 import { findPageName } from '../utils/translator';
+import { getMenuState, toggleMenuState } from '../utils/utils';
 
 export interface DataType {
     name: string;
@@ -18,6 +19,7 @@ export interface DataType {
         name: string,
         content: string
     }[]
+    openInMenu: boolean,
 }
 
 interface ProjectManagerProps {
@@ -91,7 +93,8 @@ const ProjectManager = ({
         newProjectVersion.push({
             name: "New Project",
             id: cuid(),
-            pages: []
+            pages: [],
+            openInMenu: true,
         })
         
         useMemory("projects", newProjectVersion)
@@ -164,7 +167,7 @@ function Project({
     setCurrentPage
 }: ProjectProps) {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(getMenuState(uid))
     const [isContextMenuOpen, setIsContextMenuOpen] = useState(false)
     const [contextMenuPosition, setContextMenuPosition] = useState({
         x: 0,
@@ -321,6 +324,7 @@ function Project({
                             className={styles.projectTitle}
                             onClick={() => {
                                 setIsOpen(!isOpen)
+                                toggleMenuState(uid)
                             }}
                             onContextMenu={(e) => {
                                 e.preventDefault()

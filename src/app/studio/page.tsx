@@ -24,15 +24,27 @@ import PreviewIcon from '@/assets/svg/PreviewIcon'
 
 const StudioPage = () => {
 
+    if (useMemory("menuState") == undefined) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useMemory("menuState", "true")
+    }
+    
     const [result, setResult] = useState<React.ReactNode>()
     const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
     const [pageState, setPageState] = useState("preview")
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(useMemory("menuState") == "true" ? true : false)
     const [currentMarkdown, setCurrentMarkdown] = useState("")
     const [currentPage, setCurrentPage] = useState(useMemory("currentPage"))
     const [isCopied, setIsCopied] = useState(false)
     const [code, setCode] = useState(``)
     const [currentPageLabel, setCurrentPageLabel] = useState(findPageName(useMemory("currentPage")) ?? "")
+
+    document.title = "Docsfast | Studio"
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useMemory("menuState", isMenuOpen == true ? "true" : "false")
+    }, [isMenuOpen])
 
     const [theme, setTheme] = useState(useTheme())
     useEffect(() => { // Fetch saved changes
@@ -105,6 +117,7 @@ const StudioPage = () => {
             }, 2500)
         }
     }, [isCopied])
+
 
     return (
         <>

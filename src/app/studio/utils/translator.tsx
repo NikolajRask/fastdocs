@@ -188,7 +188,7 @@ const markdownToCode = (text: string): string[] => {
   }).filter(Boolean); // Filter out any null values
 };
     
-export function TranslateCode(content: string, pageName: string): string {
+export function TranslateCode(content: string,  pageName: string): string {
 
   let code2 = ``
 
