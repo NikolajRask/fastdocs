@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { Markdown, TranslateCode } from './utils/translator'
+import { findPageName, Markdown, TranslateCode } from './utils/translator'
 import { QuestionMarkIcon } from '@radix-ui/react-icons'
 import Modal from '@/docs/ui/components/custom/Modal/Modal'
 import { a11yDark, CodeBlock, github } from 'react-code-blocks'
@@ -32,6 +32,7 @@ const StudioPage = () => {
     const [currentPage, setCurrentPage] = useState(useMemory("currentPage"))
     const [isCopied, setIsCopied] = useState(false)
     const [code, setCode] = useState(``)
+    const [currentPageLabel, setCurrentPageLabel] = useState(findPageName(useMemory("currentPage")) ?? "")
 
     const [theme, setTheme] = useState(useTheme())
     useEffect(() => { // Fetch saved changes
@@ -46,10 +47,11 @@ const StudioPage = () => {
         if (pageContent != undefined) {
             setCurrentMarkdown(pageContent.content)
             setResult(Markdown(pageContent.content))
-            setCode(TranslateCode(pageContent.content, currentPage))
+            setCode(TranslateCode(pageContent.content, currentPageLabel))
         }
 
-    }, [currentPage])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentPage, currentPageLabel])
 
     function saveProgress(markdown: string) {
         // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -177,7 +179,7 @@ const StudioPage = () => {
                         <h1
                             className={styles.logo}
                         >
-                            <a>F</a>astdocs
+                            <a>D</a>ocsfast
                             <br/>
                         </h1>
                     </>
@@ -185,7 +187,7 @@ const StudioPage = () => {
                     <h1
                         className={styles.logo}
                     >
-                        <a>F</a>
+                        <a>D</a>
                     </h1>
                 )}
                 <a href={"/"}>
@@ -246,6 +248,7 @@ const StudioPage = () => {
                 {
                     isMenuOpen && (
                         <ProjectManager 
+                            setCurrentPageLabel={setCurrentPageLabel}
                             currentMarkdown={currentMarkdown} 
                             setCurrentMarkdown={setCurrentMarkdown} 
                             currentPage={currentPage} 
@@ -338,7 +341,7 @@ const StudioPage = () => {
                                 className={styles.studioEditor}
                                 onChange={(e) => {
                                     setResult(Markdown(e.target.value))
-                                    setCode(TranslateCode(e.target.value, currentPage))
+                                    setCode(TranslateCode(e.target.value, currentPageLabel))
                                     setCurrentMarkdown(e.target.value)
                                     saveProgress(e.target.value)
                                 }}
@@ -379,7 +382,7 @@ const StudioPage = () => {
                                         }}
                                     >
                                         <CodeIcon/>
-                                        <span>Code</span>
+                                        <span>{currentPageLabel.replaceAll(" ","")}.tsx</span>
                                     </div>
                                 </div>
                                 <div

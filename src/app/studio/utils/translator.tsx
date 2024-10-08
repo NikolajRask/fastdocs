@@ -188,9 +188,7 @@ const markdownToCode = (text: string): string[] => {
   }).filter(Boolean); // Filter out any null values
 };
     
-export function TranslateCode(content: string, fileName: string): string {
-
-  const name = findPageName(fileName)
+export function TranslateCode(content: string, pageName: string): string {
 
   let code2 = ``
 
@@ -220,7 +218,7 @@ export function TranslateCode(content: string, fileName: string): string {
   return `import React from 'react'
 import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title, Blockquote } from '../ui/components/core'
 
-const ${name?.replaceAll(" ","")} = () => {
+const ${pageName?.replaceAll(" ","")} = () => {
   return (
     <>
 ${code2}
@@ -228,11 +226,11 @@ ${code2}
   ) 
 }
 
-export default ${name?.replaceAll(" ","")}`
+export default ${pageName?.replaceAll(" ","")}`
 }
 
 
-function  findPageName(fileName: string) {
+export function  findPageName(fileName: string) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const projects = useMemory("projects") as DataType[]
 

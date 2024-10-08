@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
 import React, {  useRef, useState } from 'react'
 import styles from '../styles.module.scss'
 import { useMemory} from './hooks/useMemory'
-import { CaretDownIcon, TrashIcon } from '@radix-ui/react-icons';
+import { CaretDownIcon } from '@radix-ui/react-icons';
 import { cuid } from '@/docs/utils/utils';
-import { Pen, Pencil, PlusIcon, SquareArrowOutUpRight, Trash2 } from 'lucide-react';
+import { Pencil, PlusIcon, SquareArrowOutUpRight, Trash2 } from 'lucide-react';
 import useSettings from '@/docs/utils/settings/use-settings';
-import { pages } from 'next/dist/build/templates/app-page';
+import { findPageName } from '../utils/translator';
 
 export interface DataType {
     name: string;
@@ -23,14 +24,14 @@ interface ProjectManagerProps {
     currentMarkdown: string,
     setCurrentMarkdown: React.Dispatch<React.SetStateAction<string>>
     currentPage: string,
-    setCurrentPage: React.Dispatch<React.SetStateAction<string>>
+    setCurrentPage: React.Dispatch<React.SetStateAction<string>>,
+    setCurrentPageLabel: React.Dispatch<React.SetStateAction<string>>,
 }
 
 const ProjectManager = ({
-    currentMarkdown,
     currentPage,
-    setCurrentMarkdown,
-    setCurrentPage
+    setCurrentPage,
+    setCurrentPageLabel,
 }: ProjectManagerProps) => {
 
     const [projects, setProjects] = useState<DataType[]>(useMemory("projects") as DataType[])
@@ -63,11 +64,11 @@ const ProjectManager = ({
     function addPage(projectId: string) {
         const projectIndex = projects.findIndex((x) => x.id == projectId)
 
-        let pageId = cuid()
+        const pageId = cuid()
 
-        let newProjectVersion = projects
+        const newProjectVersion = projects
         
-        let copy = newProjectVersion[projectIndex]
+        const copy = newProjectVersion[projectIndex]
         copy.pages.push({
             name: "New Page",
             id: pageId,
@@ -77,6 +78,7 @@ const ProjectManager = ({
 
         useMemory('currentPage', pageId)
         setCurrentPage(pageId)
+        setCurrentPageLabel("New Page")
 
         useMemory("projects", newProjectVersion)
 
@@ -84,7 +86,7 @@ const ProjectManager = ({
     }
 
     function addProject() {
-        let newProjectVersion = projects
+        const newProjectVersion = projects
         
         newProjectVersion.push({
             name: "New Project",
@@ -120,7 +122,7 @@ const ProjectManager = ({
                             {
                                 project.pages.map((page, index) => {
                                     return (
-                                        <Page update={() => {update()}} setCurrentPage={setCurrentPage} key={index} uid={page.id} currentPage={currentPage}>{page.name}</Page>
+                                        <Page update={() => {update()}} setCurrentPageLabel={setCurrentPageLabel} setCurrentPage={setCurrentPage} key={index} uid={page.id} currentPage={currentPage}>{page.name}</Page>
                                     )
                                 })
                             }
@@ -174,7 +176,7 @@ function Project({
     const editRef = useRef<HTMLInputElement>(null)
 
     function deleteProject() {
-        let projects = useMemory("projects") as DataType[]
+        const projects = useMemory("projects") as DataType[]
 
         const projectPageIds = projects.find((project) => project.id == uid)?.pages.map((page) => page.id)
 
@@ -194,11 +196,12 @@ function Project({
 
     function editProjectName(newName: string) {
 
-        let projects = useMemory("projects") as DataType[]
+        const projects = useMemory("projects") as DataType[]
 
-        const currentProjectIndex = projects.findIndex((project) => project.id = uid)
+        const currentProjectIndex = projects.findIndex((project) => project.id == uid)
         
         if (currentProjectIndex != -1) {
+            // eslint-disable-next-line prefer-const
             let currentProject = projects[currentProjectIndex]
 
             currentProject.name = newName
@@ -350,6 +353,7 @@ interface PageProps {
     children: React.ReactNode
     setCurrentPage: React.Dispatch<React.SetStateAction<string>>
     currentPage: string,
+    setCurrentPageLabel: React.Dispatch<React.SetStateAction<string>>;
     update: () => void
 }
 
@@ -358,7 +362,7 @@ function Page({
     uid,
     children,
     setCurrentPage,
-    currentPage,
+    setCurrentPageLabel,
 }: PageProps) {
 
     const [isEditing, setIsEditing] = useState(false)
@@ -372,17 +376,18 @@ function Page({
     const editRef = useRef<HTMLInputElement>(null)
 
     function editPageName(newName: string) {
-        let projects = useMemory("projects") as DataType[]
+        setCurrentPageLabel(newName)
+        const projects = useMemory("projects") as DataType[]
 
         const currentProjectIndex = projects.findIndex((project) => project.pages.map((page) => page.id).includes(uid))
         
         if (currentProjectIndex != -1) {
-            let currentProject = projects[currentProjectIndex]
+            const currentProject = projects[currentProjectIndex]
 
             const currentPageIndex = currentProject.pages.findIndex((page) => page.id == uid)
 
             if (currentPageIndex != -1) {
-                let currentPageLocal = currentProject.pages.find((page) => page.id == uid)
+                const currentPageLocal = currentProject.pages.find((page) => page.id == uid)
 
                 if (currentPageLocal?.name) {
                     currentPageLocal.name = newName
@@ -400,7 +405,7 @@ function Page({
     }
 
     function deletePage() {
-        let projects = useMemory("projects") as DataType[]
+        const projects = useMemory("projects") as DataType[]
 
         if (uid == useMemory("currentPage")) {
             useMemory("currentPage", "")
@@ -410,12 +415,12 @@ function Page({
         const currentProjectIndex = projects.findIndex((project) => project.pages.map((page) => page.id).includes(uid))
         
         if (currentProjectIndex != -1) {
-            let currentProject = projects[currentProjectIndex]
+            const currentProject = projects[currentProjectIndex]
 
             const currentPageIndex = currentProject.pages.findIndex((page) => page.id == uid)
 
             if (currentPageIndex != -1) {
-                let currentPageLocal = currentProject.pages.find((page) => page.id == uid)
+                const currentPageLocal = currentProject.pages.find((page) => page.id == uid)
 
                 if (currentPageLocal?.name) {
 
@@ -423,6 +428,7 @@ function Page({
 
                     projects[currentProjectIndex] = currentProject
 
+                    // eslint-disable-next-line react-hooks/rules-of-hooks
                     useMemory("projects", projects)
                     update()
                 }
@@ -474,6 +480,7 @@ function Page({
                                     setIsContextMenuOpen(false)
                                     useMemory("currentPage", uid)
                                     setCurrentPage(uid)
+                                    setCurrentPageLabel(findPageName(uid) ?? "")
                                 }}
                             >
                                 <SquareArrowOutUpRight />
@@ -526,6 +533,7 @@ function Page({
                 onClick={() => {
                     useMemory("currentPage", uid)
                     setCurrentPage(uid)
+                    setCurrentPageLabel(findPageName(uid) ?? "")
                 }}
                 className={styles.page}
             >
