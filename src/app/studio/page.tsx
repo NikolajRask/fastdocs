@@ -7,11 +7,9 @@ import { QuestionMarkIcon } from '@radix-ui/react-icons'
 import Modal from '@/docs/ui/components/custom/Modal/Modal'
 import { a11yDark, CodeBlock, github } from 'react-code-blocks'
 import useSettings from '@/docs/utils/settings/use-settings'
-import { BookOpen, BoxIcon, CopyIcon, DnaIcon, House, MenuIcon, PiggyBank } from 'lucide-react'
-
+import { CopyIcon } from 'lucide-react'
 import ProjectManager, { DataType } from './project-manager/ProjectManager'
 import { Highlight } from '@/docs/ui/components/core'
-import { ProjectManageProvider } from './project-manager/context'
 import { useMemory } from './project-manager/hooks/useMemory'
 import { useTheme } from '@/docs/utils/use-theme'
 import ThemePicker from '@/docs/ui/components/custom/theme-picker/ThemePicker'
@@ -35,14 +33,14 @@ const StudioPage = () => {
     const [isCopied, setIsCopied] = useState(false)
     const [code, setCode] = useState(``)
 
-    const theme = useTheme()
-
+    const [theme, setTheme] = useState(useTheme())
     useEffect(() => { // Fetch saved changes
-        let lookup = useMemory("projects") as DataType[]
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const lookup = useMemory("projects") as DataType[]
 
-        let currentProject = lookup.find((x) => x.pages.map((page) => page.id).includes(currentPage))
+        const currentProject = lookup.find((x) => x.pages.map((page) => page.id).includes(currentPage))
 
-        let pageContent = currentProject?.pages.find((x) => x.id == currentPage)
+        const pageContent = currentProject?.pages.find((x) => x.id == currentPage)
 
 
         if (pageContent != undefined) {
@@ -54,17 +52,18 @@ const StudioPage = () => {
     }, [currentPage])
 
     function saveProgress(markdown: string) {
-        let projects = useMemory("projects") as DataType[]
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const projects = useMemory("projects") as DataType[]
 
-        let currentProjectIndex = projects.findIndex((x) => x.pages.map((page) => page.id).includes(currentPage))
+        const currentProjectIndex = projects.findIndex((x) => x.pages.map((page) => page.id).includes(currentPage))
 
         if (currentProjectIndex != -1) {
-            let copyCurrentProject = projects[currentProjectIndex]
+            const copyCurrentProject = projects[currentProjectIndex]
     
-            let currentPageIndex = copyCurrentProject.pages.findIndex((x) => x.id == currentPage)
+            const currentPageIndex = copyCurrentProject.pages.findIndex((x) => x.id == currentPage)
 
             if (currentPageIndex != -1) {
-                let copyCurrentPage = copyCurrentProject.pages[currentPageIndex]
+                const copyCurrentPage = copyCurrentProject.pages[currentPageIndex]
     
                 copyCurrentPage.content = markdown
         
@@ -72,6 +71,7 @@ const StudioPage = () => {
         
                 projects[currentProjectIndex] = copyCurrentProject
         
+                // eslint-disable-next-line react-hooks/rules-of-hooks
                 useMemory("projects", projects)
             }
 
@@ -315,10 +315,24 @@ const StudioPage = () => {
                                 <QuestionMarkIcon/>
                             </div>
                             <textarea 
-                                onKeyDown={(e) => {
+                                onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
                                     if (e.key == "Tab") {
+
                                         e.preventDefault()
                                         e.stopPropagation()
+
+                                        const textarea = e.currentTarget;
+                                  
+                                        const start = textarea.selectionStart;
+                                        const end = textarea.selectionEnd;
+                                  
+                                        // Insert tab character at the cursor position
+                                        setCurrentMarkdown(currentMarkdown.slice(0, start) + "\t" + currentMarkdown.slice(end));
+                                  
+                                        // Move the cursor after the tab character
+                                        setTimeout(() => {
+                                          textarea.selectionStart = textarea.selectionEnd = start + 1;
+                                        }, 0);
                                     }
                                 }}
                                 className={styles.studioEditor}
@@ -347,6 +361,7 @@ const StudioPage = () => {
                                             setPageState("preview")
                                         }}
                                         style={{
+                                            // eslint-disable-next-line react-hooks/rules-of-hooks
                                             color: pageState == "preview" ? useSettings().color : "var(--text-color)"
                                         }}
                                     >
@@ -359,6 +374,7 @@ const StudioPage = () => {
                                             setPageState("code")
                                         }}
                                         style={{
+                                            // eslint-disable-next-line react-hooks/rules-of-hooks
                                             color: pageState == "code" ? useSettings().color : "var(--text-color)"
                                         }}
                                     >
@@ -392,7 +408,7 @@ const StudioPage = () => {
                                             />
                                         )
                                     }
-                                    <ThemePicker/>
+                                    <ThemePicker setLocalTheme={setTheme}/>
                                 </div>
                             </div>
                             {

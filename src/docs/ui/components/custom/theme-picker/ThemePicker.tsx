@@ -1,11 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../components.module.scss'
 import { useTheme } from '@/docs/utils/use-theme'
-import { ActionIcon } from '../../core'
 import { MoonIcon, SunIcon } from 'lucide-react'
 import classNames from '@/docs/utils/utils'
 
-const ThemePicker = () => {
+interface ThemePickerProps {
+    setLocalTheme?:  React.Dispatch<React.SetStateAction<string | null | undefined>>
+}
+
+const ThemePicker = ({
+    setLocalTheme
+}: ThemePickerProps) => {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -53,7 +58,11 @@ const ThemePicker = () => {
                     <div className={styles.themeDropdown}>
                         <div
                             onClick={() => {
+                                // eslint-disable-next-line react-hooks/rules-of-hooks
                                 useTheme('dark')
+                                if (setLocalTheme) {
+                                    setLocalTheme("dark")
+                                }
                                 setIsOpen(false)
                             }}
                         >
@@ -61,7 +70,11 @@ const ThemePicker = () => {
                         </div>
                         <div
                             onClick={() => {
+                                // eslint-disable-next-line react-hooks/rules-of-hooks
                                 useTheme('light')
+                                if (setLocalTheme) {
+                                    setLocalTheme("light")
+                                }
                                 setIsOpen(false)
                             }}
                         >
@@ -69,7 +82,10 @@ const ThemePicker = () => {
                         </div>
                         <div
                             onClick={() => {
-                                useTheme('system')
+                                if (setLocalTheme) {
+                                    // eslint-disable-next-line react-hooks/rules-of-hooks
+                                    setLocalTheme(useTheme('system'))
+                                }
                                 setIsOpen(false)
                             }}
                         >

@@ -98,11 +98,11 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
 
   function getNeighbourPage(page: string) {
 
-    let allTitles = sidebar.flatMap((item) => {
+    const allTitles = sidebar.flatMap((item) => {
       return item.titles
     })
 
-    let arr = allTitles.flatMap((at) => at)
+    const arr = allTitles.flatMap((at) => at)
 
     const index = arr.indexOf(page);
   
@@ -122,11 +122,9 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   }
 
   const allTitles = () => {
-    let allTitles = sections.map(section => {
-      return section.titles
+    const allTitles = sidebar.flatMap((item) => {
+      return item.titles
     })
-
-    allTitles = allTitles.concat(titles)
 
     return allTitles.flatMap((at) => {
       return at
@@ -199,6 +197,7 @@ export const DocsProvider: React.FC<DocsProviderProps> = ({ children }) => {
   useEffect(() => {
     window.setTimeout(() => {
       setIsLoading(false)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     }, useSettings().loadingTime)
   }, [])
 

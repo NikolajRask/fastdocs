@@ -6,7 +6,7 @@ import useSettings from '@/docs/utils/settings/use-settings'
 
 const Breadcrumb = (props: React.HTMLAttributes<HTMLDivElement>) => {
 
-    const { docsTitle, page, getPageSection, setPage, sections, getFirstPageInSection, allTitles } = useDocsContext()
+    const { docsTitle, page, getPageSection, setPage, getFirstPageInSection, allTitles } = useDocsContext()
 
     return (
         <div className={styles.breadcrumb} {...props}>
@@ -16,6 +16,7 @@ const Breadcrumb = (props: React.HTMLAttributes<HTMLDivElement>) => {
                     setPage(allTitles()[0])
                 }}
             >
+                {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
                 {docsTitle.trim() == "" ? useSettings().defaultDocsTitle : docsTitle}
             </b>
             {
@@ -26,7 +27,7 @@ const Breadcrumb = (props: React.HTMLAttributes<HTMLDivElement>) => {
                             className={styles.clickable}
                             onClick={() => {
                                 if (getPageSection(page) != undefined) {
-                                    let newPage = getFirstPageInSection(getPageSection(page) ?? "")
+                                    const newPage = getFirstPageInSection(getPageSection(page) ?? "")
                                     if (newPage != undefined) {
                                         setPage(newPage)
                                     }

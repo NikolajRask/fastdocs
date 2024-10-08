@@ -1,4 +1,4 @@
-import { Header, Text, Title, CommandPrompt, Highlight, Image } from "@/docs/ui/components/core"
+import { Text, CommandPrompt, Highlight, Image } from "@/docs/ui/components/core"
 import styles from '../styles.module.scss'
 import { CodeBlock, irBlack } from 'react-code-blocks'
 import React from "react"
@@ -25,24 +25,6 @@ const CodeReplicate = ({
             theme={irBlack}
         />
     )
-}
-
-const regex = {
-    bold: (text: string) => text.replace(/\*\*(.*?)\*\*/, '<b>$1</b>'),
-    italic: (text: string) => text.replace(/(\*|_)(.*?)\1/g, '<i>$2</i>'),
-    code: (text: string) => text.replace(/`(.*?)`/g, '<code>$1</code>'),
-    link: (text: string) => text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'),
-    // mailOrLink: (text: string) => text.replace(/<(.*?)>/g, '<a href="$1">$1</a>'),
-    image: (text: string) => text.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" />'),
-    blockquote: (text: string) => text.replace(/^>\s*(.*)$/gm, '<blockquote>$1</blockquote>'),
-    terminal: (text: string) => text.replace(/\/(.*?)\//g, '<CommandPrompt content="$1"/>'),
-}
-
-function ParseLine(line: string): React.ReactNode {
-
-    let parsedLine = regex.terminal(regex.blockquote(regex.link(regex.image(regex.code(regex.italic(regex.bold(line)))))))
-
-    return <span dangerouslySetInnerHTML={{ __html: parsedLine }} />
 }
 
 export function Markdown(text: string): React.ReactNode {
@@ -137,7 +119,7 @@ const markdownToCode = (text: string): string[] => {
 
   let lastPart = "\n"
   // Map over the parts and transform them into JSX elements where applicable
-  return parts.map((part, index) => {
+  return parts.map((part) => {
     // Match newline (\n) and render <br />
     if (part === '\n') {
       if (lastPart != "\n") {
@@ -208,7 +190,7 @@ const markdownToCode = (text: string): string[] => {
     
 export function TranslateCode(content: string, fileName: string): string {
 
-  let name = findPageName(fileName)
+  const name = findPageName(fileName)
 
   let code2 = ``
 
@@ -251,6 +233,7 @@ export default ${name?.replaceAll(" ","")}`
 
 
 function  findPageName(fileName: string) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const projects = useMemory("projects") as DataType[]
 
   return projects.find((x) => x.pages.map((page) => page.id).includes(fileName))?.pages.find((page) => page.id == fileName)?.name

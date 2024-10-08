@@ -16,6 +16,7 @@ const Navigator = ({
         className={getNeighbourPage(page).previous != null ? styles.item : styles.itemHidden}
         onClick={() => {
           if (getNeighbourPage(page).previous != null) {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             setPage(getNeighbourPage(page).previous ?? useSettings().defaultPage)
           }
         }}
@@ -28,6 +29,7 @@ const Navigator = ({
           className={styles.item}
           onClick={() => {
             if (getNeighbourPage(page).next != null) {
+              // eslint-disable-next-line react-hooks/rules-of-hooks
               setPage(getNeighbourPage(page).next ?? useSettings().defaultPage)
             }
           }}

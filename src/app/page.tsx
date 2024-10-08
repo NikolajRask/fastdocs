@@ -12,6 +12,7 @@ const HomePage = () => {
 
     useTheme()
 
+
     return (
         <div className={styles.wrapper}>
             <main className={styles.main}>
