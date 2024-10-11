@@ -6,7 +6,6 @@ interface CardAdProps {
 }
 
 const CardAd = ({
-  onClick,
   children
 }: CardAdProps) => {
   return (

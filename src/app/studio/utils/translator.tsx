@@ -41,17 +41,11 @@ const markdownToJsx = (text: string): (string | JSX.Element)[] => {
   // Split text into parts based on different Markdown elements and newline (\n)
   const parts = text.split(/(\*\*\*.*?\*\*\*|\*\*.*?\*\*|\*.*?\*|`[^`]+`|\[.*?\]\(.*?\)|!\[.*?\]\(.*?\)|^# .*$|^## .*$|^> .*|\/.*?\/|==.*?==|\n)/gm);
 
-  let lastPart = "\n"
   // Map over the parts and transform them into JSX elements where applicable
   return parts.map((part, index) => {
     // Match newline (\n) and render <br />
     if (part === '\n') {
-      if (lastPart != "\n") {
-        lastPart = "\n"
-        return <br key={index} />;
-      } else {
-        return ""
-      }
+      return <br key={index} />;
     }
     // Match inline code (`code`)
     else if (part.match(/`([^`]+)`/)) {
@@ -117,17 +111,11 @@ const markdownToCode = (text: string): string[] => {
   // Split text into parts based on different Markdown elements and newline (\n)
   const parts = text.split(/(\*\*\*.*?\*\*\*|\*\*.*?\*\*|\*.*?\*|`[^`]+`|\[.*?\]\(.*?\)|!\[.*?\]\(.*?\)|^# .*$|^## .*$|^> .*|\/.*?\/|==.*?==|\n)/gm);
 
-  let lastPart = "\n"
   // Map over the parts and transform them into JSX elements where applicable
   return parts.map((part) => {
     // Match newline (\n) and render <br />
     if (part === '\n') {
-      if (lastPart != "\n") {
-        lastPart = "\n"
-        return "\n      <br/>";
-      } else {
-        return ""
-      }
+      return "\n      <br/>";
     }
     if (part.match(/`([^`]+)`/)) {
       return `\n      <Code code={${"`"}${part.slice(1, -1)}${"`"}}
@@ -165,7 +153,7 @@ const markdownToCode = (text: string): string[] => {
     }
     // Match custom /text/ -> <p>text</p>
     else if (part.match(/\/(.*?)\//)) {
-      return `\n      <CommandPrompt content={${"`"}{${part.slice(1, -1)}}${"`"}}/>`;
+      return `\n      <CommandPrompt content={${"`"}${part.slice(1, -1)}${"`"}}/>`;
     }
     // Match bold and italic (***text***)
     else if (part.match(/\*\*\*(.*?)\*\*\*/)) {
@@ -215,7 +203,9 @@ export function TranslateCode(content: string,  pageName: string): string {
     }
   })
 
-  return `import React from 'react'
+  return `/* eslint-disable react/no-unescaped-entities */
+
+import React from 'react'
 import { CommandPrompt, Link, SEO, Text, Card, Code, CodePreview, Header, Highlight, Image, Title, Blockquote } from '../ui/components/core'
 
 const ${pageName?.replaceAll(" ","")} = () => {

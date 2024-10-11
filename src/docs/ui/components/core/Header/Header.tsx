@@ -14,7 +14,7 @@ const Header = ({
 
     const { page, addTitleToContent} = useDocsContext()
 
-    let id = cuid();
+    const id = cuid();
 
     useEffect(() => {
         addTitleToContent(title ?? page, id)

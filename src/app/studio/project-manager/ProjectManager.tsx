@@ -140,7 +140,9 @@ const ProjectManager = ({
                 }}
             >
                 <PlusIcon/>
-                Add Project
+                <span>
+                    Add Project
+                </span>
             </p>
         </div>
     )

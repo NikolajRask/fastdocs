@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
 import { useDocsContext } from '@/docs/context/context';
 import { SectionContextType, useSectionContext } from '@/docs/context/section';
 import React, { useEffect } from 'react'
-import { pages } from 'next/dist/build/templates/app-page';
 import { cuid } from '@/docs/utils/utils';
 
 interface PageProps {
@@ -18,7 +18,7 @@ const Page = ({
     withTableOfContent=false
 }: PageProps) => {
 
-  const { addTitle, page, setContentBarEnabled, setSidebar, sidebar } = useDocsContext();
+  const { addTitle, page, setContentBarEnabled, setSidebar } = useDocsContext();
  
   let section: SectionContextType | undefined;
 

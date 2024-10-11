@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react'
 import styles from '../core.module.scss'
 import { CodeBlock, irBlack } from 'react-code-blocks'

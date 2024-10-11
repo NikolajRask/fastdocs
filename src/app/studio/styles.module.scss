@@ -307,7 +307,9 @@ $nav-height: 50px;
     color: var(--text-color);
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
     white-space: nowrap;
+
 
     &:hover {
         background: var(--hover-color);
