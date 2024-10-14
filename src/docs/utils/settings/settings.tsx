@@ -1,12 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { MoonIcon, SunIcon } from "lucide-react"
-import { between, seconds } from "../utils"
 import { SettingsProps } from "./settings.type"
 import { useTheme } from "../use-theme"
 import { GearIcon } from "@radix-ui/react-icons"
 
 export const settings: SettingsProps = {
     color: "rgb(31, 102, 235)",
-    productName: "Fastdocs",
+    productName: "Docsfast",
     defaultPage: "Get Started",
     githubRepo: "https://github.com/NikolajRask/fastdocs",
     twitter: "https://x.com/nkjrask",

@@ -1,11 +1,10 @@
 "use client"
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './styles.module.scss'
 import classNames from '@/docs/utils/utils'
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from '@/docs/utils/use-theme'
-import { Facebook, Twitter, Instagram, Linkedin, Coffee, Github } from "lucide-react"
+import { Twitter, Linkedin, Coffee, Github } from "lucide-react"
 import ThemePicker from '@/docs/ui/components/custom/theme-picker/ThemePicker'
 
 const HomePage = () => {
@@ -19,7 +18,7 @@ const HomePage = () => {
                     <h1
                         className={styles.logo}
                     >
-                        <a>F</a>astdocs
+                        <a>D</a>ocsfast
                     </h1>
                     <ThemePicker/>
                 </nav>
@@ -66,7 +65,7 @@ function Footer() {
             <h1
                 className={styles.smallLogo}
             >
-                <a>F</a>astdocs
+                <a>D</a>ocsfast
             </h1>
             <p style={{color: "var(--text-color)"}}>Build by <a style={{
                 color: "black",

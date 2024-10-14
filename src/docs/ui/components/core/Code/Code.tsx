@@ -36,8 +36,9 @@ const Code = ({
           customStyle={{
               borderRadius: "10px",
               fontFamily: "monospace",
-              marginBottom: "10px",
-              fontStyle: "normal"
+              marginBlock: "10px",
+              fontStyle: "normal",
+              
           }}
           text={code.trim()}
           language='typescript'
