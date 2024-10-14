@@ -125,7 +125,7 @@ const markdownToCode = (text: string): string[] => {
     else if (part.match(/!\[(.*?)\]\((.*?)\)/)) {
       const match = part.match(/!\[(.*?)\]\((.*?)\)/);
       if (match) {
-        return `\n      <Image src="{${match[2]}}" alt="{${match[1]}}" />`;
+        return `\n      <Image src="${match[2]}" alt="${match[1]}" />`;
       }
     }
     // Match links [text](url)
@@ -133,8 +133,8 @@ const markdownToCode = (text: string): string[] => {
       const match = part.match(/\[(.*?)\]\((.*?)\)/);
       if (match) {
         return (
-          `\n      <Link href="{${match[2]}}">
-            {${match[1]}}
+          `\n      <Link href="${match[2]}">
+            ${match[1]}
           </Link>`
         );
       }

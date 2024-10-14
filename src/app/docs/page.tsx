@@ -9,13 +9,18 @@ import CommandPromptPage from "@/docs/pages/components/CommandPromptPage";
 import CustomComponents from "@/docs/pages/components/CustomComponents";
 import HeaderPage from "@/docs/pages/components/HeaderPage";
 import HighlightPage from "@/docs/pages/components/HighlightPage";
+import ImagePage from "@/docs/pages/components/ImagePage";
 import LinkPage from "@/docs/pages/components/Link";
 import NavigatorPage from "@/docs/pages/components/Navigator";
 import TextPage from "@/docs/pages/components/TextPage";
 import TitlePage from "@/docs/pages/components/TitleComponent";
 import Page404 from "@/docs/pages/concepts/404Page";
+import CustomizabilityPage from "@/docs/pages/concepts/CustomPage";
+import LayoutPage from "@/docs/pages/concepts/Layout";
 import PagesPage from "@/docs/pages/concepts/Pages";
+import SearchPage from "@/docs/pages/concepts/SearchPage";
 import SectionPage from "@/docs/pages/concepts/Sections";
+import ThemesPage from "@/docs/pages/concepts/ThemesPage";
 import Installation from "@/docs/pages/Installation";
 import Introductions from "@/docs/pages/Introduction";
 import Usage from "@/docs/pages/Usage";
@@ -62,7 +67,7 @@ export default function Home() {
             title={"Layout"}
             withTableOfContent={true}
           >
-            <p>3</p>
+            <LayoutPage/>
           </Page>
           <Page
             title={"Navigating"}
@@ -74,13 +79,13 @@ export default function Home() {
             title={"Search"}
             withTableOfContent={true}
           >
-            <p>3</p>
+            <SearchPage/>
           </Page>
           <Page
             title={"Themes"}
             withTableOfContent={true}
           >
-            <p>3</p>
+            <ThemesPage/>
           </Page>
           <Page
             title={"Components"}
@@ -104,7 +109,7 @@ export default function Home() {
             title={"Customizability"}
             withTableOfContent={true}
           >
-            <p>3</p>
+            <CustomizabilityPage/>
           </Page>
         </Section>
         <Section name="Components" alwaysOpen={true}>
@@ -154,7 +159,7 @@ export default function Home() {
             title={"Image"}
             withTableOfContent={true}
           >
-            <p></p>
+            <ImagePage/>
           </Page>
           <Page
             title={"Link"}
