@@ -1,11 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
 import styles from '../components.module.scss'
 import React, { useState } from 'react'
-import { DialogTrigger } from '@radix-ui/react-dialog'
 import { useDocsContext } from '@/docs/context/context'
-import { FileIcon, GitHubLogoIcon, MagnifyingGlassIcon, SunIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
-import { useTheme } from '@/docs/utils/use-theme'
+import { FileIcon, GitHubLogoIcon, MagnifyingGlassIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
 import useSettings from '@/docs/utils/settings/use-settings'
 import Link from 'next/link'
 import { MenuIcon, PlayIcon } from 'lucide-react'
@@ -57,6 +56,7 @@ export default function Navbar() {
                                     })
                                 }
                                 {
+                                // eslint-disable-next-line react-hooks/rules-of-hooks
                                 search(searchInput).length > 0 && (useSettings().appendSearch.filter((item) => item.label.includes(searchInput)) ?? 0).length > 0 && (
                                         <div
                                             style={{
@@ -68,6 +68,7 @@ export default function Navbar() {
                                 ) 
                                 }
                                 {
+                                    // eslint-disable-next-line react-hooks/rules-of-hooks
                                     useSettings().appendSearch.map((item, index) => {
                                         if (item.label.includes(searchInput)) {
                                             return (
@@ -102,10 +103,11 @@ export default function Navbar() {
                         }}
                         className={styles.logo}
                         onClick={() => {
+                            // eslint-disable-next-line react-hooks/rules-of-hooks
                             window.location.href = useSettings().homePage
                         }}
                     >
-                        {useSettings().productName}
+                        {useSettings().logo}
                     </h2>
                     <div className={styles.navLinks}>
                         {/* Add links here in the navbar */}

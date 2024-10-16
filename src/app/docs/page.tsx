@@ -15,8 +15,10 @@ import NavigatorPage from "@/docs/pages/components/Navigator";
 import TextPage from "@/docs/pages/components/TextPage";
 import TitlePage from "@/docs/pages/components/TitleComponent";
 import Page404 from "@/docs/pages/concepts/404Page";
+import ComponentsPage from "@/docs/pages/concepts/Components";
 import CustomizabilityPage from "@/docs/pages/concepts/CustomPage";
 import LayoutPage from "@/docs/pages/concepts/Layout";
+import NavigatingPage from "@/docs/pages/concepts/NavigationPage";
 import PagesPage from "@/docs/pages/concepts/Pages";
 import SearchPage from "@/docs/pages/concepts/SearchPage";
 import SectionPage from "@/docs/pages/concepts/Sections";
@@ -73,7 +75,7 @@ export default function Home() {
             title={"Navigating"}
             withTableOfContent={true}
           >
-            <p>3</p>
+            <NavigatingPage/>
           </Page>
           <Page
             title={"Search"}
@@ -91,7 +93,7 @@ export default function Home() {
             title={"Components"}
             withTableOfContent={true}
           >
-            <p>3</p>
+            <ComponentsPage/>
           </Page>
           <Page
             title={"Settings"}

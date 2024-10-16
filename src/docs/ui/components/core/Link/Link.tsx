@@ -20,7 +20,6 @@ const Link = ({
     color,
     openInNewWindow=false,
     withIcon=true,
-    ...rest
 }: React.HTMLAttributes<HTMLDivElement> & LinkProps) => {
 
 const { setPage } = useDocsContext()

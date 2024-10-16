@@ -1,6 +1,9 @@
+import React from "react";
+
 export interface SettingsProps {
     color: string;
     productName: string;
+    logo: React.ReactNode;
     defaultPage: string;
     githubRepo: string | undefined;
     twitter: string | undefined;
